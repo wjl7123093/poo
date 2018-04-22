@@ -100,7 +100,7 @@
     <!-- app 主色调3 -->
     <color name="app_main_btn">#7ed321</color>
     <!-- 通用页面背景色 -->
-    <color name="app_bg_grey">#f1f1f1</color>
+    <color name="app_bg_grey">#f2f2f2</color>
     <!-- 一级标题栏 - 红色 -->
     <color name="app_bg_title">#e51e3b</color>
     <!-- 一级标题栏 - 红色（该值只针对 "关于我们" 页面标题。因为要和 banner 图顶部色保持一致  -->

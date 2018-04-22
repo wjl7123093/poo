@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 尿检历史 - 次数背景 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="@color/transparent" />
+    <corners android:radius="10dp"/>
+    <padding android:bottom="2dp"
+        android:top="2dp"
+        android:left="4dp"
+        android:right="4dp"></padding>
+    <!-- 边线颜色 -->
+    <stroke
+        android:width="0.5dp" 
+        android:color="@color/app_text_color"/>
+
+</shape>
