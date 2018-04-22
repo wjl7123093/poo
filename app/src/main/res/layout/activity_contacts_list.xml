@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_contacts_list.xml
+  * @Description: 通讯录联系人界面xml
+  * @author wangjl
+  * @crdate 2017-11-15
+  * @update
+  * @version v2.1.2(14)
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_grey" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleContactsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"  >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <com.mypolice.poo.widget.SlidingLinearLayout
+        android:id="@+id/slidingview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleContactsList">
+
+        <ListView
+            android:id="@+id/contact_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#000000"
+            android:divider="@color/GREY_L"
+            android:dividerHeight="0.5dp"
+            android:fadingEdge="none"
+            android:scrollbars="none"
+            android:scrollingCache="false"
+            android:visibility="visible" />
+    </com.mypolice.poo.widget.SlidingLinearLayout>
+
+    <com.mypolice.poo.widget.QuickAlphabeticBar
+        android:id="@+id/fast_scroller"
+        android:layout_width="22dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/titleContactsList"
+        android:layout_gravity="top|right|center"
+        android:layout_marginTop="0dip"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:src="@color/GREY_H" >
+    </com.mypolice.poo.widget.QuickAlphabeticBar>
+
+    <TextView
+        android:id="@+id/fast_position"
+        android:layout_width="70dip"
+        android:layout_height="70dip"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_margin="34dip"
+        android:background="@drawable/sp_bg_btn_green"
+        android:gravity="center"
+        android:padding="2dip"
+        android:textColor="#404040"
+        android:textSize="48dip"
+        android:visibility="invisible" />
+
+</RelativeLayout>

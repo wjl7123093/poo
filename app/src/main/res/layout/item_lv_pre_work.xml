@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingBottom="12dp">
+    <View
+        android:id="@+id/viewSplitTop"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/GREY_L"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tvItemDeadtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="签到时间: 2017/9/14"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/viewSplitTop"/>
+    <TextView
+        android:id="@+id/tvItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="签到说明: xxx"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/tvItemDeadtime"
+        android:layout_marginTop="2dp"/>
+
+    <com.mypolice.poo.widget.IconView
+        android:id="@+id/iconItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="@string/icon_sign_ok"
+        android:textColor="@color/app_main_green"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"/>
+
+</RelativeLayout>

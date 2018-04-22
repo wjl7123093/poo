@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    
+    <color name="darkgray">#404040ff</color>
+    <color name="black">#000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#0ff0ff</color>
+    <color name="lightgray">#c0c0c0ff</color>
+    <color name="white">#ffffffff</color>
+    <color name="blue">#ff0f81d9</color>
+    <color name="gray">#ff666666</color>
+    <color name="text_gray2">#ffC3C3C3</color>
+    <color name="magenta">#ff6699ff</color>
+    <color name="cyan">#66ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black">#ff000000</color>
+    <color name="background_dark">#f0f0f0</color>
+    <color name="camera_bg">#2c2c2c</color>
+    <color name="camera_progress">#2980B9</color>
+    <color name="camera_progress_split">#005084</color>
+    <color name="camera_progress_three">#24ff00</color>
+    <color name="camera_progress_overflow">#1b5d89</color>
+    <color name="camera_theme_selected_bgcolor">#2980B9</color>
+    <color name="camera_bottom_press_bg">#1b1c1f</color>
+    <color name="title_background_color">#fcb840</color>
+    <color name="camera_progress_delete">#f68b2b</color>
+    <color name="translucent_background_80">#CC000000</color>
+    <color name="translucent_background_50">#7f000000</color>
+    <color name="transparent_black_40">#66000000</color>
+    <color name="transparent_black_85">#DA000000</color>
+    <color name="transparent_black_30">#4D000000</color>
+    <color name="publish_at_line">#FF434345</color>
+    <color name="main_bg_color">#e7e7e7</color>
+    <!-- 标题文字 -->
+    <color name="color_23232b">#23232b</color>
+    
+    <color name="video_double_back">#1c1b20</color>
+    <!-- 辅助文字 -->
+    <color name="color_919191">#919191</color>
+    <color name="title_bac_color">#F5F5F5</color>
+    <color name="yellow">#ffc800</color>
+    <color name="title_black_color">#23232b</color>
+    <color name="title_txt_color">#23232b</color>
+    <color name="import_video_thumb_mask">#FF151515</color>
+    <color name="translucent_background_75">#BF000000</color>
+    <color name="button_black_background">#424253</color>
+    <color name="import_video_thumb_bg">#FF515154</color>
+    
+    <!-- 白色 -->
+    <color name="WHITE_H">#FFFFFF</color>
+    <color name="WHITE_M">#EEEEEE</color>
+    <color name="WHITE_L">#DDDDDD</color>
+    <!-- 灰色 -->
+    <color name="GREY_H">#898989</color>
+    <color name="GREY_M">#A0A0A0</color>
+    <!--<color name="GREY_L">#B7B7B7</color>-->
+    <color name="GREY_L">#F2F2F2</color>
+    <!-- 黑色 -->
+    <color name="BLACK_H">#000000</color>
+    <color name="BLACK_M">#363636</color>
+    <!-- 紫色 -->
+    <color name="PURPLE_H">#9933CC</color>
+    <color name="PURPLE_M">#AA66CC</color>
+    <color name="PURPLE_L">#D6ADEB</color>
+    <!-- 黄色 -->
+    <color name="YELLOW_H">#FF8800</color>
+    <color name="YELLOW_M">#FFBB33</color>
+    <color name="YELLOW_L">#FFD980</color>
+    <!-- 红色 -->
+    <color name="RED_H">#CC0000</color>
+    <color name="RED_M">#FF4444</color>
+    <color name="RED_L">#FF9494</color>
+    <color name = "APP_RED">#f9324f</color>
+    <color name ="bg_publish_red">#f7324f</color>
+    <!-- 蓝色 -->
+    <color name="BLUE_H">#0099CC</color>
+    <color name="BLUE_M">#33B5E5</color>
+    <color name="BLUE_L">#8AD5F0</color>
+    <!-- 绿色 -->
+    <color name="GREEN_H">#669900</color>
+    <color name="GREEN_M">#99CC00</color>
+    <color name="GREEN_L">#C5E26D</color>
+    <color name="BLACK_TAB_BG">#3E3F41</color>
+    <color name="TOAST_BG">#AAE11173</color>
+    <color name = "bg_publish_green">#17c590</color>
+    <!-- 粉红 -->
+    <color name="PINK">#FDDCE7</color>
+
+
+
+    <!-- POO APP -->
+    <!-- app 主色调1 -->
+    <color name="app_main_green">#13d4e6</color>
+    <!-- app 主色调2 -->
+    <color name="app_main_red">#fa5f5f</color>
+    <!-- app 主色调3 -->
+    <color name="app_main_btn">#7ed321</color>
+    <!-- 通用页面背景色 -->
+    <color name="app_bg_grey">#f1f1f1</color>
+    <!-- 一级标题栏 - 红色 -->
+    <color name="app_bg_title">#e51e3b</color>
+    <!-- 一级标题栏 - 红色（该值只针对 "关于我们" 页面标题。因为要和 banner 图顶部色保持一致  -->
+    <color name="app_bg_title_second">#f83e5a</color>
+    <!-- 以及标题栏 按钮之间的 分割线 颜色 -->
+    <color name="app_bg_title_rdobtn_split">#e1e2e6</color>
+    <!-- 以及标题栏 icon颜色（v1.1.2(4)） -->
+    <color name="app_bg_title_icon_color">#fce9ec</color>
+    <!-- 一级标题 Title （顶部标题栏） -->
+    <color name="app_text_color_stair">#656565</color>
+    <!-- 二级标题 Title -->
+    <color name="app_text_color">#888888</color>
+    <!-- 富文本内容及三四级标题等 -->
+    <color name="app_text_color_second">#a9a7ae</color>
+    <!-- 输入框提示文字颜色 -->
+    <color name="app_text_color_hint">#cccccc</color>
+    <!-- App 半透明背景色（如：播放按钮圆形半透明背景色） -->
+    <color name="app_translucent_black">#88000000</color>
+    <!-- 列表分割线颜色 -->
+    <color name="app_list_divider_bg">#ff888888</color>
+
+
+    <!-- 新版滑动头部条所需颜色 -->
+    <color name="activity_bg_color">#fffafafa</color>
+    <!-- <color name="top_category_bar_background">#ffeeeeee</color> -->
+    <color name="top_category_bar_background">#ffffff</color>
+
+    <color name="divider">#ffdddddd</color>
+
+    <color name="category_tab_text">#ff888888</color>
+    <color name="category_tab_text2">#ffffffff</color>
+    <color name="category_tab_text_dark">#fffafafa</color>
+
+    <!-- 高亮 Tab字体 颜色 -->
+    <!--<color name="category_tab_highlight_text">#fff9304e</color>-->
+    <color name="category_tab_highlight_text">#ffffffff</color>
+
+    <color name="category_tab_highlight_text2">#ffffffff</color>
+    <color name="category_tab_highlight_text_dark">#ffd43d3d</color>
+
+    <!-- 高亮 Tab下滑指示器 颜色 -->
+    <!--<color name="category_tab_highlight_bg">#fff9304e</color>-->
+    <color name="category_tab_highlight_bg">#ffffffff</color>
+
+    <color name="category_tab_highlight_dark_bg">#fffafafa</color>
+
+    <!-- 自定义 时间选择器 -->
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
+    <color name="background">#FFFFFF</color>
+    <color name="split_line">#11112233</color>
+
+
+    <!--<color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="green">#00ff00</color>-->
+    <color name="focusedtrue">#DBDBDB</color>
+    <color name="presstrue">#EAEAEA</color>
+    <color name="normalback">#FFFFFF</color>
+    <color name="hintcolor">#707070</color>
+
+
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="update_url">http://www.myxdgk.com:18080/app/update.xml</string>
+
+</resources>

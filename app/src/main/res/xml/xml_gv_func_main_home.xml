@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: xml_gv_func_main_home.xml
+  * @Description: 首页GridView配置 XML
+  * @author wangjl  
+  * @crdate 2017-8-21
+  * @update
+  * @version v1.0.0(1)
+ -->
+<Functions>
+    
+    <!-- 功能1 -->
+    <Function 
+        name="exam"
+        displayName="定期体检"
+        icon="icon_main_examination"
+        bg1="sp_bg_oval_1"
+        bg2="sp_bg_oval_1_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="PhysicalExaminationActivity" />
+    
+    <!-- 功能2 -->
+    <!--<Function
+        name="sign"
+        displayName="定期签到"
+        icon="icon_main_sign"
+        bg1="sp_bg_oval_2"
+        bg2="sp_bg_oval_2_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="SignListActivity" />-->
+    
+    <!-- 功能3 -->
+    <Function 
+        name="interaction"
+        displayName="交流互动"
+        icon="icon_main_interaction"
+        bg1="sp_bg_oval_3"
+        bg2="sp_bg_oval_3_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="InteractionActivity" />
+    
+    <!-- 功能4 -->
+    <Function 
+        name="leave"
+        displayName="请假申请"
+        icon="icon_main_appforleave"
+        bg1="sp_bg_oval_4"
+        bg2="sp_bg_oval_4_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="LeaveListActivity" />
+    
+    <!-- 功能5 -->
+    <!--<Function
+        name="education"
+        displayName="宣传教育"
+        icon="icon_main_education"
+        bg1="sp_bg_oval_5"
+        bg2="sp_bg_oval_5_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="EducationActivity" />-->
+    
+    <!-- 功能6 -->
+    <Function
+        name="personal"
+        displayName="个人中心"
+        icon="icon_main_personal"
+        bg1="sp_bg_oval_6"
+        bg2="sp_bg_oval_6_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="PersonalActivity" />
+
+    <!-- 功能7 -->
+    <Function
+        name="prizesforreporting"
+        displayName="举报有奖"
+        icon="icon_main_interaction"
+        bg1="sp_bg_oval_7"
+        bg2="sp_bg_oval_7_2"
+        packageName="com.mypolice.poo.ui.activity"
+        activityName="PrizesForReportingActivity" />
+        
+    
+</Functions>

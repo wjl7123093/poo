@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  * @Title: activiy_personal.xml
+  * @Description: 个人中心界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_header"
+        android:orientation="vertical">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rlTitle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <!-- 左侧Btn 默认返回 -->
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_left_arrow" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="40dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="个人中心"
+                android:textColor="@color/WHITE_H"
+                android:textSize="@dimen/app_textsize_mid1"></TextView>
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/layout_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"></include>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg_grey"></View>
+
+            <!-- Layout 1 -->
+            <include
+                android:id="@+id/layout1"
+                layout="@layout/item_fragment_personal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg_grey"></View>
+
+            <!-- Layout 2 -->
+            <include
+                android:id="@+id/layout2"
+                layout="@layout/item_fragment_personal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg_grey"
+                android:visibility="gone"></View>
+
+            <!-- Layout 3 -->
+            <include
+                android:id="@+id/layout3"
+                layout="@layout/item_fragment_personal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg_grey"></View>
+
+            <!-- Layout 4 -->
+            <include
+                android:id="@+id/layout4"
+                layout="@layout/item_fragment_personal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg_grey"></View>
+
+            <!-- Layout 5 测试功能 1 -->
+            <include
+                android:id="@+id/layout5"
+                layout="@layout/item_fragment_personal" />
+
+            <!-- Layout 6 测试功能 2 -->
+            <include
+                android:id="@+id/layout6"
+                layout="@layout/item_fragment_personal" />
+
+            <!-- Layout 7 测试功能 3 -->
+            <include
+                android:id="@+id/layout7"
+                layout="@layout/item_fragment_personal" />
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sp_bg_btn_red"
+                android:text="退出登录"
+                android:textColor="@color/WHITE_H"
+                android:textSize="@dimen/app_textsize_mid2" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_check_version.xml
+  * @Description: 检查更新界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg_grey">
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleCheckVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+</LinearLayout>

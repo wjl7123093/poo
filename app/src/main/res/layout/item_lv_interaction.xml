@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: item_lv_interaction.xml
+  * @Description: 交流互动 项试图xml
+  * @author wangjl
+  * @crdate 2017-8-21
+  * @update 2017-8-23
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sp_bg_shadow">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+            <com.mypolice.poo.widget.IconView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/icon_interaction_title"
+                android:textColor="#f7b55e"
+                android:gravity="right"
+                android:paddingRight="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="交流互动"
+                android:textColor="@color/BLACK_H"
+                android:textSize="@dimen/app_textsize_mid2"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/GREY_H"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <TextView
+            android:id="@+id/tvItemDeadtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任务截止时间: 2017/9/14"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/tvItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任务说明: 定期尿检任务"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="任务状态: 未登记"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="50dp"/>
+        <!--<Button
+            android:id="@+id/btnCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/sp_bg_btn_green"
+            android:text="登记"
+            android:textColor="@color/WHITE_H"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"/>-->
+    </LinearLayout>
+
+</LinearLayout>

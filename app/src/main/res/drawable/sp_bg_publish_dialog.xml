@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: sp_bg_publish_dialog.xml
+  * @Description: 发稿页面 EditText 的光标样式
+  * @author wangjl 
+  * @crdate 2017-4-22
+  * @version v1.0   
+  -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="@color/WHITE_H" />
+    <corners android:radius="10dp"/>
+
+</shape>

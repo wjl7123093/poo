@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_webview.xml
+  * @Description: webview界面xml
+  * @author wangjl 
+  * @crdate 2017-6-9
+  * @update 
+  * @version v1.1.3(5)   
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_grey" >
+
+    <!-- 顶部标题栏 -->
+    <!--<com.mytv.rtmedia.widget.TitleBarViewSecond
+        android:id="@+id/titleWebview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mytv.rtmedia.widget.TitleBarViewSecond>-->
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <com.mypolice.poo.widget.WebProgressBar
+        android:id="@+id/webProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleWebView">
+    </com.mypolice.poo.widget.WebProgressBar>
+    
+
+</RelativeLayout>

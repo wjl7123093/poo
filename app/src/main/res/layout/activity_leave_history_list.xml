@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_leave_history_list.xml
+  * @Description: 历史请假列表界面xml
+  * @author wangjl 
+  * @crdate 2017-10-26
+  * @update 
+  * @version v2.1.0(12)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg_grey" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleLeaveList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <ListView
+        android:id="@+id/lvLeave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/transparent"
+        android:dividerHeight="10dp"
+        android:listSelector="@null"
+        android:scrollbars="none"
+        android:layout_margin="10dp" />
+
+</LinearLayout>

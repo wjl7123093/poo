@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <shape
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/category_tab_highlight_bg" />
+    <corners android:radius="4.0dip" />
+</shape> -->
+
+<!--
+  * @Title: bg_category_indetor.xml
+  * @Description: 顶部导航栏 TextView 背景色 xml
+  * @author wangjl
+  * @crdate 2017-5-22
+  * @version v1.1.2(4)   
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 边框颜色值 -->
+    <item>
+        <shape>
+            <solid android:color="@color/category_tab_highlight_bg" />
+        </shape>
+    </item>
+    <!-- 主体背景颜色值 -->
+    <item android:bottom="3dp"> <!-- 设置只有底部有边框 -->
+        <shape>
+            <solid android:color="@color/app_main_green" />
+        </shape>
+    </item>
+</layer-list>

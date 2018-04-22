@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_sign_list.xml
+  * @Description: 签到列表界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 2017-10-26
+  * @version v2.1.0(12)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleSignList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_main"
+        android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="80dp"
+        android:paddingBottom="40dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <com.mypolice.poo.widget.MyListView
+            android:id="@+id/lvSign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/transparent"
+            android:dividerHeight="20dp"
+            android:listSelector="@null"
+            android:scrollbars="none" >
+        </com.mypolice.poo.widget.MyListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_bg_shadow2"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llExpandSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <com.mypolice.poo.widget.IconView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:text="@string/icon_sign_history"
+                    android:textColor="@color/app_main_green"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="历史纪录"
+                    android:textColor="@color/BLACK_H"
+                    android:textSize="@dimen/app_textsize_mid2" />
+
+                <ImageView
+                    android:id="@+id/ivSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_arrow_down" />
+            </LinearLayout>
+
+            <com.mypolice.poo.widget.MyListView
+                android:id="@+id/lvSignPre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:paddingBottom="20dp" >
+            </com.mypolice.poo.widget.MyListView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: dialog_download_apk.xml
+  * @Description: 更新下载Apk提示框 xml
+  * @author wangjl
+  * @crdate 2017-5-10
+  * @update 
+  * @version v1.2   
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/sp_bg_publish_dialog" >
+      
+    <TextView 
+        android:id="@+id/tvDownloadNotice"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="[阳光生活] 发现新版本，是否立即更新？"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:textColor="@color/app_text_color"
+        android:gravity="center"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+    <Button 
+        android:id="@+id/btnOK"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/sp_bg_dialog_btn"
+        android:text="确定"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:textColor="@color/app_text_color"
+        android:gravity="center"
+        android:layout_marginRight="10dp"/>
+    
+    <Button 
+        android:id="@+id/btnCancel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/sp_bg_dialog_btn"
+        android:text="取消"
+        android:textColor="@color/app_text_color"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    
+
+</LinearLayout>

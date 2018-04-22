@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- 用户头像 -->
+    <org.raphets.roundimageview.RoundImageView
+        android:id="@+id/ivHeaderImg"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@mipmap/ic_logo"
+        app:border_width="4dp"
+        app:border_color="#41e4ff"
+        app:leftBottom_corner_radius="0dp"
+        app:leftTop_corner_radius="30dp"
+        app:rightBottom_corner_radius="30dp"
+        app:rightTop_corner_radius="0dp"
+        app:type="circle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"/>
+
+    <!-- 用户名 -->
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/WHITE_H"
+        android:text="李元清"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_alignTop="@id/ivHeaderImg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"/>
+    <!-- 专干 -->
+    <TextView
+        android:id="@+id/tvSecretaryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="12dp"
+        android:textColor="@color/WHITE_H"
+        android:text="专干:"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_below="@id/tvUserName"
+        android:layout_marginLeft="10dp"/>
+    <!-- 类别 -->
+    <TextView
+        android:id="@+id/tvRecoveryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/WHITE_H"
+        android:text="类别:"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_below="@id/tvSecretaryName"
+        android:layout_marginLeft="10dp"/>
+    <!-- 社区 -->
+    <TextView
+        android:id="@+id/tvCommnuintyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/WHITE_H"
+        android:text="社区:"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_below="@id/tvRecoveryName"
+        android:layout_marginLeft="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_msg_noread"
+        android:layout_width="54dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/ivHeaderImg"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/iv_msg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_msg"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"/>
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:textColor="@color/WHITE_H"
+            android:text="系统消息"
+            android:layout_below="@id/iv_msg"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/tv_msg_noread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_bg_msg_noread"
+            android:textSize="12dp"
+            android:textColor="@color/WHITE_H"
+            android:text="12"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

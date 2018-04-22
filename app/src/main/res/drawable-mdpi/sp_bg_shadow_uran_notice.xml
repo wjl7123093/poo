@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 阴影背景 [能自适应 MyListView 高度]
+    @crdate 2017-10-26
+    @version v2.1.0(12)
+    -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:left="2dp" android:top="2dp">
+                <shape>
+                    <solid android:color="#f1fcff" />
+                    <corners android:radius="6dip"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <!-- SHADOW LAYER -->
+            <item android:left="2dp" android:top="2dp">
+                <shape>
+                    <solid android:color="#c7e0e9" />
+                    <corners android:radius="6dip"/>
+                </shape>
+            </item>
+            <!-- CONTENT LAYER -->
+            <item android:bottom="2dp" android:right="2dp">
+                <shape>
+                    <solid android:color="#f1fcff" />
+                    <corners android:radius="6dip"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

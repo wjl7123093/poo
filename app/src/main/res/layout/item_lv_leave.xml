@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: item_lv_leave.xml
+  * @Description: 请假列表 项试图xml
+  * @author wangjl
+  * @crdate 2017-8-29
+  * @update
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/sp_bg_shadow">
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical|left"
+            android:text="请假草稿"
+            android:textColor="@color/BLACK_H"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:paddingLeft="15dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/GREY_H"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+            <TextView
+                android:id="@+id/tvItemCreateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="创建时间: xxx"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"/>
+            <TextView
+                android:id="@+id/tvItemStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="起始时间: xxx"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tvItemEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="结束时间: xxx"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tvItemLeaveReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="请假事由: xxx"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tvItemDestination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="目的地: xxx"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tvItemStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="申请状态: 存为草稿"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/app_text_color"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/GREY_H"/>-->
+        <RelativeLayout
+            android:id="@+id/rlItemEdit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/GREY_H"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"/>
+            <Button
+                android:id="@+id/btnItemEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="编辑"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/blue"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"/>
+            <Button
+                android:id="@+id/btnItemSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="提交"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:textColor="@color/blue"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

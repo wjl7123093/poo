@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_update_pwd.xml
+  * @Description: 修改密码界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg_grey">
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleUpdatePwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/GREY_L"
+        android:layout_marginTop="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/BLACK_H"
+            android:text="原密码"/>
+        <com.mypolice.poo.widget.ClearEditText
+            android:id="@+id/edtTxtOldPwd"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:hint="请输入原密码"
+            android:textColorHint="@color/app_text_color_hint"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/app_text_color"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/GREY_L"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/BLACK_H"
+            android:text="新密码"/>
+        <com.mypolice.poo.widget.ClearEditText
+            android:id="@+id/edtTxtNewPwd"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:hint="请输入新密码"
+            android:textColorHint="@color/app_text_color_hint"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/app_text_color"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/GREY_L" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/BLACK_H"
+            android:text="确认新密码"/>
+        <com.mypolice.poo.widget.ClearEditText
+            android:id="@+id/edtTxtNewPwd2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:hint="请再次输入新密码"
+            android:textColorHint="@color/app_text_color_hint"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:textColor="@color/app_text_color"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/GREY_L" />
+    <Button
+        android:id="@+id/btnUpdatePwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sp_bg_btn_green"
+        android:layout_marginTop="10dp"
+        android:text="保存"
+        android:textColor="@color/WHITE_H"
+        android:textSize="@dimen/app_textsize_mid2" />
+
+</LinearLayout>

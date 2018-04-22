@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: view_title_bar.xml
+  * @Description: 页面头部控件 XML
+  * @author wangjl  
+  * @crdate 2017-8-21
+  * @update 2017-10-27
+  * @version v2.1.0
+ -->
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlTitle"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/app_main_green"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+    
+    <!-- 左侧Btn 默认返回 -->
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/ic_left_arrow"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="定期体检"
+        android:textColor="@color/WHITE_H"
+        android:textSize="@dimen/app_textsize_mid1"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp">
+    </TextView>
+
+    <!-- 右侧Text -->
+    <TextView
+        android:id="@+id/tvMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:textColor="@color/WHITE_H"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <!-- 右侧Icon -->
+    <com.mypolice.poo.widget.IconView
+        android:id="@+id/iconMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icon_leave_history"
+        android:textSize="24dp"
+        android:textColor="@color/WHITE_H"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

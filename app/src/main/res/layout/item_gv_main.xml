@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/llFuncBg2"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/sp_bg_oval_1_2"
+        android:orientation="vertical"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/llFuncBg1"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/sp_bg_oval_1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <com.mypolice.poo.widget.IconView
+                android:id="@+id/iconFunc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/WHITE_H"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 功能名称 -->
+    <TextView
+        android:id="@+id/tvFuncName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/BLACK_H"
+        android:textSize="@dimen/app_textsize_mid2"/>
+
+</LinearLayout>

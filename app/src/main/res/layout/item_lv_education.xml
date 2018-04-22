@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llItemNews"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@color/WHITE_H">
+
+    <TextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:textColor="@color/BLACK_H"
+        android:gravity="center_vertical|left"
+        android:text="公安部关于加强吸毒人员驾驶机动车管理的通知"/>
+    <TextView
+        android:id="@+id/tvItemTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:textColor="@color/app_text_color"
+        android:gravity="center_vertical|right"
+        android:text="2017-07-29 13:46:59"
+        android:layout_marginTop="5dp"/>
+
+</LinearLayout>

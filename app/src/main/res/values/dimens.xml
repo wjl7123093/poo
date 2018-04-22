@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- 文本大小 -->
+    <dimen name="app_textsize_max">20dp</dimen>
+    <dimen name="app_textsize_mid1">18dp</dimen>
+    <dimen name="app_textsize_mid2">16dp</dimen>
+    <dimen name="app_textsize_mid3">14dp</dimen>
+    <dimen name="app_textsize_min">12dp</dimen>
+    <dimen name="app_textsize_mini">10dp</dimen>
+
+    <!-- 尺寸大小 -->
+    <dimen name="app_size_max">48dp</dimen>
+    <dimen name="app_size_mid1">32dp</dimen>
+    <dimen name="app_size_mid2">16dp</dimen>
+    <dimen name="app_size_min">8dp</dimen>
+
+
+    <dimen name="main_category_bar">40dp</dimen>
+
+    <!-- 百度地图 -->
+    <dimen name="main_title_size">18sp</dimen>
+    <dimen name="second_title_size">16sp</dimen>
+    <dimen name="desc_title_size">12sp</dimen>
+</resources>

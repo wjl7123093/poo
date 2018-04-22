@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_leave_list.xml
+  * @Description: 请假列表界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg_grey" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleLeaveList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <ListView
+        android:id="@+id/lvLeave"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/transparent"
+        android:dividerHeight="10dp"
+        android:listSelector="@null"
+        android:scrollbars="none"
+        android:layout_margin="10dp"
+        android:visibility="gone" />
+
+    <!--<include layout="@layout/item_lv_leave"
+        android:id="@+id/includeLeaveDetail"
+        android:visibility="gone"/>-->
+
+    <!-- 无请假申请 提示区域 -->
+    <LinearLayout
+        android:id="@+id/llNoLeave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="当前暂无请假申请/草稿"
+            android:textSize="@dimen/app_textsize_mid1"
+            android:textColor="@color/BLACK_H"/>
+
+        <LinearLayout
+            android:id="@+id/llAppForLeave"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/sp_bg_oval_1_2"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="15dp">
+            <LinearLayout
+                android:id="@+id/llFuncBg1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/sp_bg_oval_1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="请假申请"
+                    android:textSize="@dimen/app_textsize_mid1"
+                    android:textColor="@color/WHITE_H"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    
+
+</LinearLayout>

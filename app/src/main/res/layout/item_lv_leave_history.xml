@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  * @Title: item_lv_leave_history.xml
+  * @Description: 历史请假列表 项试图xml
+  * @author wangjl
+  * @crdate 2017-10-26
+  * @update
+  * @version v2.1.0(12)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="@color/WHITE_H"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/app_main_green" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tvItemStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="起始时间: xxx"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3" />
+
+        <TextView
+            android:id="@+id/tvItemEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="结束时间: xxx"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3" />
+
+        <TextView
+            android:id="@+id/tvItemLeaveReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="请假事由: xxx"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvItemDestination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="目的地: xxx"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <com.mypolice.poo.widget.IconView
+        android:id="@+id/iconItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icon_leave_status1"
+        android:textSize="40dp"
+        android:textColor="@color/app_main_green"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="5dp"/>
+
+</LinearLayout>
+
+

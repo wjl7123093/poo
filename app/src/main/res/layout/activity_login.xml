@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_login.xml
+  * @Description: 登陆界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 2017-8-23
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/bg_login">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <ImageView
+                android:id="@+id/ivStartBg"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/login_logo"
+                android:layout_marginTop="60dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/app_name_cn"
+                android:textSize="24dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Sunshine Life"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:alpha="0.5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/sp_bg_login_edt"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <com.mypolice.poo.widget.ClearEditText
+                    android:id="@+id/edtTxtAcc"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@null"
+                    android:hint="请输入账号"
+                    android:textColorHint="@color/app_text_color_hint"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/app_text_color"
+                    android:drawableLeft="@mipmap/ic_acc"
+                    android:drawablePadding="10dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/app_bg_grey"></View>
+                <com.mypolice.poo.widget.ClearEditText
+                    android:id="@+id/edtTxtPwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    android:hint="请输入密码"
+                    android:textColorHint="@color/app_text_color_hint"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/app_text_color"
+                    android:drawableLeft="@mipmap/ic_pwd"
+                    android:drawablePadding="14dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/sp_bg_btn_login"
+                android:layout_marginTop="40dp"
+                android:text="登录"
+                android:textColor="@color/WHITE_H"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="六安市公安局禁毒支队@2018\n技术支持：四川科瑞软件有限责任公司"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:alpha="0.8"
+                android:layout_marginTop="80dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

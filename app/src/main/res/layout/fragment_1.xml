@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: fragment_1.xml
+  * @Description: 宣传教育界面 子fragment xml
+  * @author wangjl
+  * @crdate 2017-8-30
+  * @update
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mypolice.poo.widget.RefreshLayout
+        android:id="@+id/refreshContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f1f1f1" >
+        <ListView
+            android:id="@+id/lvEducation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/app_list_divider_bg"
+            android:dividerHeight="1dp"
+            android:listSelector="@null"
+            android:scrollbars="none"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/WHITE_H">
+
+        </ListView>
+
+    </com.mypolice.poo.widget.RefreshLayout>
+
+</LinearLayout>

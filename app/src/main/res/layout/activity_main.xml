@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/WHITE_H"
+    tools:context="com.mypolice.poo.ui.activity.MainActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- 隐藏 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/app_main_green"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/WHITE_H"
+            android:textSize="@dimen/app_textsize_mid1"
+            android:text="阳光生活(演示)"
+            android:layout_centerInParent="true"/>
+        <com.mypolice.poo.widget.IconView
+            android:id="@+id/iconNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textColor="@color/WHITE_H"
+            android:text="@string/icon_main_notification"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+        <View
+            android:id="@+id/viewIsRead"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/sp_bg_is_read"
+            android:layout_alignRight="@id/iconNotification"
+            android:layout_alignTop="@id/iconNotification"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_header">
+        <include layout="@layout/layout_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"></include>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gvFunc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp"
+        android:horizontalSpacing="1dp"
+        android:listSelector="@android:color/transparent"
+        android:layout_marginTop="30dp">
+
+    </GridView>
+
+</LinearLayout>

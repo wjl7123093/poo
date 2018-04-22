@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: fragment_4.xml
+  * @Description: 宣传教育界面 子fragment4 xml
+  * @author wangjl
+  * @crdate 2017-8-30
+  * @update 2017-9-7
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="中国禁毒数字展馆"
+        android:textSize="26dp"
+        android:textColor="@color/BLACK_H"
+        android:gravity="center"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:id="@+id/tvLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://www.626china.org"
+        android:textSize="@dimen/app_textsize_mid1"
+        android:textColor="@color/blue"
+        android:gravity="center"
+        android:layout_marginTop="5dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_list_divider_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请关注中国禁毒微信公众号"
+        android:textSize="20dp"
+        android:textColor="@color/BLACK_H"
+        android:gravity="center"
+        android:layout_marginTop="30dp"/>
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/jindu_weixin"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

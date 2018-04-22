@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_education.xml
+  * @Description: 宣传教育界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 2017-8-29
+  * @version v1.0.0(1)
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleEducation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <!-- 下拉刷新区 -->
+    <com.mypolice.poo.widget.RefreshLayout
+        android:id="@+id/refreshContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f1f1f1"
+        android:layout_below="@id/titleEducation">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v4.view.ViewPager>
+        </ScrollView>
+    </com.mypolice.poo.widget.RefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/llCategoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_below="@id/titleEducation">
+
+        <com.mypolice.poo.widget.CategoryTabStrip
+            android:id="@+id/categoryTabStrip"
+            android:paddingLeft="0.0dip"
+            android:paddingRight="0.0dip"
+            android:clipToPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_category_bar"
+            android:background="@color/app_main_green"/>
+    </LinearLayout>
+
+    <!-- ViewPager内容区域 -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerEducation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/llCategoryLayout"
+        android:visibility="gone">
+
+    </android.support.v4.view.ViewPager>
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

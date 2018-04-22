@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: item_fragment_personal.xml
+  * @Description: 个人中心Fragment页面项视图 XML
+  * @author wangjl  
+  * @crdate 2017-8-21
+  * @update
+  * @version v1.0.0(1)
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="16dp"
+    android:background="@color/WHITE_H" >
+
+    <!-- Icon 功能图标 -->
+    <LinearLayout
+        android:id="@+id/llFuncItem"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:orientation="vertical"
+        android:gravity="center">
+	    <ImageView
+	        android:id="@+id/iconFuncItem"
+	        android:layout_width="24dp"
+	        android:layout_height="24dp"
+			android:scaleType="centerCrop"
+			android:src="@mipmap/ic_update_pwd"/>
+    </LinearLayout>
+
+    <!-- Text 功能名称 -->
+    <TextView
+        android:id="@+id/tvFuncName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="收货地址"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:textColor="@color/app_text_color"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp" />
+	<TextView 
+	    android:id="@+id/tvVersion"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="@dimen/app_textsize_mid2"
+	    android:textColor="@color/RED_M"
+	    android:visibility="invisible"
+	    />
+    <ImageView
+		android:layout_width="20dp"
+		android:layout_height="20dp"
+		android:src="@mipmap/ic_right_arrow"
+		android:scaleType="centerCrop"/>
+
+	    
+</LinearLayout>

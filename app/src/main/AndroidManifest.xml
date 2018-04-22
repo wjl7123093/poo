@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mypolice.poo">
+    <!-- -->
+
+    <!-- 读联系人权限 -->  
+    <uses-permission android:name="android.permission.READ_CONTACTS" />  
+    <!-- 写联系人权限 -->  
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />  
+    <!-- 拨号权限 -->  
+    <uses-permission android:name="android.permission.CALL_PHONE" />  
+    <!-- 读短信权限 -->  
+    <uses-permission android:name="android.permission.READ_SMS" />  
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <!--<uses-permission android:name="android.permission.DEVICE_POWER" />-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 允许程序使用闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <!-- 允许程序写音频数据 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 配置一个程序用于调试 -->
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>-->
+    
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- -->
+    <application
+        android:name="com.mypolice.poo.application.PooApplication"
+        tools:replace="android:name,android:icon,android:label,android:theme"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <activity android:name="com.mypolice.poo.ui.activity.StartActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 百度地图 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="nbEIDwBELXZGjmlEdUL08Cv8820jirtj" />  <!--http://lbsyun.baidu.com/apiconsole/key-->
+        <!--<service android:name="com.mypolice.poo.service.LocService" />-->
+        <service android:name="com.mypolice.poo.service.KeepLiveService"/>
+
+        <!--<receiver android:name="com.mypolice.poo.broadcast.KeepAliveReceiver" />  -->
+      
+
+        <!-- VCamera ffmpeg 视频压缩相关 -->
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.MediaRecorderActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme">
+            <!--<intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
+        </activity>
+        
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.MediaPreviewActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" >
+        </activity>
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" >
+        </activity>
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.ImportVideoFolderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" >
+        </activity>
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.ImportVideoSelectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" >
+        </activity>
+        <activity
+            android:name="com.yixia.camera.demo.ui.record.ImportVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" >
+        </activity>
+        
+        <service android:name="com.yixia.camera.demo.service.MessageService" >
+            <intent-filter>
+                <action android:name="com.yixia.camera.demo" />
+            </intent-filter>
+        </service>
+
+
+        <!-- Umeng 消息推送 -->
+        <activity
+            android:name="com.mypolice.poo.notification.NotificationActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name="com.mypolice.poo.notification.TestActivity" />
+        <!-- 使用完全自定义消息来开启应用的服务进程的示例服务配置 -->
+        <!-- 不是必需的服务，可以根据开发者的需求进行设置 -->
+        <service android:name="com.mypolice.poo.notification.NotificationService" />
+        <service android:name="com.mypolice.poo.notification.MyPushIntentService" />
+        <service android:name="com.mypolice.poo.notification.UmengNotificationService" />
+        <service android:name="com.mypolice.poo.notification.MyNotificationService" />
+        <receiver android:name="com.mypolice.poo.notification.NotificationBroadcast" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59e5666007fe657e750000ac"/>
+        <!--android:value="50e26c315270156df0000031"-->
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="b7071f45e8fe0b38b916d7ef0dfa224f" />
+        <!--android:value="b3a09842d2c86177aa8268ee64f14f7e"-->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
+        
+        <!-- POO 主程序 -->
+        <activity
+            android:name="com.mypolice.poo.ui.activity.AboutUsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.ApplicationForLeaveActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.CheckVersionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.EducationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.WebviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.InteractionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.LeaveListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.PersonalActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.PhysicalExaminationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.SignActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.SignListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.UpdatePwdActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.UpdateServerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.URANActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.ImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.SignaturepadActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.KeepLiveActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleTask"
+            android:process=":live"
+            android:theme="@style/LiveActivityStyle"
+            >
+        </activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.LeaveHistoryListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.PunishListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.ContactsListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.PrizesForReportingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <!-- Keeping Alive -->
+
+        <!--排除在RecentTask中显示
+         不能使用android:process=":live"
+                android:enable="false"属性
+         -->
+        <activity android:name="com.mypolice.poo.ui.activity.SinglePixelActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/SingleActivityStyle"/>
+
+        <activity android:name="com.mypolice.poo.ui.activity.SportsActivity"
+            android:launchMode="singleTask"/>
+
+        <!--注册Service-->
+        <service android:name=".service.DaemonService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":daemon_service"/>
+
+        <service android:name=".service.CancelNoticeService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":service"/>
+        <service android:name=".service.PlayerMusicService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":music_service"/>
+        <service
+            android:name=".service.AliveJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service
+            android:name=".service.AliveJobLocService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <service android:name="com.mypolice.poo.doubleservice.LocalService" />
+        <service
+            android:name="com.mypolice.poo.doubleservice.RemoteService"
+            android:process=":remote" />
+
+        <service android:name="com.mypolice.poo.doubleservice.KeepLiveLocalService" />
+        <service
+            android:name="com.mypolice.poo.doubleservice.KeepLiveRemoteService"
+            android:process=":remote_loc" />
+
+        <!--接收系统广播接收器-->
+        <receiver android:name="com.mypolice.poo.broadcast.KeepAliveReceiver">
+            <!--设备重启广播-->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!--安装或卸载广播-->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <!--解锁广播-->
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_USER_PRESENT"/>
+            </intent-filter>
+            <!--存储卡挂载广播-->
+            <intent-filter >
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+                <data android:scheme="file">
+                </data>
+            </intent-filter>
+            <!--网络状态广播-->
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+            华为推送
+        -->
+        <!-- 第三方相关 :接收Push消息（注册、Push消息、Push连接状态、标签，LBS上报结果）广播 -->
+        <receiver android:name="com.mypolice.poo.broadcast.MyHwPushReceiver" >
+            <intent-filter>
+                <!-- 必须,用于接收token-->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须，用于接收消息-->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 可选，用于点击通知栏或通知栏上的按钮后触发onEvent回调-->
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <!-- 可选，查看push通道是否连接，不查看则不需要-->
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+                <!-- 可选，标签、地理位置上报回应，不上报则不需要 -->
+                <action android:name="com.huawei.android.push.plugin.RESPONSE" />
+            </intent-filter>
+            <meta-data android:name="CS_cloud_ablitity" android:value="@string/hwpush_ability_value"/>
+        </receiver>
+
+        <!-- 备注：Push相关的android组件需要添加到业务的AndroidManifest.xml,
+        	 Push相关android组件运行在另外一个进程是为了防止Push服务异常而影响主业务 -->
+
+        <!-- PushSDK:PushSDK接收外部请求事件入口 -->
+        <receiver
+            android:name="com.huawei.android.pushagent.PushEventReceiver"
+            android:process=":pushservice" >
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REFRESH_PUSH_CHANNEL" />
+                <action android:name="com.huawei.intent.action.PUSH" />
+                <action android:name="com.huawei.intent.action.PUSH_ON" />
+                <action android:name="com.huawei.android.push.PLUGIN" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.huawei.android.pushagent.PushBootReceiver"
+            android:process=":pushservice" >
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REGISTER" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <meta-data
+                android:name="CS_cloud_version"
+                android:value="\u0032\u0037\u0030\u0035" />
+        </receiver>
+
+        <!-- PushSDK:Push服务 -->
+        <service
+            android:name="com.huawei.android.pushagent.PushService"
+            android:process=":pushservice" >
+        </service>
+
+        <!-- PushSDK:富媒体呈现页面，用于呈现服务器下发的富媒体消息 -->
+        <!-- locale|layoutDirection 切换语言后不重新创建activity -->
+        <activity
+            android:name="com.huawei.android.pushselfshow.richpush.RichPushActivity"
+            android:process=":pushservice"
+            android:theme="@style/hwpush_NoActionBar"
+            android:configChanges="orientation|screenSize|locale|layoutDirection"
+            android:screenOrientation="portrait">
+            <meta-data android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui"/>
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.RICHPUSH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.huawei.android.pushselfshow.permission.RequestPermissionsActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|locale|layoutDirection"
+            android:exported="false">
+        </activity>
+
+    </application>
+
+</manifest>

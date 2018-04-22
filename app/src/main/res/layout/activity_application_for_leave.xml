@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_application_for_leave.xml
+  * @Description: 请假申请界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleApplicationForLeave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/WHITE_H"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <!-- 外出目的地 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="外出目的地:"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:textColor="@color/BLACK_H"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"/>
+            <EditText
+                android:id="@+id/edtTxtOutwardDestination"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/sp_bg_login_edt"
+                android:inputType="textMultiLine"
+                android:hint="请输入外出目的地"
+                android:gravity="top|left"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:textColor="@color/app_text_color"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <!-- 请假事由 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="请假事由:"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:textColor="@color/BLACK_H"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"/>
+            <EditText
+                android:id="@+id/edtTxtLeaveReason"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/sp_bg_login_edt"
+                android:inputType="textMultiLine"
+                android:hint="请输入请假事由"
+                android:gravity="top|left"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:textColor="@color/app_text_color"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:padding="5dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"
+                android:layout_marginTop="10dp"/>
+
+            <!-- 开始&结束日期 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <!-- 开始日期 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="选择开始时间:"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/BLACK_H"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:id="@+id/tvStartDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:hint="2017/08/29"
+                        android:gravity="center"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/app_text_color"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+                <!-- 结束日期 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="选择结束时间:"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/BLACK_H"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:id="@+id/tvEndDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:hint="2017/08/29"
+                        android:gravity="center"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/app_text_color"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 请假共计天数 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="共"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/BLACK_H"/>
+                <TextView
+                    android:id="@+id/tvTotalDays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/BLACK_H"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/BLACK_H"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"/>
+
+            <LinearLayout
+                android:id="@+id/llRespondentsConditionsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="被访人情况"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/BLACK_H"/>
+                <ImageView
+                    android:id="@+id/ivArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_down_arrow"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"/>
+
+            <!-- 被访人情况区域 [折叠/显示] 默认隐藏 -->
+            <LinearLayout
+                android:id="@+id/llRespondentsConditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- 姓名 & 关系 & 职业 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+                    <!-- 姓名 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="姓名:"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/BLACK_H"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"/>
+                        <EditText
+                            android:id="@+id/edtTxtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/sp_bg_login_edt"
+                            android:hint=""
+                            android:gravity="center"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/app_text_color"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"/>
+                    </LinearLayout>
+                    <!-- 关系 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="关系:"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/BLACK_H"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"/>
+                        <EditText
+                            android:id="@+id/edtTxtRelationship"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/sp_bg_login_edt"
+                            android:hint=""
+                            android:gravity="center"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/app_text_color"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"/>
+                    </LinearLayout>
+                    <!-- 职业 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="职业:"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/BLACK_H"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"/>
+                        <EditText
+                            android:id="@+id/edtTxtJob"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/sp_bg_login_edt"
+                            android:hint=""
+                            android:gravity="center"
+                            android:textSize="@dimen/app_textsize_mid2"
+                            android:textColor="@color/app_text_color"
+                            android:layout_marginTop="5dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/app_list_divider_bg"/>
+
+                <!-- 单位 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="单位:"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/BLACK_H"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"/>
+                    <EditText
+                        android:id="@+id/edtTxtUnit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:hint=""
+                        android:gravity="center_vertical|left"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/app_text_color"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/app_list_divider_bg"/>
+
+                <!-- 地址 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="地址:"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/BLACK_H"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"/>
+                    <EditText
+                        android:id="@+id/edtTxtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:hint=""
+                        android:gravity="center_vertical|left"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/app_text_color"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/app_list_divider_bg"/>
+
+                <!-- 电话 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="电话:"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/BLACK_H"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"/>
+                    <EditText
+                        android:id="@+id/edtTxtPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:hint=""
+                        android:inputType="phone"
+                        android:gravity="center_vertical|left"
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:textColor="@color/app_text_color"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"/>
+
+            <!-- 备注 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="备注:"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/BLACK_H"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"/>
+                <EditText
+                    android:id="@+id/edtTxtRemarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/sp_bg_login_edt"
+                    android:hint="请输入需备注的内容"
+                    android:inputType="textMultiLine"
+                    android:gravity="top|left"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:textColor="@color/app_text_color"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/app_list_divider_bg"/>
+
+            <!-- 按钮 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/btnSaveDraft"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="存为草稿"
+                    android:textColor="@color/WHITE_H"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:background="@drawable/sp_bg_btn_green"
+                    android:layout_marginRight="15dp"/>
+                <Button
+                    android:id="@+id/btnSubmitLeave"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="提交请假"
+                    android:textColor="@color/app_main_green"
+                    android:textSize="@dimen/app_textsize_mid2"
+                    android:background="@drawable/sp_bg_btn_white"
+                    android:layout_marginLeft="15dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    
+
+</LinearLayout>
