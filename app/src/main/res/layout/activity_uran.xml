@@ -175,9 +175,9 @@
                             android:layout_height="wrap_content"
                             android:text="请上传本人及环境外观照片"
                             android:textSize="@dimen/app_textsize_mid3"
+                            android:textColor="#999"
                             android:gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:layout_below="@id/icon1"/>
+                            android:layout_marginTop="10dp"/>
                     </LinearLayout>
                     <RelativeLayout
                         android:id="@+id/rlPhoto1"
@@ -219,12 +219,13 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@mipmap/ic_uran_photo2"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="fitCenter"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="请上传尿检单照片"
                             android:textSize="@dimen/app_textsize_mid3"
+                            android:textColor="#999"
                             android:gravity="center"
                             android:layout_marginTop="10dp" />
                     </LinearLayout>
@@ -297,12 +298,13 @@
                             android:layout_width="60dp"
                             android:layout_height="40dp"
                             android:src="@mipmap/ic_uran_camera"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="fitCenter"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="请上传本人及环境外观视频"
                             android:textSize="@dimen/app_textsize_mid3"
+                            android:textColor="#999"
                             android:gravity="center"
                             android:layout_marginTop="10dp"/>
                     </LinearLayout>
