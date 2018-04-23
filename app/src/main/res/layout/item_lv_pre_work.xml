@@ -3,35 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingBottom="12dp">
-    <View
-        android:id="@+id/viewSplitTop"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/GREY_L"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+    android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/tvItemDeadtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="签到时间: 2017/9/14"
-        android:textSize="@dimen/app_textsize_mid3"
-        android:layout_marginLeft="40dp"
-        android:layout_below="@id/viewSplitTop"/>
-    <TextView
-        android:id="@+id/tvItemDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="签到说明: xxx"
-        android:textSize="@dimen/app_textsize_mid3"
-        android:layout_marginLeft="40dp"
-        android:layout_below="@id/tvItemDeadtime"
-        android:layout_marginTop="2dp"/>
+    <View
+        android:id="@+id/view_1"
+        android:layout_width="4dp"
+        android:layout_height="10dp"
+        android:background="@color/app_bg_grey"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"></View>
 
     <com.mypolice.poo.widget.IconView
         android:id="@+id/iconItemStatus"
@@ -40,8 +20,65 @@
         android:textSize="30dp"
         android:text="@string/icon_sign_ok"
         android:textColor="@color/app_main_green"
+        android:layout_below="@id/view_1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"/>
+    <View
+        android:id="@+id/view_2"
+        android:layout_width="4dp"
+        android:layout_height="70dp"
+        android:background="@color/app_bg_grey"
+        android:layout_marginLeft="22dp"
+        android:layout_below="@id/iconItemStatus"
+        android:layout_marginTop="2dp"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@mipmap/bg_history"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_toRightOf="@id/iconItemStatus"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"/>
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/tvItemDeadtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截止时间: 2017/9/14"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/tvItemDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务说明: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tvItemDeadtime"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务状态: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tvItemDescription"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvItemTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="第一年第12次"
+            android:textSize="12dp"
+            android:textColor="@color/app_text_color"
+            android:background="@drawable/sp_bg_label_history_times"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvItemDescription"
+            android:layout_marginTop="4dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>
