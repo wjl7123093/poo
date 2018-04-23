@@ -4,17 +4,112 @@
   * @Description: 请假列表 项试图xml
   * @author wangjl
   * @crdate 2017-8-29
-  * @update
+  * @update 2018-4-23   更新新版UI
   * @version v1.0.0(1)
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp">
+    android:background="@color/app_bg_grey">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_leave_status"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="请假状态"
+            android:textColor="@color/BLACK_H"
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已审核，待销假"
+            android:textColor="@color/GREY_H"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/WHITE_H"
+        android:paddingLeft="38dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/tvItemStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始时间: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"/>
+        <TextView
+            android:id="@+id/tvItemEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="结束时间: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemLeaveReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请假事由: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemDestination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="外出地址: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemCreateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="创建时间: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提示：若请假时间已结束，请前往社区销假！"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="#f14f4f"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -87,10 +182,10 @@
                 android:textColor="@color/app_text_color"
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
-        <!--<View
+        &lt;!&ndash;<View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/GREY_H"/>-->
+            android:background="@color/GREY_H"/>&ndash;&gt;
         <RelativeLayout
             android:id="@+id/rlItemEdit"
             android:layout_width="match_parent"
@@ -125,6 +220,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"/>
         </RelativeLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

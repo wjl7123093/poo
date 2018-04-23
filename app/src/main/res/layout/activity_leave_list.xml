@@ -11,7 +11,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/app_bg_grey" >
+    android:background="@color/app_bg_grey"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false" >
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
@@ -28,7 +30,6 @@
         android:dividerHeight="10dp"
         android:listSelector="@null"
         android:scrollbars="none"
-        android:layout_margin="10dp"
         android:visibility="gone" />
 
     <!--<include layout="@layout/item_lv_leave"

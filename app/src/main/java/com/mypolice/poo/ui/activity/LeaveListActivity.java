@@ -227,27 +227,27 @@ public class LeaveListActivity extends BaseActivityPoo {
 			@Override
 			public void convert(ViewHolder helper, final LeaveItemBean item) {
 				if (0 == item.getLeave_type()) {	// 草稿
-					helper.setText(R.id.tvItemTitle, "请假草稿");
-					helper.setVisibility(R.id.rlItemEdit, View.VISIBLE);
-					helper.setText(R.id.tvItemStatus, "申请状态: 存为草稿");
+//					helper.setText(R.id.tvItemTitle, "请假草稿");
+//					helper.setVisibility(R.id.rlItemEdit, View.VISIBLE);
+					helper.setText(R.id.tvItemStatus, "存为草稿");
 				} else if (1 == item.getLeave_type()) {	// 待审核
-					helper.setText(R.id.tvItemTitle, "已提交申请");
-					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-					helper.setText(R.id.tvItemStatus, "申请状态: 待审核");
+//					helper.setText(R.id.tvItemTitle, "已提交申请");
+//					helper.setVisibility(R.id.rlItemEdit, View.GONE);
+					helper.setText(R.id.tvItemStatus, "待审核");
 				} else if (2 == item.getLeave_type()) {	// 已审核，待销假
-					helper.setText(R.id.tvItemTitle, "已提交申请");
-					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-					helper.setText(R.id.tvItemStatus, "申请状态: 已审核，待销假");
+//					helper.setText(R.id.tvItemTitle, "已提交申请");
+//					helper.setVisibility(R.id.rlItemEdit, View.GONE);
+					helper.setText(R.id.tvItemStatus, "已审核，待销假");
 				}
 
-				helper.setText(R.id.tvItemCreateTime, "创建时间: " + item.getReg_time());
-				helper.setText(R.id.tvItemStartTime, "开始时间: " + item.getStart_time());
-				helper.setText(R.id.tvItemEndTime, "结束时间: " + item.getEnd_time());
-				helper.setText(R.id.tvItemLeaveReason, "请假事由: " + item.getReason());
-				helper.setText(R.id.tvItemDestination, "目的地: " + item.getDestination());
+				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
+				helper.setText(R.id.tvItemStartTime, "开始时间:  " + item.getStart_time());
+				helper.setText(R.id.tvItemEndTime, "结束时间:  " + item.getEnd_time());
+				helper.setText(R.id.tvItemLeaveReason, "请假事由:  " + item.getReason());
+				helper.setText(R.id.tvItemDestination, "外出地址:  " + item.getDestination());
 
 				// 编辑
-				helper.setOnClickListener(R.id.btnItemEdit, new View.OnClickListener() {
+				/*helper.setOnClickListener(R.id.btnItemEdit, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						Bundle bundle = new Bundle();
@@ -265,7 +265,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 						item.setLeave_type(1);
 						putLeaveData(doTransferLeaveItemToLeave(item), item.getId());
 					}
-				});
+				});*/
 			}
 		};
 		mLvLeave.setAdapter(mAdapter);
