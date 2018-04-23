@@ -3,22 +3,24 @@
   * @Description: 个人中心界面xml
   * @author wangjl 
   * @crdate 2017-8-21
-  * @update 
+  * @update 2018-4-23   更新新版UI
   * @version v1.0.0(1)
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bg_header"
+        android:background="@mipmap/bg_mine_header"
         android:orientation="vertical">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/rlTitle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
