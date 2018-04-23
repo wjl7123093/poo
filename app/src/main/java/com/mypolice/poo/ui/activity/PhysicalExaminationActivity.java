@@ -58,8 +58,8 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	private MyListView mLvExaminationPre;
 	@ViewInject(R.id.llExpandSwitch)
 	private LinearLayout mLlExpandSwitch;
-	@ViewInject(R.id.ivSwitch)
-	private ImageView mIvSwitch;
+//	@ViewInject(R.id.ivSwitch)
+//	private ImageView mIvSwitch;
 
 	private CommonAdapter mAdapter;
 	private CommonAdapter mAdapterPre;
@@ -83,8 +83,8 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	public void initView() {	
 		super.initView();
 		mTitleExamination.setText("定期体检");
-		mLlExpandSwitch.setVisibility(View.GONE);
-		mLvExaminationPre.setVisibility(View.GONE);
+//		mLlExpandSwitch.setVisibility(View.GONE);
+//		mLvExaminationPre.setVisibility(View.GONE);
 
 		centerDialog = new CenterDialog(PhysicalExaminationActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
@@ -102,7 +102,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	}
 
 	/** 展开/合并开关 点击事件 */
-	@OnClick(R.id.llExpandSwitch)
+	/*@OnClick(R.id.llExpandSwitch)
 	public void onViewExpandSwitchClick(View v) {
 		if (isExpand) {
 			isExpand = false;
@@ -113,7 +113,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 			mIvSwitch.setImageResource(R.mipmap.ic_arrow_up);
 			mLvExaminationPre.setVisibility(View.VISIBLE);
 		}
-	}
+	}*/
 
 	/**
 	 * 获取 特定吸毒者所有体检记录

@@ -20,6 +20,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -53,8 +54,11 @@ public class LeaveListActivity extends BaseActivityPoo {
 	@ViewInject(R.id.titleLeaveList)
 	private TitleBarView mTitleLeaveList;
 
-	@ViewInject(R.id.llAppForLeave)
-	private LinearLayout mLlAppForLeave;
+//	@ViewInject(R.id.llAppForLeave)
+//	private LinearLayout mLlAppForLeave;
+
+	@ViewInject(R.id.btn_leave)
+	private Button mBtnLeave;
 	@ViewInject(R.id.lvLeave)
 	private ListView mLvLeave;
 
@@ -99,8 +103,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	 * 跳转到 请假申请页面
 	 * @param v
      */
-	@OnClick(R.id.llAppForLeave)
-	public void onLlAppForLeaveClick(View v) {
+	@OnClick(R.id.btn_leave)
+	public void onBtnLeaveClick(View v) {
 		Bundle bundle = new Bundle();
 		bundle.putString("from", "create");
 		CommonFuncUtil.goNextActivityWithArgsForResult(LeaveListActivity.this,

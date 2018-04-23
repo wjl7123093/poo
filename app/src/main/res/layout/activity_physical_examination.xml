@@ -195,13 +195,13 @@
                         android:textColor="@color/app_text_color"
                         android:textSize="@dimen/app_textsize_mid3" />
 
-                    <ImageView
+                    <!--<ImageView
                         android:id="@+id/ivSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_arrow_down" />
+                        android:src="@mipmap/ic_arrow_down" />-->
                 </LinearLayout>
 
                 <View
