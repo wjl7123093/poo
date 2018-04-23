@@ -39,6 +39,7 @@ import com.mypolice.poo.service.KeepLiveService;
 import com.mypolice.poo.service.PlayerMusicService;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.FunctionManager;
+import com.mypolice.poo.util.StatusBarUtil;
 import com.mypolice.poo.util.SystemUtil;
 import com.mypolice.poo.util.UpdateVersion;
 import com.mypolice.poo.util.keeping.HwPushManager;
@@ -181,6 +182,10 @@ public class MainActivity extends BaseActivityPoo {
     public void initView() {
         super.initView();
 
+        // 沉浸式状态栏
+        StatusBarUtil.immersive(MainActivity.this, R.color.app_main_green);
+        StatusBarUtil.darkMode(MainActivity.this);
+
         initFunctionManager();
         bindGvFuncData();
 
@@ -266,13 +271,16 @@ public class MainActivity extends BaseActivityPoo {
 
             @Override
             public void convert(ViewHolder helper, GvFunctionBean item) {
-                helper.setBackground(R.id.llFuncBg1, MainActivity.this.getResources().getDrawable(
+                /*helper.setBackground(R.id.llFuncBg1, MainActivity.this.getResources().getDrawable(
                         getResourceIdDrawable(item.getBg1())));
                 helper.setBackground(R.id.llFuncBg2, MainActivity.this.getResources().getDrawable(
                         getResourceIdDrawable(item.getBg2())));
-                helper.setText(R.id.tvFuncName, item.getDisplayName());
                 helper.setIcon(R.id.iconFunc, mContext.getString(
-                        getResourceIdString(item.getIcon())), getResources().getColor(R.color.WHITE_H));
+                        getResourceIdString(item.getIcon())), getResources().getColor(R.color.WHITE_H));*/
+
+                helper.setImageResource(R.id.iv_image,
+                        getResourceIdDrawable(item.getIcon()));
+                helper.setText(R.id.tvFuncName, item.getDisplayName());
             }
 
         });

@@ -49,15 +49,16 @@
         <include layout="@layout/layout_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"></include>
+            android:layout_marginTop="50dp"></include>
     </LinearLayout>
 
     <GridView
         android:id="@+id/gvFunc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:numColumns="2"
-        android:columnWidth="90dp"
+        android:columnWidth="120dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="20dp"
         android:horizontalSpacing="1dp"
@@ -65,5 +66,13 @@
         android:layout_marginTop="30dp">
 
     </GridView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_text_color"
+        android:textSize="12dp"
+        android:text="技术支持：四川科瑞软件有限责任公司"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

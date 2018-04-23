@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/llFuncBg2"
         android:layout_width="74dp"
         android:layout_height="74dp"
@@ -26,7 +26,14 @@
                 android:textSize="30dp"
                 android:textColor="@color/WHITE_H"/>
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_home_uran"
+        android:scaleType="centerCrop"/>
 
     <!-- 功能名称 -->
     <TextView
@@ -34,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/BLACK_H"
-        android:textSize="@dimen/app_textsize_mid2"/>
+        android:textColor="#333"
+        android:textSize="@dimen/app_textsize_mid3"/>
 
 </LinearLayout>

@@ -79,6 +79,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:22.1.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     testCompile 'junit:junit:4.12'
     //    compile project(':FFmpegAndroid')
     compile files('libs/xUtils-2.6.14.jar')

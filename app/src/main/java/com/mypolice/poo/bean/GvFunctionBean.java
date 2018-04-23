@@ -9,7 +9,7 @@ import android.os.Parcelable;
  * @Description: GridView xml配置文件实体类
  * @author wangjl  
  * @crdate 2017-8-21
- * @update
+ * @update 2017-4-23	update
  * @version v1.0.0(1)
  */
 public class GvFunctionBean implements Parcelable {
@@ -18,10 +18,10 @@ public class GvFunctionBean implements Parcelable {
 	private String packageName;
 	private String activityName;
 	private String displayName;
-	private String icon;
 
-	private String bg1;
-	private String bg2;
+	private String icon;
+//	private String bg1;
+//	private String bg2;
 	
 	public GvFunctionBean() {
 		
@@ -67,21 +67,21 @@ public class GvFunctionBean implements Parcelable {
 		this.icon = icon;
 	}
 
-	public String getBg1() {
-		return bg1;
-	}
-
-	public void setBg1(String bg1) {
-		this.bg1 = bg1;
-	}
-
-	public String getBg2() {
-		return bg2;
-	}
-
-	public void setBg2(String bg2) {
-		this.bg2 = bg2;
-	}
+//	public String getBg1() {
+//		return bg1;
+//	}
+//
+//	public void setBg1(String bg1) {
+//		this.bg1 = bg1;
+//	}
+//
+//	public String getBg2() {
+//		return bg2;
+//	}
+//
+//	public void setBg2(String bg2) {
+//		this.bg2 = bg2;
+//	}
 
 	@Override
 	public int describeContents() {
@@ -95,8 +95,8 @@ public class GvFunctionBean implements Parcelable {
 		dest.writeString(activityName);
 		dest.writeString(displayName);
 		dest.writeString(icon);
-		dest.writeString(bg1);
-		dest.writeString(bg2);
+//		dest.writeString(bg1);
+//		dest.writeString(bg2);
 	}
 	
 	public static final Creator<GvFunctionBean> CREATOR = new Creator<GvFunctionBean>() {
@@ -118,8 +118,8 @@ public class GvFunctionBean implements Parcelable {
 		activityName = source.readString();
 		displayName = source.readString();
 		icon = source.readString();
-		bg1 = source.readString();
-		bg2 = source.readString();
+//		bg1 = source.readString();
+//		bg2 = source.readString();
 	}
 	
 }

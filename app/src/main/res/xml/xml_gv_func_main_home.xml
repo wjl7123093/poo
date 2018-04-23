@@ -12,10 +12,8 @@
     <!-- 功能1 -->
     <Function 
         name="exam"
-        displayName="定期体检"
-        icon="icon_main_examination"
-        bg1="sp_bg_oval_1"
-        bg2="sp_bg_oval_1_2"
+        displayName="定期尿检"
+        icon="ic_home_uran"
         packageName="com.mypolice.poo.ui.activity"
         activityName="PhysicalExaminationActivity" />
     
@@ -32,10 +30,8 @@
     <!-- 功能3 -->
     <Function 
         name="interaction"
-        displayName="交流互动"
-        icon="icon_main_interaction"
-        bg1="sp_bg_oval_3"
-        bg2="sp_bg_oval_3_2"
+        displayName="定期访谈"
+        icon="ic_home_communition"
         packageName="com.mypolice.poo.ui.activity"
         activityName="InteractionActivity" />
     
@@ -43,9 +39,7 @@
     <Function 
         name="leave"
         displayName="请假申请"
-        icon="icon_main_appforleave"
-        bg1="sp_bg_oval_4"
-        bg2="sp_bg_oval_4_2"
+        icon="ic_home_leave"
         packageName="com.mypolice.poo.ui.activity"
         activityName="LeaveListActivity" />
     
@@ -60,22 +54,20 @@
         activityName="EducationActivity" />-->
     
     <!-- 功能6 -->
-    <Function
+    <!--<Function
         name="personal"
         displayName="个人中心"
         icon="icon_main_personal"
         bg1="sp_bg_oval_6"
         bg2="sp_bg_oval_6_2"
         packageName="com.mypolice.poo.ui.activity"
-        activityName="PersonalActivity" />
+        activityName="PersonalActivity" />-->
 
     <!-- 功能7 -->
     <Function
         name="prizesforreporting"
-        displayName="举报有奖"
-        icon="icon_main_interaction"
-        bg1="sp_bg_oval_7"
-        bg2="sp_bg_oval_7_2"
+        displayName="有奖举报"
+        icon="ic_home_report"
         packageName="com.mypolice.poo.ui.activity"
         activityName="PrizesForReportingActivity" />
         
