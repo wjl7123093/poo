@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.mypolice.poo.R;
 import com.mypolice.poo.application.PooApplication;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.GPSUtils;
+import com.mypolice.poo.util.StatusBarTools;
+import com.mypolice.poo.util.StatusBarUtil;
 import com.umeng.message.PushAgent;
 
 /**
@@ -27,6 +30,12 @@ public class BaseActivityPoo extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// 沉浸式状态栏
+//		StatusBarUtil.immersive(BaseActivityPoo.this, R.color.app_main_green);
+//		StatusBarUtil.darkMode(BaseActivityPoo.this);
+		StatusBarTools.setWindowStatusBarColor(BaseActivityPoo.this,
+				getResources().getColor(R.color.app_main_green));
 
 		PushAgent.getInstance(BaseActivityPoo.this).onAppStart();
 		if (null == mApplication)
