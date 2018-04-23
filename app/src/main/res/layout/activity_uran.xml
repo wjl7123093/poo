@@ -4,7 +4,7 @@
   * @Description: 尿检界面xml
   * @author wangjl 
   * @crdate 2017-8-22
-  * @update 
+  * @update 2018-4-23   更新新版UI
   * @version v1.0.0(1)
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/app_bg_grey">
+    android:background="@color/app_bg_grey"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
@@ -175,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:text="请上传本人及环境外观照片"
                             android:textSize="@dimen/app_textsize_mid3"
-                            android:textColor="#999"
+                            android:textColor="@color/GREY_H"
                             android:gravity="center"
                             android:layout_marginTop="10dp"/>
                     </LinearLayout>
@@ -277,7 +279,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">

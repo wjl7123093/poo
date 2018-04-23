@@ -174,7 +174,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
     @Override
     public void initView() {
         super.initView();
-        mTitlePrizesForReporting.setText("举报有奖");
+        mTitlePrizesForReporting.setText("有奖举报");
 
         centerDialog = new CenterDialog(PrizesForReportingActivity.this, R.layout.dialog_uploading,
                 new int[]{});

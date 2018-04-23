@@ -55,7 +55,8 @@
     <color name="WHITE_M">#EEEEEE</color>
     <color name="WHITE_L">#DDDDDD</color>
     <!-- 灰色 -->
-    <color name="GREY_H">#898989</color>
+    <!--<color name="GREY_H">#898989</color>-->
+    <color name="GREY_H">#999999</color>
     <color name="GREY_M">#A0A0A0</color>
     <!--<color name="GREY_L">#B7B7B7</color>-->
     <color name="GREY_L">#F2F2F2</color>

@@ -4,7 +4,7 @@
   * @Description: 举报有奖界面xml
   * @author wangjl 
   * @crdate 2017-11-24
-  * @update
+  * @update 2018-4-23   更新新版UI
   * @version v2.1.2(14)
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/app_bg_grey">
+    android:background="@color/app_bg_grey"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
@@ -28,63 +30,113 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp">
-        <!-- 添加照片 -->
+        android:orientation="vertical">
+
+        <!-- 上传举报内容 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.mypolice.poo.widget.IconView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:text="@string/icon_uran_photo"
-                android:textSize="20dp"
-                android:textColor="@color/app_main_green"
-                android:gravity="center"/>
+            android:orientation="horizontal"
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_report_content"
+                android:scaleType="centerCrop"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加照片: "
-                android:textSize="@dimen/app_textsize_mid3"
-                android:gravity="center"/>
+                android:text="举报内容"
+                android:textColor="@color/BLACK_H"
+                android:textSize="16dp"
+                android:layout_marginLeft="8dp"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
+            android:layout_marginTop="2dp">
+
+            <EditText
+                android:id="@+id/edtTxtReportInfo"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/sp_bg_login_edt"
+                android:hint="请填写举报内容"
+                android:textColorHint="@color/GREY_H"
+                android:textSize="14dp"
+                android:padding="10dp"
+                android:gravity="top|left"/>
+
+        </LinearLayout>
+
+        <!-- 添加照片 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_report_photo"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上传照片"
+                android:textColor="@color/BLACK_H"
+                android:textSize="16dp"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
+            android:layout_marginTop="2dp">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/app_text_color_hint">
+                android:background="@drawable/sp_bg_login_edt">
                 <LinearLayout
                     android:id="@+id/llPhoto1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center">
-                    <com.mypolice.poo.widget.IconView
-                        android:id="@+id/icon1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_uran_camera1"
-                        android:textSize="20dp"
-                        android:textColor="@color/GREY_H"/>
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/ic_uran_photo2"
+                        android:scaleType="fitCenter"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="请上传照片证据信息"
+                        android:text="上传相关照片"
                         android:textSize="@dimen/app_textsize_mid3"
+                        android:textColor="@color/GREY_H"
                         android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_below="@id/icon1"/>
+                        android:layout_marginTop="10dp"/>
                 </LinearLayout>
                 <RelativeLayout
                     android:id="@+id/rlPhoto1"
@@ -114,9 +166,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/app_text_color_hint"
+                android:background="@drawable/sp_bg_login_edt"
                 android:layout_marginLeft="20dp"
-                android:visibility="invisible">
+                android:visibility="gone">
                 <LinearLayout
                     android:id="@+id/llPhoto2"
                     android:layout_width="match_parent"
@@ -135,6 +187,7 @@
                         android:layout_height="wrap_content"
                         android:text="请上传尿检单照片"
                         android:textSize="@dimen/app_textsize_mid3"
+                        android:textColor="@color/GREY_H"
                         android:gravity="center"
                         android:layout_marginTop="10dp" />
                 </LinearLayout>
@@ -168,55 +221,59 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.mypolice.poo.widget.IconView
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:text="@string/icon_uran_video"
-                android:textSize="20dp"
-                android:textColor="@color/app_main_green"
-                android:gravity="center"/>
+            android:orientation="horizontal"
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_report_camera"
+                android:scaleType="centerCrop"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加视频: "
-                android:textSize="@dimen/app_textsize_mid3"
-                android:gravity="center"/>
+                android:text="上传视频"
+                android:textColor="@color/BLACK_H"
+                android:textSize="16dp"
+                android:layout_marginLeft="8dp"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:orientation="horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:background="@color/WHITE_H"
+            android:padding="10dp"
+            android:layout_marginTop="2dp">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@color/app_text_color_hint">
+                android:background="@drawable/sp_bg_login_edt">
                 <LinearLayout
                     android:id="@+id/llVideo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center">
-                    <com.mypolice.poo.widget.IconView
-                        android:id="@+id/icon3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_uran_camera2"
-                        android:textSize="20dp"
-                        android:textColor="@color/GREY_H"/>
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/ic_uran_camera"
+                        android:scaleType="fitCenter"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="请上传音视频证据信息"
+                        android:text="上传相关视频"
                         android:textSize="@dimen/app_textsize_mid3"
+                        android:textColor="@color/GREY_H"
                         android:gravity="center"
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
@@ -252,24 +309,13 @@
 
         </LinearLayout>
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="提示: 录制时间不要超过10s"
             android:textSize="@dimen/app_textsize_mid3"
             android:gravity="center"
-            android:layout_margin="10dp"/>
-
-        <EditText
-            android:id="@+id/edtTxtReportInfo"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:hint="请输入相关举报信息"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:padding="10dp"
-            android:gravity="left|top"
-            android:textSize="@dimen/app_textsize_mid3"/>
+            android:layout_margin="10dp"/>-->
 
         <!--<RelativeLayout
             android:id="@+id/rlRecord"
@@ -327,13 +373,11 @@
             android:id="@+id/btnSendReport"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="举报"
+            android:text="提交"
             android:textSize="@dimen/app_textsize_mid2"
             android:textColor="@color/WHITE_H"
             android:background="@drawable/sp_bg_btn_green"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
     </ScrollView>
