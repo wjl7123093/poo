@@ -28,7 +28,7 @@
 
             <ImageView
                 android:id="@+id/ivStartBg"
-                android:layout_width="160dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
                 android:src="@mipmap/login_logo"
@@ -112,7 +112,7 @@
                 android:textSize="14dp"
                 android:textColor="@color/white"
                 android:alpha="0.8"
-                android:layout_marginTop="80dp"/>
+                android:layout_marginTop="90dp"/>
 
         </LinearLayout>
     </ScrollView>

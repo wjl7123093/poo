@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
@@ -111,6 +112,9 @@ public class MainActivity extends BaseActivityPoo {
 
     /** 退出程序时间 */
     private long mExitTime = 0;
+
+    @ViewInject(R.id.include_header)
+    private LinearLayout mIncludeHeader;
 
     /** 未读标识（红点） */
     @ViewInject(R.id.viewIsRead)
@@ -212,6 +216,11 @@ public class MainActivity extends BaseActivityPoo {
 //        startAlive();
 //        startAliveNew();
 
+    }
+
+    @OnClick(R.id.include_header)
+    public void onIncludeHeaderClick(View v) {
+        CommonFuncUtil.goNextActivityWithNoArgs(MainActivity.this, PersonalActivity.class, false);
     }
 
     /** 未读通知 点击事件 */

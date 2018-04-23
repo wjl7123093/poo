@@ -23,7 +23,7 @@ import android.os.Handler;
  * @update 2017-9-7
  * @version v2.0.0(2)
  */
-@ContentView(R.layout.activity_prizes_for_reporting)
+@ContentView(R.layout.activity_application_for_leave)
 public class StartActivity extends Activity {
 
 	private PooApplication mApplication;

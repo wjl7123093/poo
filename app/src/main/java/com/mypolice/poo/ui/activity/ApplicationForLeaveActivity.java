@@ -74,17 +74,17 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 	@ViewInject(R.id.tvEndDate)
 	private TextView mTvEndDate;
 	/** TextView 请假总天数 */
-	@ViewInject(R.id.tvTotalDays)
-	private TextView mTvTotoalDays;
+//	@ViewInject(R.id.tvTotalDays)
+//	private TextView mTvTotoalDays;
 	/** LinearLayout 被访人情况 标题栏 */
-	@ViewInject(R.id.llRespondentsConditionsTitle)
-	private LinearLayout mLlRespondentsConditionsTitle;
+//	@ViewInject(R.id.llRespondentsConditionsTitle)
+//	private LinearLayout mLlRespondentsConditionsTitle;
 	/** ImageView 上下指示箭头 */
-	@ViewInject(R.id.ivArrow)
-	private ImageView mIvArrow;
+//	@ViewInject(R.id.ivArrow)
+//	private ImageView mIvArrow;
 	/** LinearLayout 被访人情况 区域 */
-	@ViewInject(R.id.llRespondentsConditions)
-	private LinearLayout mLlRespondentsConditions;
+//	@ViewInject(R.id.llRespondentsConditions)
+//	private LinearLayout mLlRespondentsConditions;
 	/** EditText 姓名 */
 	@ViewInject(R.id.edtTxtName)
 	private EditText mEdtTxtName;
@@ -154,7 +154,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 				new int[]{});
 
 		mTitleApplicationForLeave.setText("请假申请");
-		mLlRespondentsConditions.setVisibility(View.GONE);
+//		mLlRespondentsConditions.setVisibility(View.GONE);
 
 	}
 
@@ -178,7 +178,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 			mEdtTxtLeaveReason.setText(mLeaveItemBean.getReason());
 			mTvStartDate.setText(sdf2.format(mDateStart));
 			mTvEndDate.setText(sdf2.format(mDateEnd));
-			mTvTotoalDays.setText(mLeaveItemBean.getLeave_num() + "");
+//			mTvTotoalDays.setText(mLeaveItemBean.getLeave_num() + "");
 			mEdtTxtName.setText(mLeaveItemBean.getVisitor_name());
 			mEdtTxtRelationship.setText(mLeaveItemBean.getVisitor_relation());
 			mEdtTxtJob.setText(mLeaveItemBean.getVisitor_profession());
@@ -218,8 +218,8 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 						return;
 					} else {
 						// 计算间隔天数
-						mTvTotoalDays.setText(
-								((mDateEnd.getTime()-mDateStart.getTime())/(60*60*1000*24) + 1) + "");
+//						mTvTotoalDays.setText(
+//								((mDateEnd.getTime()-mDateStart.getTime())/(60*60*1000*24) + 1) + "");
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -242,8 +242,8 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 						return;
 					} else {
 						// 计算间隔天数
-						mTvTotoalDays.setText(
-								((mDateEnd.getTime()-mDateStart.getTime())/(60*60*1000*24) + 1) + "");
+//						mTvTotoalDays.setText(
+//								((mDateEnd.getTime()-mDateStart.getTime())/(60*60*1000*24) + 1) + "");
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -258,7 +258,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 	 * 点击 显示/隐藏 被访人区域
 	 * @param v
      */
-	@OnClick(R.id.llRespondentsConditionsTitle)
+	/*@OnClick(R.id.llRespondentsConditionsTitle)
 	public void onLlRespondentsConditionsTitleClick(View v) {
 		if (mIsDisplay) {
 			mIvArrow.setImageResource(R.mipmap.ic_down_arrow);
@@ -271,7 +271,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 			mLlRespondentsConditions.setVisibility(View.VISIBLE);
 			mIsDisplay = true;
 		}
-	}
+	}*/
 
 	@OnClick(R.id.tvStartDate)
 	public void onTvStartDataClick(View v) {
@@ -439,7 +439,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		mLeaveBean.setLeave_num(Integer.parseInt(mTvTotoalDays.getText().toString()));
+//		mLeaveBean.setLeave_num(Integer.parseInt(mTvTotoalDays.getText().toString()));
 		mLeaveBean.setVisitor_name(mEdtTxtName.getText().toString().trim());
 		mLeaveBean.setVisitor_relation(mEdtTxtRelationship.getText().toString().trim());
 		mLeaveBean.setVisitor_profession(mEdtTxtJob.getText().toString().trim());

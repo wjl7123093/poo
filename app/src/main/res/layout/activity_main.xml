@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/bg_header">
         <include layout="@layout/layout_header"
+            android:id="@+id/include_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"></include>
