@@ -89,6 +89,51 @@
             android:layout_marginTop="6dp"/>
     </LinearLayout>
 
+    <!-- 体检预告 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_uran_warning"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="体检预告"
+            android:textColor="@color/BLACK_H"
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/edtTxtReportInfo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="暂无相关任务"
+            android:textColorHint="@color/GREY_H"
+            android:textSize="14dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
