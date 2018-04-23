@@ -127,11 +127,11 @@ public class URANActivity extends BaseActivityPoo {
 	private IconView mIconDel3;
 	@ViewInject(R.id.ivPlay)
 	private ImageView mIvPlay;
-	@ViewInject(R.id.ivSignatureImage)
-	private ImageView mIvSignatureImage;
+//	@ViewInject(R.id.ivSignatureImage)
+//	private ImageView mIvSignatureImage;
 
-	@ViewInject(R.id.btnSignature)
-	private Button mBtnSignature;
+//	@ViewInject(R.id.btnSignature)
+//	private Button mBtnSignature;
 	@ViewInject(R.id.btnSendReport)
 	private Button mBtnSendReport;
 
@@ -232,11 +232,11 @@ public class URANActivity extends BaseActivityPoo {
 	 * 签名
 	 * @param v
      */
-	@OnClick(R.id.btnSignature)
+	/*@OnClick(R.id.btnSignature)
 	public void onBtnSignature(View v) {
 		CommonFuncUtil.goNextActivityWithNoArgsForResult(URANActivity.this,
 				SignaturepadActivity.class, REQUEST_CODE_SIGNATURE);
-	}
+	}*/
 
 	/**
 	 * 上传操作
@@ -465,9 +465,9 @@ public class URANActivity extends BaseActivityPoo {
 			mSignatureBmpPath = FileUtils.SDPATH + "test_sign.jpg";
 			mFileSignatureBmp = new File(mSignatureBmpPath);
 
-			mIvSignatureImage.setImageBitmap(null);
-			mIvSignatureImage.setImageBitmap(BitmapFactory.decodeFile(mSignatureBmpPath));
-			mIvSignatureImage.setVisibility(View.VISIBLE);
+//			mIvSignatureImage.setImageBitmap(null);
+//			mIvSignatureImage.setImageBitmap(BitmapFactory.decodeFile(mSignatureBmpPath));
+//			mIvSignatureImage.setVisibility(View.VISIBLE);
 		}
 	}
 

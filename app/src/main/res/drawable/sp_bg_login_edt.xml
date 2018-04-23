@@ -5,6 +5,6 @@
     <!-- 边线颜色 -->
     <stroke
         android:width="0.5dp" 
-        android:color="@color/app_text_color"/>
+        android:color="#e8e8e8"/>
 
 </shape>

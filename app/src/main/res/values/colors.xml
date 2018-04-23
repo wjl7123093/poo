@@ -60,7 +60,8 @@
     <!--<color name="GREY_L">#B7B7B7</color>-->
     <color name="GREY_L">#F2F2F2</color>
     <!-- 黑色 -->
-    <color name="BLACK_H">#000000</color>
+    <!--<color name="BLACK_H">#000000</color>-->
+    <color name="BLACK_H">#666666</color>
     <color name="BLACK_M">#363636</color>
     <!-- 紫色 -->
     <color name="PURPLE_H">#9933CC</color>
