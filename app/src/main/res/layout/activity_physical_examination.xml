@@ -80,6 +80,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginLeft="6dp"/>
         <Button
+            android:id="@+id/btn_uran"
             android:layout_width="100dp"
             android:layout_height="32dp"
             android:text="外地尿检"
