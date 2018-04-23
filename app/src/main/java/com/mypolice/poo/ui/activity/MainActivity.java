@@ -39,7 +39,6 @@ import com.mypolice.poo.service.KeepLiveService;
 import com.mypolice.poo.service.PlayerMusicService;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.FunctionManager;
-import com.mypolice.poo.util.StatusBarUtil;
 import com.mypolice.poo.util.SystemUtil;
 import com.mypolice.poo.util.UpdateVersion;
 import com.mypolice.poo.util.keeping.HwPushManager;
@@ -181,10 +180,6 @@ public class MainActivity extends BaseActivityPoo {
     @Override
     public void initView() {
         super.initView();
-
-        // 沉浸式状态栏
-        StatusBarUtil.immersive(MainActivity.this, R.color.app_main_green);
-        StatusBarUtil.darkMode(MainActivity.this);
 
         initFunctionManager();
         bindGvFuncData();
