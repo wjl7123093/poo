@@ -1,9 +1,14 @@
 package com.mypolice.poo.bean;
 
 /**
- * Created by wangjl on 2018/4/24.
+ * @Title: UserEntity.java
+ * @Package com.mypolice.poo.bean
+ * @Description: 用户信息 实体类
+ * @author wangjl
+ * @crdate 2017-4-24
+ * @update
+ * @version v1.0.0[六安版]
  */
-
 public class UserEntity {
 
     private int user_id;

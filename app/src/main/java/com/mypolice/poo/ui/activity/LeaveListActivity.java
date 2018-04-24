@@ -8,6 +8,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
 import com.mypolice.poo.adapter.CommonAdapter;
 import com.mypolice.poo.adapter.ViewHolder;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.LeaveBean;
 import com.mypolice.poo.bean.LeaveItemBean;
@@ -61,6 +62,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	private Button mBtnLeave;
 	@ViewInject(R.id.lvLeave)
 	private ListView mLvLeave;
+	@ViewInject(R.id.lvLeavePre)
+	private ListView mLvLeavePre;
 
 	private CommonAdapter mAdapter;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -75,6 +78,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 
 		initView();
 		loadData();
+		// 获取请假记录数据
+		getLeaveLogNew();
 	}
 	
 	@Override
@@ -96,7 +101,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	}
 
 	private void loadData() {
-		getLeaveData();
+//		getLeaveData();
+		getLeaveDataNew();
 	}
 
 	/**
@@ -119,7 +125,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 				&& resultCode == ApplicationForLeaveActivity.RESULT_CODE_LEAVE) {
 			centerDialog.show();
 			// 刷新列表
-			getLeaveData();
+			loadData();
 		}
 	}
 
@@ -176,6 +182,114 @@ public class LeaveListActivity extends BaseActivityPoo {
 	}
 
 	/**
+	 * 获取请假数据[六安]
+	 * 2018-4-24
+	 */
+	private void getLeaveDataNew() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/getLeaveStatus";
+		OkHttpUtils.get().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						centerDialog.cancel();
+						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
+						centerDialog.cancel();
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
+								org.json.JSONArray array = jsonResponse.getJSONArray("data");
+								if (array.length() == 0)
+									return;
+
+								List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
+								LeaveItemBean leave = null;
+								for (int i = 0; i < array.length(); i++) {
+									leave = JSON.parseObject(array.getString(i), LeaveItemBean.class);
+//									CommonFuncUtil.getToast(LeaveListActivity.this, leave.toString());
+									leaveList.add(leave);
+								}
+								bindDataToUI(leaveList);
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
+								// 空数据，不做处理
+
+							} else if (jsonResponse.getInt("code") == 1007) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(LeaveListActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
+										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+
+	}
+
+	/**
+	 * 获取请假记录[六安]
+	 * 2018-4-24
+	 */
+	private void getLeaveLogNew() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/getLeaveLog";
+		OkHttpUtils.get().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						centerDialog.cancel();
+						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
+						centerDialog.cancel();
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+								org.json.JSONArray array = jsonResponse.getJSONArray("data");
+								if (array.length() == 0)
+									return;
+
+								List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
+								LeaveItemBean leave = null;
+								for (int i = 0; i < array.length(); i++) {
+									leave = JSON.parseObject(array.getString(i), LeaveItemBean.class);
+//									CommonFuncUtil.getToast(LeaveListActivity.this, leave.toString());
+									leaveList.add(leave);
+								}
+								bindLogDataToUI(leaveList);
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
+								// 空数据，不做处理
+
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(LeaveListActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
+										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+
+	}
+
+	/**
 	 * 提交已有请假数据
 	 */
 	private void putLeaveData(LeaveBean leaveBean, int leaveId) {
@@ -202,7 +316,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 								int result = jsonResponse.getInt("data");
 								if (1 == result) {
 									CommonFuncUtil.getToast(LeaveListActivity.this, "提交成功");
-									getLeaveData();	// 刷新列表
+									loadData();	// 刷新列表
 								}
 							} else if (jsonResponse.getInt("code") == 1007) {
 								// token 失效，踢出当前用户，退到登录页面
@@ -230,20 +344,21 @@ public class LeaveListActivity extends BaseActivityPoo {
 				leaveList, R.layout.item_lv_leave) {
 			@Override
 			public void convert(ViewHolder helper, final LeaveItemBean item) {
-				if (0 == item.getLeave_type()) {	// 草稿
-//					helper.setText(R.id.tvItemTitle, "请假草稿");
-//					helper.setVisibility(R.id.rlItemEdit, View.VISIBLE);
-					helper.setText(R.id.tvItemStatus, "存为草稿");
-				} else if (1 == item.getLeave_type()) {	// 待审核
-//					helper.setText(R.id.tvItemTitle, "已提交申请");
-//					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-					helper.setText(R.id.tvItemStatus, "待审核");
-				} else if (2 == item.getLeave_type()) {	// 已审核，待销假
-//					helper.setText(R.id.tvItemTitle, "已提交申请");
-//					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-					helper.setText(R.id.tvItemStatus, "已审核，待销假");
-				}
+//				if (0 == item.getLeave_type()) {	// 草稿
+////					helper.setText(R.id.tvItemTitle, "请假草稿");
+////					helper.setVisibility(R.id.rlItemEdit, View.VISIBLE);
+//					helper.setText(R.id.tvItemStatus, "存为草稿");
+//				} else if (1 == item.getLeave_type()) {	// 待审核
+////					helper.setText(R.id.tvItemTitle, "已提交申请");
+////					helper.setVisibility(R.id.rlItemEdit, View.GONE);
+//					helper.setText(R.id.tvItemStatus, "待审核");
+//				} else if (2 == item.getLeave_type()) {	// 已审核，待销假
+////					helper.setText(R.id.tvItemTitle, "已提交申请");
+////					helper.setVisibility(R.id.rlItemEdit, View.GONE);
+//					helper.setText(R.id.tvItemStatus, "已审核，待销假");
+//				}
 
+				helper.setText(R.id.tvItemStatus, "请假状态: " + item.getLeave_type_text());
 				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
 				helper.setText(R.id.tvItemStartTime, "开始时间:  " + item.getStart_time());
 				helper.setText(R.id.tvItemEndTime, "结束时间:  " + item.getEnd_time());
@@ -274,6 +389,26 @@ public class LeaveListActivity extends BaseActivityPoo {
 		};
 		mLvLeave.setAdapter(mAdapter);
 		mLvLeave.setVisibility(View.VISIBLE);
+
+	}
+
+	/**
+	 * 绑定请假记录数据到 UI [六安]
+	 * 2018-4-24
+	 * @param leaveList
+	 */
+	private void bindLogDataToUI(List<LeaveItemBean> leaveList) {
+		mAdapter = new CommonAdapter<LeaveItemBean>(LeaveListActivity.this,
+				leaveList, R.layout.item_lv_leave_history) {
+			@Override
+			public void convert(ViewHolder helper, final LeaveItemBean item) {
+				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
+				helper.setText(R.id.tvItemStartTime, "请假时间:  " + item.getStart_time());
+				helper.setText(R.id.tvItemStatus, "请假状态: " + item.getLeave_type_text());
+			}
+		};
+		mLvLeavePre.setAdapter(mAdapter);
+//		mLvLeavePre.setVisibility(View.VISIBLE);
 
 	}
 

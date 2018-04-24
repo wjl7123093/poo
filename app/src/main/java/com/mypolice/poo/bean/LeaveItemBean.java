@@ -34,6 +34,7 @@ public class LeaveItemBean implements Parcelable {
     private String visitor_tel;
     private String remark;
     private int leave_type;
+    private String leave_type_text;
 
     public LeaveItemBean() {  }
 
@@ -56,6 +57,7 @@ public class LeaveItemBean implements Parcelable {
         visitor_tel = in.readString();
         remark = in.readString();
         leave_type = in.readInt();
+        leave_type_text = in.readString();
     }
 
     public static final Creator<LeaveItemBean> CREATOR = new Creator<LeaveItemBean>() {
@@ -238,6 +240,14 @@ public class LeaveItemBean implements Parcelable {
         this.leave_type = leave_type;
     }
 
+    public String getLeave_type_text() {
+        return leave_type_text;
+    }
+
+    public void setLeave_type_text(String leave_type_text) {
+        this.leave_type_text = leave_type_text;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -263,5 +273,6 @@ public class LeaveItemBean implements Parcelable {
         dest.writeString(visitor_tel);
         dest.writeString(remark);
         dest.writeInt(leave_type);
+        dest.writeString(leave_type_text);
     }
 }

@@ -30,6 +30,8 @@ public class GlobalSet {
 	// =================== 六安新版 地址 ==============================
 	public static int APP_TYPE = 2;
     public static int APP_SUCCESS = 1;
+	/** Token Key */
+	public static String APP_TOKEN_KEY = "jwt-token";
 	/** 服务端接口地址 */
 	public static String APP_SERVER_URL = "http://111.39.142.240:55555/doc//";
 	/** 服务端图片地址 */

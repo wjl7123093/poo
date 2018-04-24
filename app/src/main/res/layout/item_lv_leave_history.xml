@@ -4,7 +4,7 @@
   * @Description: 历史请假列表 项试图xml
   * @author wangjl
   * @crdate 2017-10-26
-  * @update
+  * @update 2018-4-24   更新新版UI
   * @version v2.1.0(12)
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,14 +51,14 @@
         android:layout_centerVertical="true"
         android:padding="16dp">
         <TextView
-            android:id="@+id/tvItemDeadtime"
+            android:id="@+id/tvItemCreateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="创建时间: 2017/9/14"
             android:textSize="@dimen/app_textsize_mid3"
             android:layout_marginLeft="10dp"/>
         <TextView
-            android:id="@+id/tvItemDescription"
+            android:id="@+id/tvItemStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="请假时间: xxx"

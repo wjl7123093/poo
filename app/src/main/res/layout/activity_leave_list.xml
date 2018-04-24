@@ -147,7 +147,7 @@
                     android:background="@color/app_bg_grey"></View>
 
                 <com.mypolice.poo.widget.MyListView
-                    android:id="@+id/lvExaminationPre"
+                    android:id="@+id/lvLeavePre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:divider="@null"

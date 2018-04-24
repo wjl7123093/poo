@@ -382,7 +382,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
     }
 
     /**
-     * New 上传文件及数据【一次性上传】
+     * 上传举报数据
      */
     private void doUploadData() {
         String url = GlobalSet.APP_SERVER_URL + "drug_Inform/uploadSave";
@@ -469,6 +469,102 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                     .addParams("longitude", mLongitude + "")
                     .addParams("latitude", mLatitude + "")
                     .addParams("address", mAddress + "")
+                    .url(url)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            dealWithResponseData(response);
+                        }
+                    });
+
+        }
+
+
+    }
+
+
+    /**
+     * 上传举报数据[六安]
+     */
+    private void doUploadDataNew() {
+        String url = GlobalSet.APP_SERVER_URL + "app.drug_user/addReport";
+
+        if (!TextUtils.isEmpty(mBmpPath1) && !TextUtils.isEmpty(mVideoPath)) {  // Photo & Video
+            OkHttpUtils.post()
+                    .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+                    .addFile("photo_url", mFileNameBmp1, new File(mBmpPath1))
+                    .addFile("video_url", mFileNameVideo, new File(mVideoPath))
+                    .addParams("content", mEdtTxtReportInfo.getText().toString().trim())
+                    .addParams("longitude", mLongitude + "")
+                    .addParams("latitude", mLatitude + "")
+                    .url(url)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            dealWithResponseData(response);
+                        }
+                    });
+
+        } else if (TextUtils.isEmpty(mBmpPath1) && !TextUtils.isEmpty(mVideoPath)) { // !Photo & Video
+            OkHttpUtils.post()
+                    .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+                    .addFile("video_url", mFileNameVideo, new File(mVideoPath))
+                    .addParams("content", mEdtTxtReportInfo.getText().toString().trim())
+                    .addParams("longitude", mLongitude + "")
+                    .addParams("latitude", mLatitude + "")
+                    .url(url)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            dealWithResponseData(response);
+                        }
+                    });
+
+        } else if (!TextUtils.isEmpty(mBmpPath1) && TextUtils.isEmpty(mVideoPath)) { // Photo & !Video
+            OkHttpUtils.post()
+                    .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+                    .addFile("photo_url", mFileNameBmp1, new File(mBmpPath1))
+                    .addParams("content", mEdtTxtReportInfo.getText().toString().trim())
+                    .addParams("longitude", mLongitude + "")
+                    .addParams("latitude", mLatitude + "")
+                    .url(url)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            dealWithResponseData(response);
+                        }
+                    });
+
+        } else if (TextUtils.isEmpty(mBmpPath1) && TextUtils.isEmpty(mVideoPath)) { // !Photo & !Video
+            OkHttpUtils.post()
+                    .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+                    .addParams("content", mEdtTxtReportInfo.getText().toString().trim())
+                    .addParams("longitude", mLongitude + "")
+                    .addParams("latitude", mLatitude + "")
                     .url(url)
                     .build()
                     .execute(new StringCallback() {
@@ -579,7 +675,8 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                 mAddress = location.getAddrStr();
                 locationService.stop();
 //				doUploadFile();
-                doUploadData();
+//                doUploadData();
+                doUploadDataNew();
 
             }
         }
