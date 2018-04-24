@@ -17,6 +17,7 @@ public class LeaveBean implements Parcelable {
     private int drug_user_id;
     private int community_drug_reg_id;
     private String destination;
+    private String destin_police;
     private String reason;
     private long start_time;
     private long end_time;
@@ -36,6 +37,7 @@ public class LeaveBean implements Parcelable {
         drug_user_id = in.readInt();
         community_drug_reg_id = in.readInt();
         destination = in.readString();
+        destin_police = in.readString();
         reason = in.readString();
         start_time = in.readLong();
         end_time = in.readLong();
@@ -105,6 +107,14 @@ public class LeaveBean implements Parcelable {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public String getDestin_police() {
+        return destin_police;
+    }
+
+    public void setDestin_police(String destin_police) {
+        this.destin_police = destin_police;
     }
 
     public String getReason() {
@@ -213,6 +223,7 @@ public class LeaveBean implements Parcelable {
         dest.writeInt(drug_user_id);
         dest.writeInt(community_drug_reg_id);
         dest.writeString(destination);
+        dest.writeString(destin_police);
         dest.writeString(reason);
         dest.writeLong(start_time);
         dest.writeLong(end_time);

@@ -2,7 +2,14 @@ package com.mypolice.poo.ui.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -18,21 +26,30 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.LeaveBean;
 import com.mypolice.poo.bean.LeaveItemBean;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.DateTimeUtil;
+import com.mypolice.poo.util.FileUtils;
+import com.mypolice.poo.util.ImageTools;
 import com.mypolice.poo.util.RegexUtil;
 import com.mypolice.poo.widget.CenterDialog;
 import com.mypolice.poo.widget.CustomDatePicker;
+import com.mypolice.poo.widget.IconView;
 import com.mypolice.poo.widget.TitleBarView;
+import com.yixia.camera.demo.ui.record.VideoPlayerActivity;
+import com.yixia.camera.demo.util.Constant;
+import com.yixia.weibo.sdk.VCamera;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,6 +81,8 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 	/** EditText 外出目的地 */
 	@ViewInject(R.id.edtTxtOutwardDestination)
 	private EditText mEdtTxtDestination;
+	@ViewInject(R.id.edt_police_station)
+	private EditText mEdtTxtDestinPolice;
 	/** EditText 请假事由 */
 	@ViewInject(R.id.edtTxtLeaveReason)
 	private EditText mEdtTxtLeaveReason;
@@ -114,6 +133,30 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 	@ViewInject(R.id.btnSubmitLeave)
 	private Button mBtnSubmitLeave;
 
+	@ViewInject(R.id.llPhoto1)
+	private LinearLayout mLlPhoto1;
+	@ViewInject(R.id.rlPhoto1)
+	private RelativeLayout mRlPhoto1;
+	@ViewInject(R.id.ivPhoto1)
+	private ImageView mivPhoto1;
+	@ViewInject(R.id.iconDel1)
+	private IconView mIconDel1;
+
+	/** 是否已拍摄 标识 */
+	private boolean isPhoto1 = false;	// 照片1是否已经存在
+	private boolean isTakingPhoto1 = false;	// 是否正在拍摄照片1
+	// 路径
+	private String mBmpPath1 = "";
+	// 文件
+	private File mFileBmp1 = null;
+	// 文件名
+	private String mFileNameBmp1 = "";
+	// 临时保存图片
+	private Bitmap mBitmap1 = null;
+
+	// 拍照
+	public static final int IMAGE_CAPTURE = 1;
+
 	private boolean mIsDisplay = false;
 
 	/** 时间选择器 */
@@ -145,6 +188,23 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		initView();
 		initDatePicker();
 		initData();
+
+		// 获取 onSaveInstanseState() 保存的值
+		if (null != savedInstanceState) {
+
+			// 获取 拍摄照片翻转后 Activity 销毁之前保存的数据
+			isTakingPhoto1 = savedInstanceState.getBoolean("isTakingPhoto1");
+			if (isTakingPhoto1) {
+				mBitmap1 = (Bitmap) savedInstanceState.getParcelable("bitmap");
+				mFileNameBmp1 = savedInstanceState.getString("fileName");
+				mBmpPath1 = savedInstanceState.getString("filePath");
+
+				mivPhoto1.setImageBitmap(mBitmap1);
+				mLlPhoto1.setVisibility(View.GONE);
+				mRlPhoto1.setVisibility(View.VISIBLE);
+				isPhoto1 = true;
+			}
+		}
 	}
 	
 	@Override
@@ -273,6 +333,27 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		}
 	}*/
 
+	@OnClick(R.id.llPhoto1)
+	public void onLlPhoto1Click(View v) {
+		isTakingPhoto1 = true;
+//		isTakingPhoto2 = false;
+		captureImage(FileUtils.SDPATH);
+	}
+
+	@OnClick(R.id.iconDel1)
+	public void onIconDel1Click(View v) {
+		mLlPhoto1.setVisibility(View.VISIBLE);
+		mRlPhoto1.setVisibility(View.GONE);
+
+		mBmpPath1 = "";
+		FileUtils.deleteFile(new File(mBmpPath1));
+	}
+
+	@OnClick(R.id.ivPhoto1)
+	public void onIvPhoto1Click(View v) {
+		goToImagePreviewActivity(mBmpPath1);
+	}
+
 	@OnClick(R.id.tvStartDate)
 	public void onTvStartDataClick(View v) {
 		// 日期格式为yyyy-MM-dd
@@ -302,7 +383,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		if (from.equals("edit"))
 			putLeaveData(mLeaveItemBean.getId());
 		else
-			postLeaveData();
+			postLeaveDataNew();
 	}
 
 	/**
@@ -322,7 +403,82 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		if (from.equals("edit"))
 			putLeaveData(mLeaveItemBean.getId());
 		else
-			postLeaveData();
+			postLeaveDataNew();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK && resultCode != RESULT_CANCELED) {	// 拍照/相册
+
+			String fileName;
+			switch (requestCode) {
+				case IMAGE_CAPTURE:// 拍照返回
+
+					Bitmap newBitmap = null;
+					try {
+						newBitmap = ImageTools.revitionImageSize(Environment.getExternalStorageDirectory() + "/image.jpg");
+						int degree = getBitmapDegree(Environment.getExternalStorageDirectory() + "/image.jpg");
+						if (degree != 0) {
+							newBitmap = rotateBitmapByDegree(newBitmap, degree);
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+//					// 将保存在本地的图片取出并缩小后显示在界面上
+//					Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/image.jpg");
+//					Bitmap newBitmap = ImageTools.zoomBitmap(bitmap,bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
+					// 由于Bitmap内存占用较大，这里需要回收内存，否则会报out of memory异常
+//					bitmap.recycle();
+
+					// 生成一个图片文件名
+					fileName = String.valueOf(System.currentTimeMillis());
+					// 将处理过的图片添加到缩略图列表并保存到本地
+					ImageTools.savePhotoToSDCard(newBitmap, FileUtils.SDPATH,fileName);
+
+
+					if (isTakingPhoto1) {
+						mBitmap1 = newBitmap;
+						mFileNameBmp1 = fileName + ".jpg";
+						mBmpPath1 = FileUtils.SDPATH + mFileNameBmp1;
+						mFileBmp1 = new File(mBmpPath1);
+
+						mivPhoto1.setImageBitmap(newBitmap);
+						mLlPhoto1.setVisibility(View.GONE);
+						mRlPhoto1.setVisibility(View.VISIBLE);
+						isPhoto1 = true;
+					}
+
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+
+	/**
+	 * 点击图片 跳转到预览页面
+	 */
+	private void goToImagePreviewActivity(String bmpPath) {
+		Bundle bundle = new Bundle();
+		bundle.putString("bmpPath", bmpPath);
+		CommonFuncUtil.goNextActivityWithArgs(ApplicationForLeaveActivity.this,
+				ImagePreviewActivity.class, bundle, false);
+	}
+
+	/**
+	 * 拍照
+	 *
+	 * @param path
+	 *            照片存放的路径
+	 */
+	public void captureImage(String path) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		// 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
+		Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "image.jpg"));
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		startActivityForResult(intent, IMAGE_CAPTURE);
 	}
 
 	/**
@@ -368,6 +524,59 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 								setResult(RESULT_CODE_LEAVE);
 								ApplicationForLeaveActivity.this.finish();
 							} else if (jsonResponse.getInt("code") == 1007) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(ApplicationForLeaveActivity.this,
+										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+	}
+
+	/**
+	 * 新增请假数据[六安]
+	 * 2018-4-24
+	 */
+	private void postLeaveDataNew() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/addLeave";
+		OkHttpUtils.post().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.addFile("photo_url", mFileNameBmp1, new File(mBmpPath1))
+				.addParams("destination", mLeaveBean.getDestination())
+				.addParams("reason", mLeaveBean.getReason())
+				.addParams("start_time", mLeaveBean.getStart_time() + "")
+				.addParams("end_time", mLeaveBean.getEnd_time() + "")
+				.addParams("destin_police", mLeaveBean.getDestin_police() + "")
+				.addParams("visitor_name", mLeaveBean.getVisitor_name())
+				.addParams("visitor_profession", mLeaveBean.getVisitor_profession())
+				.addParams("visitor_relation", mLeaveBean.getVisitor_relation())
+				.addParams("visitor_company", mLeaveBean.getVisitor_company())
+				.addParams("visitor_address", mLeaveBean.getVisitor_address())
+				.addParams("visitor_tel", mLeaveBean.getVisitor_tel())
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						centerDialog.cancel();
+						CommonFuncUtil.getToast(ApplicationForLeaveActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(ApplicationForLeaveActivity.this, response);
+						centerDialog.cancel();
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+//								int leaveId = jsonResponse.getInt("data");
+								setResult(RESULT_CODE_LEAVE);
+								ApplicationForLeaveActivity.this.finish();
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED	) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
 										"当前用户已在别处登录，请重新登录");
@@ -432,6 +641,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 	 */
 	private void setLeaveData() {
 		mLeaveBean.setDestination(mEdtTxtDestination.getText().toString().trim());
+		mLeaveBean.setDestin_police(mEdtTxtDestinPolice.getText().toString().trim());
 		mLeaveBean.setReason(mEdtTxtLeaveReason.getText().toString().trim());
 		try {
 			mLeaveBean.setStart_time(sdf.parse(mTvStartDate.getText().toString()).getTime() / 1000);
@@ -508,6 +718,80 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 		leaveBean.setLeave_type(leaveItemBean.getLeave_type());
 		leaveBean.setCommunity_drug_reg_id(leaveItemBean.getCommunity_drug_reg_id());
 		return leaveBean;
+	}
+
+	/**
+	  * 读取图片的旋转的角度
+	  *
+	  * @param path
+	  *            图片绝对路径
+	  * @return 图片的旋转角度
+	  */
+	private int getBitmapDegree(String path) {
+		int degree = 0;
+		try {
+			// 从指定路径下读取图片，并获取其EXIF信息
+			ExifInterface exifInterface = new ExifInterface(path);
+			// 获取图片的旋转信息
+			int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+					ExifInterface.ORIENTATION_NORMAL);
+			switch (orientation) {
+				case ExifInterface.ORIENTATION_ROTATE_90:
+					degree = 90;
+					break;
+				case ExifInterface.ORIENTATION_ROTATE_180:
+					degree = 180;
+					break;
+				case ExifInterface.ORIENTATION_ROTATE_270:
+					degree = 270;
+					break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return degree;
+	}
+
+	/**
+	  * 将图片按照某个角度进行旋转
+	  *
+	  * @param bm
+	  *            需要旋转的图片
+	  * @param degree
+	  *            旋转角度
+	  * @return 旋转后的图片
+	  */
+	public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
+		Bitmap returnBm = null;
+
+		// 根据旋转角度，生成旋转矩阵
+		Matrix matrix = new Matrix();
+		matrix.postRotate(degree);
+		try {
+			// 将原始图片按照旋转矩阵进行旋转，并得到新的图片
+			returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+		} catch (OutOfMemoryError e) {
+		}
+		if (returnBm == null) {
+			returnBm = bm;
+		}
+		if (bm != returnBm) {
+			bm.recycle();
+		}
+		return returnBm;
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		// 防止部分 三星手机 因拍摄照片后，屏幕翻转导致 Activity 周期重建从而导致的数据丢失
+		// 故在因翻转导致 Activity 销毁之前保存 拍照后的数据
+		outState.putBoolean("isTakingPhoto1", isTakingPhoto1);
+		outState.putParcelable("bitmap", mBitmap1);
+		outState.putString("fileName", mFileNameBmp1);
+		outState.putString("filePath", mBmpPath1);
+
 	}
 
 }
