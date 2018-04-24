@@ -6,7 +6,7 @@ package com.mypolice.poo.bean;
  * @Description: 任务信息 实体类
  * @author wangjl
  * @crdate 2017-8-23
- * @update 2017-10-26
+ * @update 2018-4-24    更新新版实体类[六安]
  * @version v2.1.0(12)
  */
 public class WorkBean {
@@ -18,6 +18,10 @@ public class WorkBean {
     private int work_tag;
     private String work_tag_text;
     private String work_type_text;
+
+    private int work_id;
+    private int sum;
+    private int finish;
 
     @Override
     public String toString() {
@@ -86,5 +90,29 @@ public class WorkBean {
 
     public void setWork_type_text(String work_type_text) {
         this.work_type_text = work_type_text;
+    }
+
+    public int getWork_id() {
+        return work_id;
+    }
+
+    public void setWork_id(int work_id) {
+        this.work_id = work_id;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public int getFinish() {
+        return finish;
+    }
+
+    public void setFinish(int finish) {
+        this.finish = finish;
     }
 }
