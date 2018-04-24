@@ -66,7 +66,7 @@
                 android:padding="10dp">
 
                 <!-- 开始时间 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sp_bg_login_edt"
@@ -99,7 +99,7 @@
                 </LinearLayout>
 
                 <!-- 结束时间 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sp_bg_login_edt"
@@ -133,7 +133,7 @@
                 </LinearLayout>
 
                 <!-- 请假事由 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -161,7 +161,7 @@
                 </LinearLayout>
 
                 <!-- 外出地址 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -189,7 +189,7 @@
                 </LinearLayout>
 
                 <!-- 目的地派出所 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -427,7 +427,8 @@
                     android:background="@drawable/sp_bg_login_edt"
                     android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
