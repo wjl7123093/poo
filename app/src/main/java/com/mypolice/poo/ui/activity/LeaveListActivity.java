@@ -20,10 +20,12 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,6 +72,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	private ListView mLvLeave;
 	@ViewInject(R.id.lvLeavePre)
 	private ListView mLvLeavePre;
+	@ViewInject(R.id.tv_count)
+	private TextView mTvCounts;
 
 	private CommonAdapter mAdapter;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -85,7 +89,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 		initView();
 		loadData();
 		// 获取请假记录数据
-		getLeaveLogNew();
+//		getLeaveLogNew();
 	}
 	
 	@Override
@@ -107,8 +111,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	}
 
 	private void loadData() {
-//		getLeaveData();
-		getLeaveDataNew();
+		getLeaveData();
+//		getLeaveDataNew();
 	}
 
 	/** 设置无请假提示区的显示状态 */
@@ -139,58 +143,6 @@ public class LeaveListActivity extends BaseActivityPoo {
 			// 刷新列表
 			loadData();
 		}
-	}
-
-	/**
-	 * 获取请假数据
-	 */
-	private void getLeaveData() {
-		String url = GlobalSet.APP_SERVER_URL + "community_leave/conditionGet";
-		OkHttpUtils.post().url(url)
-				.addParams("token", mApplication.getToken())
-				.addParams("conditions", "drug_user_id=" + mApplication.getUserID() + " and leave_type<3")
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
-						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								org.json.JSONArray array = jsonResponse.getJSONObject("data").getJSONArray("data");
-								if (array.length() == 0)
-									return;
-
-								List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
-								LeaveItemBean leave = null;
-								for (int i = 0; i < array.length(); i++) {
-									leave = JSON.parseObject(array.getString(i), LeaveItemBean.class);
-//									CommonFuncUtil.getToast(LeaveListActivity.this, leave.toString());
-									leaveList.add(leave);
-								}
-								bindDataToUI(leaveList);
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(LeaveListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-
 	}
 
 	/**
@@ -276,6 +228,72 @@ public class LeaveListActivity extends BaseActivityPoo {
 									leaveList.add(leave);
 								}
 								bindLogDataToUI(leaveList);
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
+								// 空数据，不做处理
+
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(LeaveListActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
+										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+
+	}
+
+	/**
+	 * 一次性获取请假状态，记录[六安]
+	 * 2018-4-24
+	 */
+	private void getLeaveData() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/leaveView";
+		OkHttpUtils.get().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						centerDialog.cancel();
+						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
+						centerDialog.cancel();
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+								String statusData = jsonResponse.getJSONObject("data").getString("leave");
+								org.json.JSONArray arrayLog = jsonResponse.getJSONObject("data").getJSONArray("leave_list");
+
+								if (!TextUtils.isEmpty(statusData) && !statusData.equals("{}")
+										&& !statusData.equals("null")) {
+									List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
+									LeaveItemBean leave = JSON.parseObject(statusData, LeaveItemBean.class);
+									leaveList.add(leave);
+									bindDataToUI(leaveList);
+									// 隐藏无请假 - 提示区
+									setNoLeaveBlockVisibility(View.GONE);
+								}
+								if (arrayLog.length() > 0) {
+									List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
+									LeaveItemBean leave = null;
+									for (int i = 0; i < arrayLog.length(); i++) {
+										leave = JSON.parseObject(arrayLog.getString(i), LeaveItemBean.class);
+//									CommonFuncUtil.getToast(LeaveListActivity.this, leave.toString());
+										leaveList.add(leave);
+									}
+									bindLogDataToUI(leaveList);
+								}
+
+
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
 								// 空数据，不做处理
 
@@ -404,6 +422,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	 * @param leaveList
 	 */
 	private void bindLogDataToUI(List<LeaveItemBean> leaveList) {
+		mTvCounts.setText("共" + leaveList.size() + "条");
+
 		mAdapter = new CommonAdapter<LeaveItemBean>(LeaveListActivity.this,
 				leaveList, R.layout.item_lv_leave_history) {
 			@Override

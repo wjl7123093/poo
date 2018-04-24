@@ -128,13 +128,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="请假纪录"
+                        android:text="请假记录"
                         android:textColor="@color/BLACK_H"
                         android:textSize="@dimen/app_textsize_mid2"
                         android:layout_marginLeft="8dp"/>
 
                     <TextView
-                        android:id="@+id/tv_already_times"
+                        android:id="@+id/tv_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="共32条"
