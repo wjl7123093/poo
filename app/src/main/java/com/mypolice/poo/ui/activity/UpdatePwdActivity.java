@@ -86,12 +86,12 @@ public class UpdatePwdActivity extends BaseActivityPoo {
 			return;
 		}
 
-		String url = GlobalSet.APP_SERVER_URL + "index/changePassword";
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/updatePassword";
 		OkHttpUtils.post().url(url)
-				.addParams("token", mApplication.getToken())
-				.addParams("id", mApplication.getUserID() + "")
-				.addParams("oldPwd", oldPwd)
-				.addParams("newPwd", newPwd)
+				.addHeader("jwt-token", mApplication.getToken())
+				.addParams("password", oldPwd)
+				.addParams("new_password", newPwd)
+				.addParams("verify_password", newPwd)
 				.build()
 				.execute(new StringCallback() {
 					@Override
@@ -104,9 +104,8 @@ public class UpdatePwdActivity extends BaseActivityPoo {
 //						Toast.makeText(UpdatePwdActivity.this, response, Toast.LENGTH_LONG).show();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								CommonFuncUtil.getToast(UpdatePwdActivity.this, "修改成功");
+							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
+								CommonFuncUtil.getToast(UpdatePwdActivity.this, jsonResponse.getString("info"));
 								removeALLActivity();
 								CommonFuncUtil.goNextActivityWithNoArgs(UpdatePwdActivity.this,
 										LoginActivity.class, false);

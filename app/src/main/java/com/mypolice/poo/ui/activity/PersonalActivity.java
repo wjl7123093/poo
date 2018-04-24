@@ -47,9 +47,10 @@ public class PersonalActivity extends BaseActivityPoo {
 	private UpdateVersion 	mUpdateVersion;
 	private UpdateVersion.DownCallBack mDownCallBack;
 
-
+	@ViewInject(R.id.include_header)
+	private LinearLayout mIncludeHeader;
 	@ViewInject(R.id.ivHeaderImg)
-	private RoundImageView mIvHeader;
+	private RoundImageView mIvHeaderImg;
 	@ViewInject(R.id.tvUserName)
 	private TextView mTvUserName;
 	@ViewInject(R.id.tvSecretaryName)
@@ -57,7 +58,7 @@ public class PersonalActivity extends BaseActivityPoo {
 	@ViewInject(R.id.tvRecoveryName)
 	private TextView mTvRecoveryName;
 	@ViewInject(R.id.tvCommnuintyName)
-	private TextView mTvCommunityName;
+	private TextView mTvCommnuintyName;
 
 	/** Include Layout1 */
 	@ViewInject(R.id.layout1)
@@ -93,7 +94,8 @@ public class PersonalActivity extends BaseActivityPoo {
 		ViewUtils.inject(this);
 
 		initView();
-		getOwnerInfo();
+		bindDataToUI();
+//		getOwnerInfo();
 	}
 	
 	@Override
@@ -111,9 +113,9 @@ public class PersonalActivity extends BaseActivityPoo {
 		mLayout7.setVisibility(View.GONE);	// 测试功能3 默认隐藏
 		mLayout2.setVisibility(View.GONE);
 
-		centerDialog = new CenterDialog(PersonalActivity.this, R.layout.dialog_wap_loading,
+		/*centerDialog = new CenterDialog(PersonalActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
-		centerDialog.show();
+		centerDialog.show();*/
 	}
 
 	/** 修改密码 */
@@ -269,11 +271,22 @@ public class PersonalActivity extends BaseActivityPoo {
 	 * @param user
      */
 	private void bindDataToUI(DragUserInfo user) {
-		mApplication.mBtimapUtils.display(mIvHeader, GlobalSet.APP_IMAGE_URL + user.getAvatar_url());
+		mApplication.mBtimapUtils.display(mIvHeaderImg, GlobalSet.APP_IMAGE_URL + user.getAvatar_url());
 		mTvUserName.setText(user.getDrug_name());
 		mTvSecretaryName.setText("专干: " + user.getSecretary_name());
 		mTvRecoveryName.setText("类别: " + user.getRecovery_name());
-		mTvCommunityName.setText("社区: " + user.getCommunity_name());
+		mTvCommnuintyName.setText("社区: " + user.getCommunity_name());
+	}
+
+	/**
+	 * 绑定数据到 UI
+	 */
+	private void bindDataToUI() {
+		mApplication.mBtimapUtils.display(mIvHeaderImg, GlobalSet.APP_IMAGE_URL + mApplication.getAvatarUrl());
+		mTvUserName.setText(mApplication.getUserName());
+		mTvSecretaryName.setText("专干: " + mApplication.getSecretary());
+		mTvRecoveryName.setText("类别: " + mApplication.getStatus());
+		mTvCommnuintyName.setText("社区: " + mApplication.getCommunity());
 	}
 
 	/**
