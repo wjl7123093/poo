@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选择尿检结果 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择尿检结果"
+        android:textSize="16dp"
+        android:textColor="@color/BLACK_H"/>
+
+    <RadioGroup
+        android:id="@+id/rdo_grp_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/rdo_yin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="阴性"
+            android:textColor="@color/GREY_H"
+            android:textSize="14dp"/>
+
+        <RadioButton
+            android:id="@+id/rdo_yang"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="阳性"
+            android:textColor="@color/GREY_H"
+            android:textSize="14dp"/>
+
+    </RadioGroup>
+
+</LinearLayout>

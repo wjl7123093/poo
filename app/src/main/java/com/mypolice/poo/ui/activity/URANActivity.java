@@ -1,5 +1,7 @@
 package com.mypolice.poo.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -13,11 +15,14 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
@@ -30,6 +35,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.FileBean;
+import com.mypolice.poo.bean.LeaveBean;
+import com.mypolice.poo.bean.LeaveItemBean;
 import com.mypolice.poo.service.KeepLiveService;
 import com.mypolice.poo.service.LocationService;
 import com.mypolice.poo.util.CommonFuncUtil;
@@ -37,6 +44,7 @@ import com.mypolice.poo.util.FileUtils;
 import com.mypolice.poo.util.GPSUtils;
 import com.mypolice.poo.util.ImageTools;
 import com.mypolice.poo.widget.CenterDialog;
+import com.mypolice.poo.widget.CustomDatePicker;
 import com.mypolice.poo.widget.IconView;
 import com.mypolice.poo.widget.TitleBarView;
 import com.yixia.camera.demo.ui.record.MediaRecorderActivity;
@@ -53,8 +61,12 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -100,6 +112,12 @@ public class URANActivity extends BaseActivityPoo {
 	/** TitleBarView 顶部标题栏 */
 	@ViewInject(R.id.titleURAN)
 	private TitleBarView mTitleURAN;
+
+	/** EditText 尿检日期 */
+	@ViewInject(R.id.tv_datetime)
+	private TextView mTvStartDate;
+	@ViewInject(R.id.tv_result)
+	private TextView mTvResult;
 
 	@ViewInject(R.id.llPhoto1)
 	private LinearLayout mLlPhoto1;
@@ -176,6 +194,15 @@ public class URANActivity extends BaseActivityPoo {
 	// 照片缩小比例
 	private static final int SCALE = 5;
 
+	/** 时间选择器 */
+	private CustomDatePicker customDatePicker1;
+	private Date mDateStart = null;
+
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String wraningInfo = "结束日期不能小于起始日期";
+
+	private int mResult = 0;	// 0 阴性，1 阳性
+
 	/** 加载进度条 */
 	private CenterDialog centerDialog;
 
@@ -188,6 +215,7 @@ public class URANActivity extends BaseActivityPoo {
 		mTaskId = bundle.getInt("taskId");
 
 		initView();
+		initDatePicker();
 
 		// 获取 onSaveInstanseState() 保存的值
 		if (null != savedInstanceState) {
@@ -337,6 +365,72 @@ public class URANActivity extends BaseActivityPoo {
 	@OnClick(R.id.ivPlay)
 	public void onIvPlayClick(View v) {
 		goToVideoPlayActivity();
+	}
+
+	@OnClick(R.id.tv_datetime)
+	public void onTvStartDateClick(View v) {
+		// 日期格式为yyyy-MM-dd
+		customDatePicker1.show(mTvStartDate.getText().toString());
+	}
+
+	@OnClick(R.id.tv_result)
+	public void onTvResultClick(View v) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(URANActivity.this);
+		View dialogView = LayoutInflater.from(URANActivity.this).inflate(R.layout.dialog_select_type, null);
+		final RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.rdo_grp_select);
+		radioGroup.check(R.id.rdo_yin);
+		builder.setView(dialogView);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (R.id.rdo_yin == radioGroup.getCheckedRadioButtonId()) {
+					mResult = 0;
+				} else {
+					mResult = 1;
+				}
+				mTvResult.setText(mResult == 0 ? "阴性" : "阳性");
+				dialog.dismiss();
+			}
+		})
+		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mTvResult.setText("阴性");
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	/** 初始化时间选择器 */
+	private void initDatePicker() {
+		// sdf 为 时间选择器所需要的格式， sdf2 为 poo 程序具体所需格式
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+		final SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+		String now = sdf.format(new Date());
+		mTvStartDate.setText(now.split(" ")[0]);
+		try {
+			mDateStart = sdf2.parse(now.split(" ")[0]);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+			@Override
+			public void handle(String time) { // 回调接口，获得选中的时间
+				String startTime = time.split(" ")[0];
+				mTvStartDate.setText(startTime);
+				try {
+					mDateStart = sdf2.parse(startTime);
+
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		}, now, "2099-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+		customDatePicker1.showSpecificTime(false); // 不显示时和分
+		customDatePicker1.setIsLoop(false); // 不允许循环滚动
 	}
 
 	/**
@@ -761,87 +855,6 @@ public class URANActivity extends BaseActivityPoo {
 //				doUploadFile();
 				doUploadData();
 
-				/*StringBuffer sb = new StringBuffer(256);
-//				// 保存 经纬度坐标至缓存文件中
-//				FileUtils.writeTxtToFile(location.getLatitude() + "," + location.getLongitude() + "\n " , mStrCachePath, "LocInfo.txt");
-				*//**
-				 * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
-				 * location.getTime() 是指服务端出本次结果的时间，如果位置不发生变化，则时间不变
-				 *//*
-				sb.append(location.getTime());
-				sb.append("time : ");
-				sb.append("\nlocType : ");// 定位类型
-				sb.append(location.getLocType());
-				sb.append("\nlocType description : ");// *****对应的定位类型说明*****
-				sb.append(location.getLocTypeDescription());
-				sb.append("\nlatitude : ");// 纬度
-				sb.append(location.getLatitude());
-				sb.append("\nlontitude : ");// 经度
-				sb.append(location.getLongitude());
-				sb.append("\nradius : ");// 半径
-				sb.append(location.getRadius());
-				sb.append("\nCountryCode : ");// 国家码
-				sb.append(location.getCountryCode());
-				sb.append("\nCountry : ");// 国家名称
-				sb.append(location.getCountry());
-				sb.append("\ncitycode : ");// 城市编码
-				sb.append(location.getCityCode());
-				sb.append("\ncity : ");// 城市
-				sb.append(location.getCity());
-				sb.append("\nDistrict : ");// 区
-				sb.append(location.getDistrict());
-				sb.append("\nStreet : ");// 街道
-				sb.append(location.getStreet());
-				sb.append("\naddr : ");// 地址信息
-				sb.append(location.getAddrStr());
-				sb.append("\nUserIndoorState: ");// *****返回用户室内外判断结果*****
-				sb.append(location.getUserIndoorState());
-				sb.append("\nDirection(not all devices have value): ");
-				sb.append(location.getDirection());// 方向
-				sb.append("\nlocationdescribe: ");
-				sb.append(location.getLocationDescribe());// 位置语义化信息
-				sb.append("\nPoi: ");// POI信息
-				if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
-					for (int i = 0; i < location.getPoiList().size(); i++) {
-						Poi poi = (Poi) location.getPoiList().get(i);
-						sb.append(poi.getName() + ";");
-					}
-				}
-				if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
-					sb.append("\nspeed : ");
-					sb.append(location.getSpeed());// 速度 单位：km/h
-					sb.append("\nsatellite : ");
-					sb.append(location.getSatelliteNumber());// 卫星数目
-					sb.append("\nheight : ");
-					sb.append(location.getAltitude());// 海拔高度 单位：米
-					sb.append("\ngps status : ");
-					sb.append(location.getGpsAccuracyStatus());// *****gps质量判断*****
-					sb.append("\ndescribe : ");
-					sb.append("gps定位成功");
-				} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
-					// 运营商信息
-					if (location.hasAltitude()) {// *****如果有海拔高度*****
-						sb.append("\nheight : ");
-						sb.append(location.getAltitude());// 单位：米
-					}
-					sb.append("\noperationers : ");// 运营商信息
-					sb.append(location.getOperators());
-					sb.append("\ndescribe : ");
-					sb.append("网络定位成功");
-				} else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
-					sb.append("\ndescribe : ");
-					sb.append("离线定位成功，离线定位结果也是有效的");
-				} else if (location.getLocType() == BDLocation.TypeServerError) {
-					sb.append("\ndescribe : ");
-					sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
-				} else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-					sb.append("\ndescribe : ");
-					sb.append("网络不同导致定位失败，请检查网络是否通畅");
-				} else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-					sb.append("\ndescribe : ");
-					sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
-				}
-//				logMsg(sb.toString());*/
 			}
 		}
 
