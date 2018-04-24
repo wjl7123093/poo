@@ -58,6 +58,12 @@ public class LeaveListActivity extends BaseActivityPoo {
 //	@ViewInject(R.id.llAppForLeave)
 //	private LinearLayout mLlAppForLeave;
 
+	// 当前无请假 - 提示区
+	@ViewInject(R.id.ll_no_leave_title)
+	private LinearLayout mLlNoLeaveTitle;
+	@ViewInject(R.id.ll_no_leave_btn)
+	private LinearLayout mLlNoLeaveBtn;
+
 	@ViewInject(R.id.btn_leave)
 	private Button mBtnLeave;
 	@ViewInject(R.id.lvLeave)
@@ -103,6 +109,12 @@ public class LeaveListActivity extends BaseActivityPoo {
 	private void loadData() {
 //		getLeaveData();
 		getLeaveDataNew();
+	}
+
+	/** 设置无请假提示区的显示状态 */
+	private void setNoLeaveBlockVisibility(int visibility) {
+		mLlNoLeaveTitle.setVisibility(visibility);
+		mLlNoLeaveBtn.setVisibility(visibility);
 	}
 
 	/**
@@ -204,18 +216,12 @@ public class LeaveListActivity extends BaseActivityPoo {
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
-								org.json.JSONArray array = jsonResponse.getJSONArray("data");
-								if (array.length() == 0)
-									return;
-
 								List<LeaveItemBean> leaveList = new ArrayList<LeaveItemBean>();
-								LeaveItemBean leave = null;
-								for (int i = 0; i < array.length(); i++) {
-									leave = JSON.parseObject(array.getString(i), LeaveItemBean.class);
-//									CommonFuncUtil.getToast(LeaveListActivity.this, leave.toString());
-									leaveList.add(leave);
-								}
+								LeaveItemBean leave = JSON.parseObject(jsonResponse.getString("data"), LeaveItemBean.class);
+								leaveList.add(leave);
 								bindDataToUI(leaveList);
+								// 隐藏无请假 - 提示区
+								setNoLeaveBlockVisibility(View.GONE);
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
 								// 空数据，不做处理
 
@@ -358,7 +364,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 //					helper.setText(R.id.tvItemStatus, "已审核，待销假");
 //				}
 
-				helper.setText(R.id.tvItemStatus, "请假状态: " + item.getLeave_type_text());
+				helper.setText(R.id.tvItemStatus, item.getLeave_type_text());
 				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
 				helper.setText(R.id.tvItemStartTime, "开始时间:  " + item.getStart_time());
 				helper.setText(R.id.tvItemEndTime, "结束时间:  " + item.getEnd_time());

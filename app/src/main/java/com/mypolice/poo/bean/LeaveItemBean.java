@@ -35,6 +35,8 @@ public class LeaveItemBean implements Parcelable {
     private String remark;
     private int leave_type;
     private String leave_type_text;
+    private int leave_id;
+    private String community_name;
 
     public LeaveItemBean() {  }
 
@@ -58,6 +60,8 @@ public class LeaveItemBean implements Parcelable {
         remark = in.readString();
         leave_type = in.readInt();
         leave_type_text = in.readString();
+        leave_id = in.readInt();
+        community_name = in.readString();
     }
 
     public static final Creator<LeaveItemBean> CREATOR = new Creator<LeaveItemBean>() {
@@ -248,6 +252,22 @@ public class LeaveItemBean implements Parcelable {
         this.leave_type_text = leave_type_text;
     }
 
+    public int getLeave_id() {
+        return leave_id;
+    }
+
+    public void setLeave_id(int leave_id) {
+        this.leave_id = leave_id;
+    }
+
+    public String getCommunity_name() {
+        return community_name;
+    }
+
+    public void setCommunity_name(String community_name) {
+        this.community_name = community_name;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -274,5 +294,7 @@ public class LeaveItemBean implements Parcelable {
         dest.writeString(remark);
         dest.writeInt(leave_type);
         dest.writeString(leave_type_text);
+        dest.writeInt(leave_id);
+        dest.writeString(community_name);
     }
 }

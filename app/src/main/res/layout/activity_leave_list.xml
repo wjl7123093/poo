@@ -38,6 +38,7 @@
 
     <!-- 无请假申请 提示区域 -->
     <LinearLayout
+        android:id="@+id/ll_no_leave_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -63,6 +64,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_no_leave_btn"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="vertical"
