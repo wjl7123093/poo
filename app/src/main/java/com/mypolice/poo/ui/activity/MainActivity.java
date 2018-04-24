@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
@@ -51,6 +52,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.raphets.roundimageview.RoundImageView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -115,6 +117,17 @@ public class MainActivity extends BaseActivityPoo {
 
     @ViewInject(R.id.include_header)
     private LinearLayout mIncludeHeader;
+    @ViewInject(R.id.ivHeaderImg)
+    private RoundImageView mIvHeaderImg;
+    @ViewInject(R.id.tvUserName)
+    private TextView mTvUserName;
+    @ViewInject(R.id.tvSecretaryName)
+    private TextView mTvSecretaryName;
+    @ViewInject(R.id.tvRecoveryName)
+    private TextView mTvRecoveryName;
+    @ViewInject(R.id.tvCommnuintyName)
+    private TextView mTvCommnuintyName;
+
 
     /** 未读标识（红点） */
     @ViewInject(R.id.viewIsRead)
@@ -185,6 +198,7 @@ public class MainActivity extends BaseActivityPoo {
     public void initView() {
         super.initView();
 
+        initUserData();
         initFunctionManager();
         bindGvFuncData();
 
@@ -259,6 +273,16 @@ public class MainActivity extends BaseActivityPoo {
 
         //将广播监听器和过滤器注册在一起；
         registerReceiver(mReceiver, intentFilter);
+    }
+
+    /** 初始化用户数据 */
+    private void initUserData() {
+        mApplication.mBtimapUtils.display(mIvHeaderImg, GlobalSet.APP_IMAGE_URL + mApplication.getAvatarUrl());
+        mTvUserName.setText(mApplication.getUserName());
+        mTvSecretaryName.setText("专干: " + mApplication.getSecretary());
+        mTvRecoveryName.setText("类别: " + mApplication.getStatus());
+        mTvCommnuintyName.setText("社区: " + mApplication.getCommunity());
+//        mTvSecretaryName.setVisibility(View.GONE);
     }
 
     /** 初始化 FunctionManager */

@@ -288,11 +288,12 @@ public class LoginActivity extends BaseActivityPoo {
 			application.setToken(json.getString("token"));
 			application.setAcc(mAcc);
 			application.setPwd(mPwd);
-			application.setUserID(user.getId());
+			application.setUserID(user.getUser_id());
 			application.setUserName(user.getName());
 			application.setAvatarUrl(user.getAvatar_url());
 			application.setStatus(user.getStatus());
 			application.setSecretary(user.getSecretary());
+			application.setCommunity(user.getCommunity());
 
 //			application.setToken(json.getString("ticket"));
 //			application.setAcc(mAcc);

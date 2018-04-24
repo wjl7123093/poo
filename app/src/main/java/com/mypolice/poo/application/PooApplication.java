@@ -95,6 +95,7 @@ public class PooApplication extends Application {
     private static String KEY_AVATAR_URL = "avatar_url";
     private static String KEY_STATUS = "status";
     private static String KEY_SECRETARY = "secretary";
+    private static String KEY_COMMUNITY = "community";
 
     private static String KEY_IS_LOGIN = "isLogin";
     private static String KEY_APP_SERVER = "appserver";
@@ -112,6 +113,7 @@ public class PooApplication extends Application {
     private String avatarUrl;               // 头像
     private String status;                  // 状态
     private String secretary;               // 所属专干
+    private String community;               // 社区
 
     private boolean isLogin = false;		// 是否登录
     private boolean isServiceRunning = false;   // 服务是否运行中
@@ -176,6 +178,7 @@ public class PooApplication extends Application {
         this.avatarUrl = spRTApp.getString(KEY_AVATAR_URL, "");
         this.status = spRTApp.getString(KEY_STATUS, "");
         this.secretary = spRTApp.getString(KEY_SECRETARY, "");
+        this.community = spRTApp.getString(KEY_COMMUNITY, "");
 
         // 全局初始化 bimaputils
         mBtimapUtils = new BitmapUtils(this, "", 4 * 1024 * 1024, 20 * 1024 * 1024);
@@ -217,6 +220,16 @@ public class PooApplication extends Application {
     public void setSecretary(String secretary) {
         this.secretary = secretary;
         spEditor.putString(KEY_SECRETARY, secretary);
+        spEditor.commit();
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+        spEditor.putString(KEY_COMMUNITY, community);
         spEditor.commit();
     }
 

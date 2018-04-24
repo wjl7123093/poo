@@ -6,18 +6,19 @@ package com.mypolice.poo.bean;
 
 public class UserEntity {
 
-    private int id;
+    private int user_id;
     private String name;
     private String avatar_url;
     private String status;
     private String secretary;
+    private String community;
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -50,5 +51,13 @@ public class UserEntity {
 
     public void setSecretary(String secretary) {
         this.secretary = secretary;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
     }
 }

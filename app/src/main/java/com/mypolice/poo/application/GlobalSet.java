@@ -32,6 +32,8 @@ public class GlobalSet {
     public static int APP_SUCCESS = 1;
 	/** 服务端接口地址 */
 	public static String APP_SERVER_URL = "http://111.39.142.240:55555/doc//";
+	/** 服务端图片地址 */
+	public static String APP_IMAGE_URL = "http://111.39.142.240:55555/static/uploads/";
 
 
 
@@ -64,8 +66,8 @@ public class GlobalSet {
 //	public static String APP_SERVER_URL = "http://police.keywaysoft.com/api/";
 	/** 服务端接口地址 https */
 	public static String APP_SERVER_URL_HTTPS = "https://police.keywaysoft.com/api/";
-	/** 服务端图片地址 */
-	public static String APP_IMAGE_URL = "http://police.keywaysoft.com/static/uploads/";
+//	/** 服务端图片地址 */
+//	public static String APP_IMAGE_URL = "http://police.keywaysoft.com/static/uploads/";
 	/** 服务端图片地址 https */
 	public static String APP_IMAGE_URL_HTTPS = "https://police.keywaysoft.com/static/uploads/";
 	/** 宣传教育 - 新闻详情页地址 */
