@@ -231,25 +231,6 @@ public class InteractionActivity extends BaseActivityPoo {
 									bindDataToUIPre(workBeanPreList);
 								}
 
-
-//								List<WorkBean> workBeanList = new ArrayList<WorkBean>();
-//								WorkBean work = null;
-//								for (int i = 0; i < arrNow.length(); i++) {
-//									work = JSON.parseObject(arrNow.getString(i), WorkBean.class);
-//									workBeanList.add(work);
-//								}
-//								List<WorkBean> workBeanPreList = new ArrayList<WorkBean>();
-//								WorkBean workPre = null;
-//								for (int i = 0; i < arrPre.length(); i++) {
-//									workPre = JSON.parseObject(arrPre.getString(i), WorkBean.class);
-//									workBeanPreList.add(workPre);
-//								}
-//
-//								if (workBeanList.size() > 0)
-//									bindDataToUI(workBeanList);
-//								if (workBeanPreList.size() > 0)
-//									bindDataToUIPre(workBeanPreList);
-
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(InteractionActivity.this,
