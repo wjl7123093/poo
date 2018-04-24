@@ -86,7 +86,7 @@ public class GlobalSet {
 	public static String APP_DOWNLOAD_NAME = "drugapp.apk";
 
 
-	public static String WORK_TIME_HEAD = "任务截止时间: ";
+	public static String WORK_TIME_HEAD = "截止时间: ";
 	public static String WORK_DESCRIPTION_HEAD = "任务说明: ";
 	public static String WORK_STATUS_HEAD = "任务状态: ";
 

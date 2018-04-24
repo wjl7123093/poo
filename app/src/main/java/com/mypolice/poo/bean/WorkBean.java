@@ -22,6 +22,7 @@ public class WorkBean {
     private int work_id;
     private int sum;
     private int finish;
+    private int num;
 
     @Override
     public String toString() {
@@ -114,5 +115,13 @@ public class WorkBean {
 
     public void setFinish(int finish) {
         this.finish = finish;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

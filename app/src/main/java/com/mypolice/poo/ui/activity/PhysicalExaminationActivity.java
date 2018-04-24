@@ -8,6 +8,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
 import com.mypolice.poo.adapter.CommonAdapter;
 import com.mypolice.poo.adapter.ViewHolder;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.WorkBean;
 import com.mypolice.poo.service.KeepLiveService;
@@ -20,10 +21,13 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +65,24 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 //	@ViewInject(R.id.ivSwitch)
 //	private ImageView mIvSwitch;
 
+	@ViewInject(R.id.ll_uran_notice)
+	private LinearLayout mLlUranNotice;
+	@ViewInject(R.id.ll_uran_btn)
+	private LinearLayout mLlUranBtn;
+	@ViewInject(R.id.ll_uran_pre_notice_title)
+	private LinearLayout mLlUranPreWorkTitle;
+	@ViewInject(R.id.ll_uran_pre_notice_nowork)
+	private LinearLayout mLlUranPreWorkNowork;
+
+	@ViewInject(R.id.btn_uran)
+	private Button mBtnUran;
+	@ViewInject(R.id.tv_notice)
+	private TextView mTvNotice;
+	@ViewInject(R.id.tv_count)
+	private TextView mTvCounts;
+
+	private int mWorkId = 0;	// 任务ID
+
 	private CommonAdapter mAdapter;
 	private CommonAdapter mAdapterPre;
 
@@ -75,8 +97,8 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		ViewUtils.inject(this);
 
 		initView();
-//		getCommunityWork();
-		getExaminationList();
+//		getExaminationList();
+		getExaminationData();
 	}
 	
 	@Override
@@ -101,68 +123,13 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		}
 	}
 
-	/** 展开/合并开关 点击事件 */
-	/*@OnClick(R.id.llExpandSwitch)
-	public void onViewExpandSwitchClick(View v) {
-		if (isExpand) {
-			isExpand = false;
-			mIvSwitch.setImageResource(R.mipmap.ic_arrow_down);
-			mLvExaminationPre.setVisibility(View.GONE);
-		} else {
-			isExpand = true;
-			mIvSwitch.setImageResource(R.mipmap.ic_arrow_up);
-			mLvExaminationPre.setVisibility(View.VISIBLE);
-		}
-	}*/
-
-	/**
-	 * 获取 特定吸毒者所有体检记录
-	 */
-	private void getCommunityWork() {
-		String url = GlobalSet.APP_SERVER_URL + "community_work/conditionGet";
-		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
-				.addParams("conditions", "(work_tag=0 or work_tag=1) and (work_type=1) and drug_user_id=" + mApplication.getUserID())
-				.addParams("fileds", "id,work_type,work_time,r,woremarkk_tag")
-//				.addParams("id", mApplication.getUserID() + "")
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(PhysicalExaminationActivity.this, e.getMessage());
-						centerDialog.cancel();
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(PhysicalExaminationActivity.this, response);
-						centerDialog.cancel();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								org.json.JSONArray array = jsonResponse.getJSONObject("data").getJSONArray("data");
-								List<WorkBean> workBeanList = new ArrayList<WorkBean>();
-								WorkBean work = null;
-								for (int i = 0; i < array.length(); i++) {
-									work = JSON.parseObject(array.getString(i), WorkBean.class);
-//									CommonFuncUtil.getToast(PhysicalExaminationActivity.this, work.toString());
-									workBeanList.add(work);
-								}
-								bindDataToUI(workBeanList);
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(PhysicalExaminationActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(PhysicalExaminationActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
+	/** 跳转到尿检页面 */
+	@OnClick(R.id.btn_uran)
+	public void onBtnUranClick(View v) {
+		Bundle bundle = new Bundle();
+		bundle.putInt("taskId", mWorkId);
+		CommonFuncUtil.goNextActivityWithArgs(PhysicalExaminationActivity.this, URANActivity.class,
+				bundle, false);
 	}
 
 	/**
@@ -228,6 +195,71 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	}
 
 	/**
+	 * 获取交流互动数据 [六安]
+	 * 2018-4-24
+	 */
+	private void getExaminationData() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/workView";
+		OkHttpUtils.post().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.addParams("type", "1")	// 1 -> 尿检
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						CommonFuncUtil.getToast(PhysicalExaminationActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(SignActivity.this, response);
+						centerDialog.cancel();
+//						mLlExpandSwitch.setVisibility(View.VISIBLE);
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+								JSONArray arrWorkLog = jsonResponse.getJSONObject("data").getJSONArray("work_log");
+								String work = jsonResponse.getJSONObject("data").getString("work");
+								String workNum = jsonResponse.getJSONObject("data").getString("work_num");
+
+								if (!TextUtils.isEmpty(work) && !work.equals("{}")
+										&& !work.equals("null")) {	// 当前任务
+									WorkBean workBean = JSON.parseObject(work, WorkBean.class);
+									bindWorkDataToUI(workBean);
+//									// 显示提示区
+//									setUranNoticeBlockVisibility(View.VISIBLE);
+								}
+								if (!TextUtils.isEmpty(workNum) && !workNum.equals("{}")
+										&& !workNum.equals("null")) {	// 任务数量
+									WorkBean workNumBean = JSON.parseObject(workNum, WorkBean.class);
+									bindWorkNumDataToUI(workNumBean);
+								}
+								if (arrWorkLog.length() > 0) {	// 家访记录
+									List<WorkBean> workBeanPreList = new ArrayList<WorkBean>();
+									WorkBean workPre = null;
+									for (int i = 0; i < arrWorkLog.length(); i++) {
+										workPre = JSON.parseObject(arrWorkLog.getString(i), WorkBean.class);
+										workBeanPreList.add(workPre);
+									}
+									bindDataToUIPre(workBeanPreList);
+								}
+
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(PhysicalExaminationActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(PhysicalExaminationActivity.this,
+										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+	}
+
+	/**
 	 * 绑定数据到 UI
 	 * @param workBeanList
      */
@@ -277,9 +309,29 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 								: getString(R.string.icon_sign_err),
 						item.getWork_tag() == 2 ? getResources().getColor(R.color.app_main_green)
 								: getResources().getColor(R.color.app_main_red));
+				helper.setText(R.id.tvItemTimes, "第一年第" + item.getNum() + "次");
 			}
 		};
 		mLvExaminationPre.setAdapter(mAdapterPre);
+	}
+
+	/** 绑定当前尿检数据 */
+	private void bindWorkDataToUI(WorkBean workBean) {
+		mWorkId = workBean.getWork_id();
+		mTvNotice.setText("亲～" + workBean.getWork_time() + "要完成本月尿检任务哦～～");
+	}
+
+	/** 绑定任务数量数据 */
+	private void bindWorkNumDataToUI(WorkBean workBean) {
+		mTvCounts.setText("已完成:" + workBean.getFinish() + "次  |  共需完成:" + workBean.getSum() + "次");
+	}
+
+	/** 设置提示区显示状态 */
+	private void setUranNoticeBlockVisibility(int visibility) {
+		mLlUranNotice.setVisibility(visibility);
+		mLlUranBtn.setVisibility(visibility);
+		mLlUranPreWorkTitle.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
+		mLlUranPreWorkNowork.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
 	}
 
 	@Override
@@ -288,8 +340,8 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		if (requestCode == REQUES_CODE_EXAMINATION
 				&& resultCode == URANActivity.RESULT_CODE_URAN) {
 			// 刷新列表
-//			getCommunityWork();
-			getExaminationList();
+//			getExaminationList();
+			getExaminationData();
 		}
 	}
 }
