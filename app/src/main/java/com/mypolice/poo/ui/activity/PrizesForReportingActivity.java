@@ -26,6 +26,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.FileBean;
 import com.mypolice.poo.service.LocationService;
@@ -61,7 +62,7 @@ import okhttp3.RequestBody;
  * @Description: 举报有奖页面
  * @author wangjl
  * @crdate 2017-11-24
- * @update
+ * @update 2018-4-24    更新新版UI
  * @version v2.1.2(14)
  */
 @ContentView(R.layout.activity_prizes_for_reporting)
@@ -591,8 +592,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
     private void dealWithResponseData(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            if (jsonResponse.getInt("code") == 0
-                    || jsonResponse.getInt("code") == 200) {	// Success
+            if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {	// Success
                 // 删除视频文件夹
                 if (!TextUtils.isEmpty(mVideoDirPath))
                     FileUtils.deleteDir(mVideoDirPath);
@@ -603,13 +603,16 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
 
 //                PrizesForReportingActivity.this.setResult(RESULT_CODE_SIGN);
                 PrizesForReportingActivity.this.finish();
-            } else if (jsonResponse.getInt("code") == 1007) {
+            } else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
                 // token 失效，踢出当前用户，退到登录页面
                 CommonFuncUtil.getToast(PrizesForReportingActivity.this,
                         "当前用户已在别处登录，请重新登录");
                 removeALLActivity();
                 CommonFuncUtil.goNextActivityWithNoArgs(PrizesForReportingActivity.this,
                         LoginActivity.class, false);
+            } else {
+                CommonFuncUtil.getToast(PrizesForReportingActivity.this,
+                        jsonResponse.getString("info"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
