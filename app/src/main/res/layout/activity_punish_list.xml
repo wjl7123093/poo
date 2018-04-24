@@ -4,14 +4,15 @@
   * @Description: 违反协议处置列表界面xml
   * @author wangjl 
   * @crdate 2017-10-27
-  * @update 
+  * @update 2018-4-24   更新新版UI
   * @version v2.1.0(12)
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/app_bg_grey" >
+    android:background="@color/app_bg_grey">
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
@@ -20,14 +21,33 @@
         android:layout_height="wrap_content" >
     </com.mypolice.poo.widget.TitleBarView>
 
+    <lib.kingja.switchbutton.SwitchMultiButton
+        android:id="@+id/switchmultibutton"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/WHITE_H"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        app:switchTabs="@array/switch_tabs_msg"
+        app:selectedColor="@color/app_main_btn"
+        app:selectedTab="0"
+        app:strokeRadius="5dp"
+        app:strokeWidth="0dp"
+        app:textsize="16sp"/>
+
     <ListView
         android:id="@+id/lvPunish"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@color/transparent"
         android:dividerHeight="10dp"
         android:listSelector="@null"
         android:scrollbars="none"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:visibility="gone"/>
 
 </LinearLayout>

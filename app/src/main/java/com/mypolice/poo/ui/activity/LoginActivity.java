@@ -1,5 +1,6 @@
 package com.mypolice.poo.ui.activity;
 
+import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -7,6 +8,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.application.PooApplication;
+import com.mypolice.poo.bean.UserEntity;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.NetUtils;
 import com.mypolice.poo.util.encrypt.RSAUtil;
@@ -114,7 +116,8 @@ public class LoginActivity extends BaseActivityPoo {
 		}
 
 		centerDialog.show();
-		doLogin(data);
+//		doLogin(data);
+		doLoginNew(data);
 
 	}
 
@@ -156,6 +159,46 @@ public class LoginActivity extends BaseActivityPoo {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0
 									|| jsonResponse.getInt("code") == 200) {
+								loadDataToApplication(mApplication, jsonResponse.getString("data"));
+								CommonFuncUtil.goNextActivityWithNoArgs(LoginActivity.this,
+										MainActivity.class, true);
+							} else {
+								CommonFuncUtil.getToast(LoginActivity.this, "登录失败，请检查账号密码");
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+	}
+
+	/**
+	 * 登陆（HTTP）
+	 * @param data
+	 */
+	private void doLoginNew(final String data) {
+		String url = GlobalSet.APP_SERVER_URL + "app.passport/login";
+		OkHttpUtils.post().url(url)
+				.addParams("type", GlobalSet.APP_TYPE + "")
+				.addParams("user", data)
+				.addParams("registrationID", PushAgent.getInstance(LoginActivity.this).getRegistrationId() + ",0")	// 0 代表 Android
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						CommonFuncUtil.getToast(LoginActivity.this, e.getMessage());
+
+						// http 访问不成功，就访问 https
+//						doLoginHttps(data);
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
+						centerDialog.cancel();
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
 								loadDataToApplication(mApplication, jsonResponse.getString("data"));
 								CommonFuncUtil.goNextActivityWithNoArgs(LoginActivity.this,
 										MainActivity.class, true);
@@ -240,15 +283,25 @@ public class LoginActivity extends BaseActivityPoo {
 		application.setLogin(true);
 		try {
 			JSONObject json = new JSONObject(data);
+			UserEntity user = JSON.parseObject(json.getString("user"), UserEntity.class);
 
-			application.setToken(json.getString("ticket"));
+			application.setToken(json.getString("token"));
 			application.setAcc(mAcc);
 			application.setPwd(mPwd);
-			application.setUserID(json.getInt("id"));
-			application.setUserName(json.getString("name"));
-			application.setGroupID(json.getInt("group"));
-			application.setRoleID(json.getString("role"));
-			application.setMobile(json.getString("mobile"));
+			application.setUserID(user.getId());
+			application.setUserName(user.getName());
+			application.setAvatarUrl(user.getAvatar_url());
+			application.setStatus(user.getStatus());
+			application.setSecretary(user.getSecretary());
+
+//			application.setToken(json.getString("ticket"));
+//			application.setAcc(mAcc);
+//			application.setPwd(mPwd);
+//			application.setUserID(json.getInt("id"));
+//			application.setUserName(json.getString("name"));
+//			application.setGroupID(json.getInt("group"));
+//			application.setRoleID(json.getString("role"));
+//			application.setMobile(json.getString("mobile"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -23,7 +23,7 @@ import android.os.Handler;
  * @update 2017-9-7
  * @version v2.0.0(2)
  */
-@ContentView(R.layout.activity_physical_examination)
+@ContentView(R.layout.activity_punish_list)
 public class StartActivity extends Activity {
 
 	private PooApplication mApplication;

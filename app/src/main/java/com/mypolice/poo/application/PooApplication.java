@@ -91,6 +91,11 @@ public class PooApplication extends Application {
     private static String KEY_ROLE_ID = "roleID";
     private static String KEY_MOBILE = "mobile";
 
+    // 六安 - 新版
+    private static String KEY_AVATAR_URL = "avatar_url";
+    private static String KEY_STATUS = "status";
+    private static String KEY_SECRETARY = "secretary";
+
     private static String KEY_IS_LOGIN = "isLogin";
     private static String KEY_APP_SERVER = "appserver";
 
@@ -102,6 +107,11 @@ public class PooApplication extends Application {
     private int groupID;                    // 分组 ID
     private String roleID;                  // 分组名称
     private String mobile;                  // 手机号
+
+    // 六安 - 新版
+    private String avatarUrl;               // 头像
+    private String status;                  // 状态
+    private String secretary;               // 所属专干
 
     private boolean isLogin = false;		// 是否登录
     private boolean isServiceRunning = false;   // 服务是否运行中
@@ -163,6 +173,10 @@ public class PooApplication extends Application {
         this.isLogin = spRTApp.getBoolean(KEY_IS_LOGIN, false);
         this.appServer = spRTApp.getString(KEY_APP_SERVER, "");
 
+        this.avatarUrl = spRTApp.getString(KEY_AVATAR_URL, "");
+        this.status = spRTApp.getString(KEY_STATUS, "");
+        this.secretary = spRTApp.getString(KEY_SECRETARY, "");
+
         // 全局初始化 bimaputils
         mBtimapUtils = new BitmapUtils(this, "", 4 * 1024 * 1024, 20 * 1024 * 1024);
         mBtimapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);
@@ -173,6 +187,36 @@ public class PooApplication extends Application {
     /** 清空 SharePreference 数据 */
     public void clearSharePreferenceData() {
         spEditor.clear();
+        spEditor.commit();
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+        spEditor.putString(KEY_AVATAR_URL, avatarUrl);
+        spEditor.commit();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+        spEditor.putString(KEY_STATUS, status);
+        spEditor.commit();
+    }
+
+    public String getSecretary() {
+        return secretary;
+    }
+
+    public void setSecretary(String secretary) {
+        this.secretary = secretary;
+        spEditor.putString(KEY_SECRETARY, secretary);
         spEditor.commit();
     }
 

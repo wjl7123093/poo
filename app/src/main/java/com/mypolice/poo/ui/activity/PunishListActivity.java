@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.ViewUtils;
@@ -28,15 +29,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import lib.kingja.switchbutton.SwitchMultiButton;
 import okhttp3.Call;
 
 /**   
  * @Title: PunishListActivity.java
  * @Package com.mypolice.poo.ui.activity
- * @Description: 违反协议处置列表页面
+ * @Description: 消息通知列表页面
  * @author wangjl  
  * @crdate 2017-10-27
- * @update
+ * @update 2018-4-24	更新新版UI
  * @version v2.1.0(12)
  */
 @ContentView(R.layout.activity_punish_list)
@@ -47,6 +49,8 @@ public class PunishListActivity extends BaseActivityPoo {
 	/** TitleBarView 顶部标题栏 */
 	@ViewInject(R.id.titleLeaveList)
 	private TitleBarView mTitleLeaveList;
+	@ViewInject(R.id.switchmultibutton)
+	private SwitchMultiButton mSwitchButton;
 
 	@ViewInject(R.id.lvPunish)
 	private ListView mLvPunish;
@@ -74,6 +78,13 @@ public class PunishListActivity extends BaseActivityPoo {
 		centerDialog = new CenterDialog(PunishListActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
 		centerDialog.show();
+
+		mSwitchButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
+			@Override
+			public void onSwitch(int position, String tabText) {
+				Toast.makeText(PunishListActivity.this, tabText, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	private void loadData() {

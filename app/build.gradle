@@ -106,4 +106,5 @@ dependencies {
     // RoundImageView
     compile 'org.raphets:roundimageview:1.2.0'
     compile files('libs/systembartint-1.0.4.jar')
+    compile project(':libk-switchbutton')
 }

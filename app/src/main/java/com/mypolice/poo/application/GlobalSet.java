@@ -27,6 +27,14 @@ public class GlobalSet {
 			"rVJ3O70fnzvTR1P7Cx+UXyeM1IPew1YTWQtaWIxaKbYxiCpMJsZ5KDs+POFRPF6CDvf6g" +
 			"sCu5QwdauxFbhBTut6ncrOYPCB3GwIDAQAB";
 
+	// =================== 六安新版 地址 ==============================
+	public static int APP_TYPE = 2;
+    public static int APP_SUCCESS = 1;
+	/** 服务端接口地址 */
+	public static String APP_SERVER_URL = "http://111.39.142.240:55555/doc//";
+
+
+
 //	public static String APP_SERVER = "http://www.myxdgk.com:18080";
 //	/** 服务端接口地址 */
 //	public static String APP_SERVER_URL = "http://www.myxdgk.com:18080/api/";
@@ -52,8 +60,8 @@ public class GlobalSet {
 	// =================== 演示环境 地址 ==============================
 
 	public static String APP_SERVER = "http://police.keywaysoft.com/";
-	/** 服务端接口地址 */
-	public static String APP_SERVER_URL = "http://police.keywaysoft.com/api/";
+//	/** 服务端接口地址 */
+//	public static String APP_SERVER_URL = "http://police.keywaysoft.com/api/";
 	/** 服务端接口地址 https */
 	public static String APP_SERVER_URL_HTTPS = "https://police.keywaysoft.com/api/";
 	/** 服务端图片地址 */
