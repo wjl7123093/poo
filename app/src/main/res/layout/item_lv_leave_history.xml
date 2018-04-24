@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   * @Title: item_lv_leave_history.xml
   * @Description: 历史请假列表 项试图xml
   * @author wangjl
@@ -6,7 +7,78 @@
   * @update
   * @version v2.1.0(12)
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <View
+        android:id="@+id/view_1"
+        android:layout_width="4dp"
+        android:layout_height="10dp"
+        android:background="@color/app_bg_grey"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"></View>
+
+    <com.mypolice.poo.widget.IconView
+        android:id="@+id/iconItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="@string/icon_sign_ok"
+        android:textColor="@color/app_main_green"
+        android:layout_below="@id/view_1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"/>
+    <View
+        android:id="@+id/view_2"
+        android:layout_width="4dp"
+        android:layout_height="70dp"
+        android:background="@color/app_bg_grey"
+        android:layout_marginLeft="22dp"
+        android:layout_below="@id/iconItemStatus"
+        android:layout_marginTop="2dp"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@mipmap/bg_history"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_toRightOf="@id/iconItemStatus"
+        android:layout_centerVertical="true"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/tvItemDeadtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建时间: 2017/9/14"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/tvItemDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假时间: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tvItemDeadtime"
+            android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假状态: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tvItemDescription"
+            android:layout_marginTop="4dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
@@ -76,6 +148,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="5dp"/>
 
-</LinearLayout>
+</LinearLayout>-->
 
 
