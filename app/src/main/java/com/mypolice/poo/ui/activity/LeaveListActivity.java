@@ -412,6 +412,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 				helper.setText(R.id.tvItemStartTime, "请假时间:  " + item.getStart_time());
 				helper.setText(R.id.tvItemStatus, "请假状态:  " + item.getLeave_type_text());
 			}
+
+
 		};
 		mLvLeavePre.setAdapter(mAdapter);
 //		mLvLeavePre.setVisibility(View.VISIBLE);
