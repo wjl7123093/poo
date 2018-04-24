@@ -185,7 +185,7 @@
                         android:layout_weight="1"
                         android:text="尿检纪录"
                         android:textColor="@color/BLACK_H"
-                        android:textSize="@dimen/app_textsize_mid1" />
+                        android:textSize="@dimen/app_textsize_mid2" />
 
                     <TextView
                         android:id="@+id/tv_already_times"
