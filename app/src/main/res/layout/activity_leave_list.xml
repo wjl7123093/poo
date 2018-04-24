@@ -122,7 +122,6 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:gravity="right"
-                        android:paddingRight="5dp"
                         android:src="@mipmap/ic_time"/>
 
                     <TextView
@@ -131,7 +130,8 @@
                         android:layout_weight="1"
                         android:text="请假纪录"
                         android:textColor="@color/BLACK_H"
-                        android:textSize="@dimen/app_textsize_mid2" />
+                        android:textSize="@dimen/app_textsize_mid2"
+                        android:layout_marginLeft="8dp"/>
 
                     <TextView
                         android:id="@+id/tv_already_times"

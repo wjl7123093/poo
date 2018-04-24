@@ -410,7 +410,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 			public void convert(ViewHolder helper, final LeaveItemBean item) {
 				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
 				helper.setText(R.id.tvItemStartTime, "请假时间:  " + item.getStart_time());
-				helper.setText(R.id.tvItemStatus, "请假状态: " + item.getLeave_type_text());
+				helper.setText(R.id.tvItemStatus, "请假状态:  " + item.getLeave_type_text());
 			}
 		};
 		mLvLeavePre.setAdapter(mAdapter);
