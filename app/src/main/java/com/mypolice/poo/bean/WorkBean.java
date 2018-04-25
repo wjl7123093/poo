@@ -13,16 +13,17 @@ public class WorkBean {
 
     private int id;
     private int work_type;
-    private String work_time;
-    private String remark;
-    private int work_tag;
+    private String work_time;       // 任务时间
+    private String remark;          // 任务说明
+    private int work_tag;           // 任务类型 0 新任务 1 待审核 2 已完成 3 未通过
     private String work_tag_text;
     private String work_type_text;
 
-    private int work_id;
-    private int sum;
-    private int finish;
-    private int num;
+    private int work_id;            // 任务ID
+    private int sum;                // 任务总数
+    private int finish;             // 已完成任务数
+    private int num;                // 任务是第几次
+    private String the_first_year;  // 任务是第几年
 
     @Override
     public String toString() {
@@ -123,5 +124,13 @@ public class WorkBean {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public String getThe_first_year() {
+        return the_first_year;
+    }
+
+    public void setThe_first_year(String the_first_year) {
+        this.the_first_year = the_first_year;
     }
 }

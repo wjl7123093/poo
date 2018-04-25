@@ -195,12 +195,12 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	}
 
 	/**
-	 * 获取交流互动数据 [六安]
+	 * 获取尿检数据 [六安]
 	 * 2018-4-24
 	 */
 	private void getExaminationData() {
 		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/workView";
-		OkHttpUtils.post().url(url)
+		OkHttpUtils.get().url(url)
 				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
 				.addParams("type", "1")	// 1 -> 尿检
 				.build()
@@ -304,12 +304,23 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 						+ item.getWork_time());
 				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
 						+ item.getRemark());
-				helper.setIcon(R.id.iconItemStatus,
-						item.getWork_tag() == 2 ? getString(R.string.icon_sign_ok)
-								: getString(R.string.icon_sign_err),
-						item.getWork_tag() == 2 ? getResources().getColor(R.color.app_main_green)
-								: getResources().getColor(R.color.app_main_red));
-				helper.setText(R.id.tvItemTimes, "第一年第" + item.getNum() + "次");
+				String status = "";
+				switch (item.getWork_tag()) {
+					case 0:
+						status = "新任务";
+						break;
+					case 1:
+						status = "待审核";
+						break;
+					case 2:
+						status = "已完成";
+						break;
+					case 3:
+						status = "未通过";
+						break;
+				}
+				helper.setText(R.id.tvItemStatus, "任务状态: " + status);
+				helper.setText(R.id.tvItemTimes, item.getThe_first_year() + "第" + item.getNum() + "次");
 			}
 		};
 		mLvExaminationPre.setAdapter(mAdapterPre);
