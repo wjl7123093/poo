@@ -1,1 +1,1 @@
-include ':app', ':Pushlib', ':ShortcutBadger'
+include ':app', ':Pushlib', ':ShortcutBadger', ':libk-switchbutton'
