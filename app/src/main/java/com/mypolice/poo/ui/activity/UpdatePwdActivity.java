@@ -5,6 +5,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.widget.TitleBarView;
@@ -104,12 +105,12 @@ public class UpdatePwdActivity extends BaseActivityPoo {
 //						Toast.makeText(UpdatePwdActivity.this, response, Toast.LENGTH_LONG).show();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
 								CommonFuncUtil.getToast(UpdatePwdActivity.this, jsonResponse.getString("info"));
 								removeALLActivity();
 								CommonFuncUtil.goNextActivityWithNoArgs(UpdatePwdActivity.this,
 										LoginActivity.class, false);
-							} else if (jsonResponse.getInt("code") == 1007) {
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(UpdatePwdActivity.this,
 										"当前用户已在别处登录，请重新登录");

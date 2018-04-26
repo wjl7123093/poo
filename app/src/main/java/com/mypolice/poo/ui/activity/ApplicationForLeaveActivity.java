@@ -688,6 +688,20 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 					"手机/电话格式不正确");
 			return false;
 		}
+
+		if (TextUtils.isEmpty(mEdtTxtLeaveReason.getText().toString().trim())
+				|| TextUtils.isEmpty(mEdtTxtDestination.getText().toString().trim())
+				|| TextUtils.isEmpty(mEdtTxtDestinPolice.getText().toString().trim())) {
+			CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
+					"请完善请假信息");
+			return false;
+		}
+
+		if (TextUtils.isEmpty(mBmpPath1)) {
+			CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
+					"请上传请假条照片");
+			return false;
+		}
 		return true;
 
 	}

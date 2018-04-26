@@ -6,6 +6,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.application.PooApplication;
 import com.mypolice.poo.bean.UserEntity;
@@ -236,8 +237,7 @@ public class LoginActivity extends BaseActivityPoo {
 						centerDialog.cancel();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
 								loadDataToApplication(mApplication, jsonResponse.getString("data"));
 								CommonFuncUtil.goNextActivityWithNoArgs(LoginActivity.this,
 										MainActivity.class, true);

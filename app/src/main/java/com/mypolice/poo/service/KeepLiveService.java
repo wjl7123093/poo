@@ -23,13 +23,16 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.application.PooApplication;
 import com.mypolice.poo.bean.UploadServiceBean;
 import com.mypolice.poo.bean.UploadServiceBeanNew;
 import com.mypolice.poo.broadcast.KeepLiveReceiver;
 import com.mypolice.poo.ui.activity.ApplicationForLeaveActivity;
+import com.mypolice.poo.ui.activity.LoginActivity;
 import com.mypolice.poo.ui.activity.MainActivity;
+import com.mypolice.poo.ui.activity.UpdatePwdActivity;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.DateTimeUtil;
 import com.mypolice.poo.util.FileUtils;
@@ -179,7 +182,6 @@ public class KeepLiveService extends Service {
 	}
 	
 	/*****
-	 * @see copy funtion to you project
 	 * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
 	 *
 	 */
@@ -327,12 +329,12 @@ public class KeepLiveService extends Service {
 						mUploadServiceBeanListNew.clear();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
 								Log.d("UploadService", "Success");
-							} else {
-								CommonFuncUtil.getToast(KeepLiveService.this, jsonResponse.toString());
 							}
+//							else {
+//								CommonFuncUtil.getToast(KeepLiveService.this, jsonResponse.toString());
+//							}
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -367,8 +369,7 @@ public class KeepLiveService extends Service {
 						FileUtils.deleteFile(new File(mStrCachePath + mFileName));
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
 								Log.d("UploadService_LineOff", "Success");
 							}
 						} catch (JSONException e) {
