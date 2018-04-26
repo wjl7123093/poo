@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -127,7 +128,8 @@ public class MainActivity extends BaseActivityPoo {
     private TextView mTvRecoveryName;
     @ViewInject(R.id.tvCommnuintyName)
     private TextView mTvCommnuintyName;
-
+    @ViewInject(R.id.rl_msg_noread)
+    private RelativeLayout mRlMsgNoread;
 
     /** 未读标识（红点） */
     @ViewInject(R.id.viewIsRead)
@@ -203,6 +205,7 @@ public class MainActivity extends BaseActivityPoo {
         bindGvFuncData();
 
         mViewIsRead.setVisibility(View.GONE);
+        mTvSecretaryName.setVisibility(View.GONE);
     }
 
     @Override

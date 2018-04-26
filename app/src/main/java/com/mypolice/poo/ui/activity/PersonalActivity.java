@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -59,6 +60,8 @@ public class PersonalActivity extends BaseActivityPoo {
 	private TextView mTvRecoveryName;
 	@ViewInject(R.id.tvCommnuintyName)
 	private TextView mTvCommnuintyName;
+	@ViewInject(R.id.rl_msg_noread)
+	private RelativeLayout mRlMsgNoread;
 
 	/** Include Layout1 */
 	@ViewInject(R.id.layout1)
@@ -116,6 +119,8 @@ public class PersonalActivity extends BaseActivityPoo {
 		/*centerDialog = new CenterDialog(PersonalActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
 		centerDialog.show();*/
+
+		mRlMsgNoread.setVisibility(View.GONE);
 	}
 
 	/** 修改密码 */

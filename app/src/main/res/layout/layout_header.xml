@@ -20,41 +20,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"/>
 
-    <!-- 用户名 -->
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/WHITE_H"
-        android:text="李元清"
-        android:layout_toRightOf="@id/ivHeaderImg"
-        android:layout_alignTop="@id/ivHeaderImg"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="6dp"/>
-    <!-- 专干 -->
-    <TextView
-        android:id="@+id/tvSecretaryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="12dp"
-        android:textColor="@color/WHITE_H"
-        android:text="专干:"
-        android:layout_toRightOf="@id/ivHeaderImg"
-        android:layout_below="@id/tvUserName"
-        android:layout_marginLeft="10dp"/>
-    <!-- 类别 -->
-    <TextView
-        android:id="@+id/tvRecoveryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12dp"
-        android:textColor="@color/WHITE_H"
-        android:text="类别:"
-        android:layout_toRightOf="@id/ivHeaderImg"
-        android:layout_below="@id/tvSecretaryName"
-        android:layout_marginLeft="10dp"/>
     <!-- 社区 -->
     <TextView
         android:id="@+id/tvCommnuintyName"
@@ -64,8 +29,43 @@
         android:textColor="@color/WHITE_H"
         android:text="社区:"
         android:layout_toRightOf="@id/ivHeaderImg"
-        android:layout_below="@id/tvRecoveryName"
+        android:layout_alignBottom="@id/ivHeaderImg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"/>
+    <!-- 类别 -->
+    <TextView
+        android:id="@+id/tvRecoveryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/WHITE_H"
+        android:text="类别:"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_above="@id/tvCommnuintyName"
         android:layout_marginLeft="10dp"/>
+    <!-- 专干 -->
+    <TextView
+        android:id="@+id/tvSecretaryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/WHITE_H"
+        android:text="专干:"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_above="@id/tvRecoveryName"
+        android:layout_marginLeft="10dp"/>
+    <!-- 用户名 -->
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/WHITE_H"
+        android:text="李元清"
+        android:layout_toRightOf="@id/ivHeaderImg"
+        android:layout_above="@id/tvSecretaryName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="4dp"/>
 
     <RelativeLayout
         android:id="@+id/rl_msg_noread"
