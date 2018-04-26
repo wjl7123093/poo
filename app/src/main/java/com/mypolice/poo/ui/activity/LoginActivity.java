@@ -18,6 +18,7 @@ import com.umeng.message.PushAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import sun.misc.BASE64Encoder;
 
@@ -60,7 +62,7 @@ public class LoginActivity extends BaseActivityPoo {
 	private String mPwd;
 
 	/** 加载进度条 */
-	private CenterDialog centerDialog;
+	private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +74,6 @@ public class LoginActivity extends BaseActivityPoo {
 	@Override
 	public void initView() {
 		super.initView();
-		centerDialog = new CenterDialog(LoginActivity.this, R.layout.dialog_logining,
-				new int[]{});
 
 //		if (TextUtils.isEmpty(mApplication.getAppServer())) {
 //			mApplication.setAppServer(GlobalSet.APP_SERVER);
@@ -85,6 +85,12 @@ public class LoginActivity extends BaseActivityPoo {
 
 		mAcc = mApplication.getAcc();
 		mEdtTxtAcc.setText(mAcc);
+
+		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+		pDialog.setTitleText("正在登录...");
+		pDialog.setCancelable(false);
+		pDialog.show();
 	}
 
 	/**
@@ -116,7 +122,7 @@ public class LoginActivity extends BaseActivityPoo {
 			e.printStackTrace();
 		}
 
-		centerDialog.show();
+		pDialog.show();
 //		doLogin(data);
 		doLoginNew(data);
 
@@ -146,7 +152,7 @@ public class LoginActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-//						CommonFuncUtil.getToast(LoginActivity.this, e.getMessage());
+						pDialog.dismiss();
 
 						// http 访问不成功，就访问 https
 						doLoginHttps(data);
@@ -154,8 +160,7 @@ public class LoginActivity extends BaseActivityPoo {
 
 					@Override
 					public void onResponse(String response, int id) {
-//						Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0
@@ -187,6 +192,7 @@ public class LoginActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(LoginActivity.this, e.getMessage());
 
 						// http 访问不成功，就访问 https
@@ -195,8 +201,7 @@ public class LoginActivity extends BaseActivityPoo {
 
 					@Override
 					public void onResponse(String response, int id) {
-//						Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
@@ -227,14 +232,13 @@ public class LoginActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(LoginActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						Toast.makeText(LoginActivity.this, response, Toast.LENGTH_LONG).show();
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {

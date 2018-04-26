@@ -123,6 +123,12 @@ public class PersonalActivity extends BaseActivityPoo {
 		mRlMsgNoread.setVisibility(View.GONE);
 	}
 
+	/** 返回 */
+	@OnClick(R.id.ivBack)
+	public void onBtnBackClick(View v) {
+		this.finish();
+	}
+
 	/** 修改密码 */
 	@OnClick(R.id.layout1)
 	public void onLayout1Click(View v) {

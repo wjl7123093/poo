@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -72,6 +73,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -222,6 +224,7 @@ public class URANActivity extends BaseActivityPoo {
 
 	/** 加载进度条 */
 	private CenterDialog centerDialog;
+	private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +270,12 @@ public class URANActivity extends BaseActivityPoo {
 	public void initView() {
 		super.initView();
 		mTitleURAN.setText("尿检");
+
+		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+		pDialog.setTitleText("正在提交...");
+		pDialog.setCancelable(false);
+//		pDialog.show();
 	}
 
 	/**
@@ -316,7 +325,7 @@ public class URANActivity extends BaseActivityPoo {
 			URANActivity.this.startActivity(settingsIntent);
 
 		} else {    // 开启GPS，运行服务
-			centerDialog.show();
+			pDialog.show();
 			// 先执行定位操作
 			doLoc();
 		}
@@ -638,12 +647,13 @@ public class URANActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0
@@ -696,12 +706,13 @@ public class URANActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {	// Success

@@ -20,6 +20,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -37,6 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 
 /**   
@@ -90,7 +92,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	private boolean isExpand = false;	// 是否展开[默认关闭]
 
 	/** 加载进度条 */
-	private CenterDialog centerDialog;
+	private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +108,12 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	public void initView() {	
 		super.initView();
 		mTitleExamination.setText("定期体检");
-//		mLlExpandSwitch.setVisibility(View.GONE);
-//		mLvExaminationPre.setVisibility(View.GONE);
 
-		centerDialog = new CenterDialog(PhysicalExaminationActivity.this, R.layout.dialog_wap_loading,
-				new int[]{});
-		centerDialog.show();
+		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+		pDialog.setTitleText("正在加载...");
+		pDialog.setCancelable(false);
+		pDialog.show();
 	}
 
 	@Override
@@ -146,13 +148,14 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(PhysicalExaminationActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
 //						CommonFuncUtil.getToast(SignActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						mLlExpandSwitch.setVisibility(View.VISIBLE);
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
@@ -208,14 +211,13 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(PhysicalExaminationActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
-						centerDialog.cancel();
-//						mLlExpandSwitch.setVisibility(View.VISIBLE);
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {

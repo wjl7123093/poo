@@ -19,6 +19,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -36,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -80,7 +82,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
 	/** 加载进度条 */
-	private CenterDialog centerDialog;
+    private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +108,11 @@ public class LeaveListActivity extends BaseActivityPoo {
 //			}
 //		});
 
-		centerDialog = new CenterDialog(LeaveListActivity.this, R.layout.dialog_wap_loading,
-				new int[]{});
-		centerDialog.show();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在加载...");
+        pDialog.setCancelable(false);
+        pDialog.show();
 	}
 
 	private void loadData() {
@@ -140,7 +144,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 
 		if (requestCode == REQUEST_CODE_LEAVE
 				&& resultCode == ApplicationForLeaveActivity.RESULT_CODE_LEAVE) {
-			centerDialog.show();
+			pDialog.show();
 			// 刷新列表
 			loadData();
 		}
@@ -158,14 +162,13 @@ public class LeaveListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+                        pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == GlobalSet.APP_SUCCESS) {
@@ -206,14 +209,13 @@ public class LeaveListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+                        pDialog.dismiss();
 						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
@@ -260,14 +262,13 @@ public class LeaveListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+                        pDialog.dismiss();
 						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
@@ -326,14 +327,13 @@ public class LeaveListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0

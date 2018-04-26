@@ -2,6 +2,7 @@ package com.mypolice.poo.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -52,6 +53,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -143,7 +145,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
     public static final int IMAGE_CAPTURE = 1;
 
     /** 加载进度条 */
-    private CenterDialog centerDialog;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,9 +179,11 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
         super.initView();
         mTitlePrizesForReporting.setText("有奖举报");
 
-        centerDialog = new CenterDialog(PrizesForReportingActivity.this, R.layout.dialog_uploading,
-                new int[]{});
-//		centerDialog.show();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在提交...");
+        pDialog.setCancelable(false);
+//        pDialog.show();
     }
 
     /**
@@ -202,7 +206,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
             settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             PrizesForReportingActivity.this.startActivity(settingsIntent);
         } else {
-            centerDialog.show();
+            pDialog.show();
             // 先执行定位操作
             doLoc();
         }
@@ -404,6 +408,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+                            pDialog.dismiss();
                             CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
                         }
 
@@ -428,6 +433,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+                            pDialog.dismiss();
                             CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
                         }
 
@@ -452,6 +458,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+                            pDialog.dismiss();
                             CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
                         }
 
@@ -475,6 +482,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
+                            pDialog.dismiss();
                             CommonFuncUtil.getToast(PrizesForReportingActivity.this, e.getMessage());
                         }
 
@@ -590,6 +598,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
      * @param response
      */
     private void dealWithResponseData(String response) {
+        pDialog.dismiss();
         try {
             JSONObject jsonResponse = new JSONObject(response);
             if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {	// Success
