@@ -1,24 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 选择尿检结果 -->
+<?xml version="1.0" encoding="utf-8"?><!-- 选择尿检结果 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/dialog_center_background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="选择尿检结果"
+        android:textColor="@color/BLACK_H"
         android:textSize="16dp"
-        android:textColor="@color/BLACK_H"/>
+        android:layout_marginBottom="10dp" />
 
     <RadioGroup
         android:id="@+id/rdo_grp_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rdo_yin"
@@ -27,7 +29,8 @@
             android:layout_weight="1"
             android:text="阴性"
             android:textColor="@color/GREY_H"
-            android:textSize="14dp"/>
+            android:textSize="16dp"
+            android:button="@drawable/sl_rdobtn"/>
 
         <RadioButton
             android:id="@+id/rdo_yang"
@@ -36,8 +39,41 @@
             android:layout_weight="1"
             android:text="阳性"
             android:textColor="@color/GREY_H"
-            android:textSize="14dp"/>
+            android:textSize="16dp"
+            android:button="@drawable/sl_rdobtn" />
 
     </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <!-- 发送 尿检结果 -->
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/sp_bg_btn_white"
+            android:text="取消"
+            android:textColor="@color/app_main_green"
+            android:textSize="@dimen/app_textsize_mid2" />
+
+        <!-- 发送 尿检结果 -->
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/sp_bg_btn_green"
+            android:text="确定"
+            android:textColor="@color/WHITE_H"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

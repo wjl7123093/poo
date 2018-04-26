@@ -267,10 +267,6 @@ public class URANActivity extends BaseActivityPoo {
 	public void initView() {
 		super.initView();
 		mTitleURAN.setText("尿检");
-
-		centerDialog = new CenterDialog(URANActivity.this, R.layout.dialog_uploading,
-				new int[]{});
-//		centerDialog.show();
 	}
 
 	/**
@@ -405,32 +401,32 @@ public class URANActivity extends BaseActivityPoo {
 
 	@OnClick(R.id.ll_result)
 	public void onTvResultClick(View v) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(URANActivity.this);
-		View dialogView = LayoutInflater.from(URANActivity.this).inflate(R.layout.dialog_select_type, null);
-		final RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.rdo_grp_select);
-		radioGroup.check(R.id.rdo_yin);
-		builder.setView(dialogView);
-		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (R.id.rdo_yin == radioGroup.getCheckedRadioButtonId()) {
-					mResult = 0;
-				} else {
-					mResult = 1;
-				}
-				mTvResult.setText(mResult == 0 ? "阴性" : "阳性");
-				dialog.dismiss();
-			}
-		})
-		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
+		centerDialog = new CenterDialog(URANActivity.this, R.layout.dialog_select_type,
+				new int[]{R.id.btnCancel, R.id.btnOK});
+		centerDialog.show();
+		final RadioGroup radioGroup = (RadioGroup) centerDialog.findViewById(R.id.rdo_grp_select);
+		radioGroup.check(R.id.rdo_yin);
+		centerDialog.setOnCenterItemClickListener(new CenterDialog.OnCenterItemClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mTvResult.setText("阴性");
-				dialog.dismiss();
+			public void OnCenterItemClick(CenterDialog dialog, View view) {
+				switch (view.getId()) {
+					case R.id.btnCancel:
+						mTvResult.setText("阴性");
+						dialog.dismiss();
+						break;
+					case R.id.btnOK:
+						if (R.id.rdo_yin == radioGroup.getCheckedRadioButtonId()) {
+							mResult = 0;
+						} else {
+							mResult = 1;
+						}
+						mTvResult.setText(mResult == 0 ? "阴性" : "阳性");
+						dialog.dismiss();
+						break;
+				}
 			}
 		});
-		builder.create().show();
 	}
 
 	/** 初始化时间选择器 */
@@ -778,7 +774,6 @@ public class URANActivity extends BaseActivityPoo {
 	}
 
 	/*****
-	 * @see copy funtion to you project
 	 * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
 	 *
 	 */

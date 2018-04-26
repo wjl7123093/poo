@@ -17,7 +17,6 @@
         ProgressWheel:rimColor="#44000000"
         ProgressWheel:rimProgress="0"
         ProgressWheel:rimWidth="7dp"
-        ProgressWheel:spinSpeed="2dp"
         ProgressWheel:textColor="@color/white"
         ProgressWheel:textSize="14sp" />
 

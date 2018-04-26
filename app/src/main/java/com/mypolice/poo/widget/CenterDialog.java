@@ -16,12 +16,12 @@ import com.mypolice.poo.util.ScreenUtils;
 
 /**   
  * @Title: CenterDialog.java 
- * @Package com.mypolice.app.widget
+ * @Package com.hw.ics.widget
  * @Description: 自定义居中弹出dialog
  * @author wangjl
- * @crdate 2017-9-1
+ * @crdate 2017-3-17  
  * @update  
- * @version v1.0.0(1)
+ * @version v1.0   
  */
 public class CenterDialog extends Dialog implements View.OnClickListener {
 
@@ -55,8 +55,8 @@ public class CenterDialog extends Dialog implements View.OnClickListener {
         lp.width = ScreenUtils.getScreenWidth(context)*4/5; // 设置dialog宽度为屏幕的4/5
         lp.height = LayoutParams.WRAP_CONTENT;
         getWindow().setAttributes(lp);
-        // 点击Dialog外部不消失
-        setCanceledOnTouchOutside(false);
+        // 点击Dialog外部消失
+        setCanceledOnTouchOutside(true);
 
         for (int id : listenedItems) {
             findViewById(id).setOnClickListener(this);

@@ -189,11 +189,11 @@ public class MainActivity extends BaseActivityPoo {
 //        mHwPushManager.isEnableReceiverNotifyMsg(true);
 
         // 4. 调用 服务
-        getIsRead();
-        postDeviceInfo();
-        // 实例化
-        asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
-        init();
+        /*getIsRead();
+        postDeviceInfo();*/
+        // 上传外联信息
+        /*asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
+        init();*/
     }
 
     @Override
