@@ -2,6 +2,7 @@ package com.mypolice.poo.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,7 +57,7 @@ public class InteractionActivity extends BaseActivityPoo {
 
 	@ViewInject(R.id.lvInteraction)
 	private MyListView mLvInteraction;
-	@ViewInject(R.id.lvInteractionPre)
+	@ViewInject(R.id.lvInteractionLog)
 	private MyListView mLvInteractionPre;
 //	@ViewInject(R.id.llExpandSwitch)
 //	private LinearLayout mLlExpandSwitch;
@@ -90,8 +91,6 @@ public class InteractionActivity extends BaseActivityPoo {
 	public void initView() {
 		super.initView();
 		mTitleInteraction.setText("交流互动");
-//		mLlExpandSwitch.setVisibility(View.GONE);
-		mLvInteractionPre.setVisibility(View.GONE);
 
 		centerDialog = new CenterDialog(InteractionActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
@@ -275,15 +274,33 @@ public class InteractionActivity extends BaseActivityPoo {
 				R.layout.item_lv_pre_work) {
 			@Override
 			public void convert(ViewHolder helper, final WorkBean item) {
-				helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD
+				helper.setText(R.id.tvItemDeadtime, "访谈时间: "
 						+ item.getWork_time());
 				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
 						+ item.getRemark());
-				helper.setIcon(R.id.iconItemStatus,
-						item.getWork_tag() == 2 ? getString(R.string.icon_sign_ok)
-								: getString(R.string.icon_sign_err),
-						item.getWork_tag() == 2 ? getResources().getColor(R.color.app_main_green)
-								: getResources().getColor(R.color.app_main_red));
+				String status = "";
+				int resId = R.mipmap.ic_warning;
+				switch (item.getWork_tag()) {
+					case 0:
+						status = "<font color=\"#ffa400\">新任务</font>";
+						resId = R.mipmap.ic_warning;
+						break;
+					case 1:
+						status = "<font color=\"#ffa400\">待审核</font>";
+						resId = R.mipmap.ic_warning;
+						break;
+					case 2:
+						status = "<font color=\"#53d656\">已完成</font>";
+						resId = R.mipmap.ic_ok;
+						break;
+					case 3:
+						status = "<font color=\"#f14f4f\">未通过</font>";
+						resId = R.mipmap.ic_error;
+						break;
+				}
+				helper.setImageResource(R.id.iconItemStatus, resId);
+				((TextView) helper.getView(R.id.tvItemStatus)).setText(Html.fromHtml("任务状态: " + status));
+				helper.setText(R.id.tvItemTimes, item.getThe_first_year() + "第" + item.getNum() + "次");
 
 			}
 		};

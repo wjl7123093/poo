@@ -87,67 +87,61 @@
         </com.mypolice.poo.widget.MyListView>
 
         <LinearLayout
+            android:id="@+id/llExpandSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/WHITE_H">
 
-            <LinearLayout
-                android:id="@+id/llExpandSwitch"
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:src="@mipmap/ic_time"/>
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="@color/WHITE_H">
+                android:layout_weight="1"
+                android:text="访谈记录"
+                android:textColor="@color/BLACK_H"
+                android:textSize="@dimen/app_textsize_mid2" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:src="@mipmap/ic_time"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="访谈记录"
-                    android:textColor="@color/BLACK_H"
-                    android:textSize="@dimen/app_textsize_mid2" />
-
-                <TextView
-                    android:id="@+id/tv_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已完成12次 | 共需完成24次"
-                    android:textColor="@color/app_text_color"
-                    android:textSize="@dimen/app_textsize_mid3" />
-
-                <!--<ImageView
-                    android:id="@+id/ivSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_arrow_down" />-->
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/app_bg_grey"></View>
-
-            <com.mypolice.poo.widget.MyListView
-                android:id="@+id/lvInteractionPre"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:listSelector="@null"
-                android:scrollbars="none"
-                android:paddingBottom="20dp" >
-            </com.mypolice.poo.widget.MyListView>
+                android:text="已完成12次 | 共需完成24次"
+                android:textColor="@color/app_text_color"
+                android:textSize="@dimen/app_textsize_mid3" />
+
+            <!--<ImageView
+                android:id="@+id/ivSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_arrow_down" />-->
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/app_bg_grey"></View>
+
+        <com.mypolice.poo.widget.MyListView
+            android:id="@+id/lvInteractionLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/transparent"
+            android:dividerHeight="20dp"
+            android:listSelector="@null"
+            android:scrollbars="none">
+
+        </com.mypolice.poo.widget.MyListView>
 
     </LinearLayout>
     </ScrollView>

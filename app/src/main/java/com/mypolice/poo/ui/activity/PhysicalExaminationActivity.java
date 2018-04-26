@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -305,21 +306,27 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
 						+ item.getRemark());
 				String status = "";
+				int resId = R.mipmap.ic_warning;
 				switch (item.getWork_tag()) {
 					case 0:
-						status = "新任务";
+						status = "<font color=\"#ffa400\">新任务</font>";
+						resId = R.mipmap.ic_warning;
 						break;
 					case 1:
-						status = "待审核";
+						status = "<font color=\"#ffa400\">待审核</font>";
+						resId = R.mipmap.ic_warning;
 						break;
 					case 2:
-						status = "已完成";
+						status = "<font color=\"#53d656\">已完成</font>";
+						resId = R.mipmap.ic_ok;
 						break;
 					case 3:
-						status = "未通过";
+						status = "<font color=\"#f14f4f\">未通过</font>";
+						resId = R.mipmap.ic_error;
 						break;
 				}
-				helper.setText(R.id.tvItemStatus, "任务状态: " + status);
+				helper.setImageResource(R.id.iconItemStatus, resId);
+				((TextView) helper.getView(R.id.tvItemStatus)).setText(Html.fromHtml("任务状态: " + status));
 				helper.setText(R.id.tvItemTimes, item.getThe_first_year() + "第" + item.getNum() + "次");
 			}
 		};
