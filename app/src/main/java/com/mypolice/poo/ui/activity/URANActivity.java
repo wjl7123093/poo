@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -33,6 +34,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.FileBean;
 import com.mypolice.poo.bean.LeaveBean;
@@ -118,6 +120,10 @@ public class URANActivity extends BaseActivityPoo {
 	private TextView mTvStartDate;
 	@ViewInject(R.id.tv_result)
 	private TextView mTvResult;
+	@ViewInject(R.id.edt_department)
+	private EditText mEdtDepartment;
+	@ViewInject(R.id.edt_remark)
+	private EditText mEdtRemark;
 
 	@ViewInject(R.id.llPhoto1)
 	private LinearLayout mLlPhoto1;
@@ -275,9 +281,6 @@ public class URANActivity extends BaseActivityPoo {
 		if (TextUtils.isEmpty(mBmpPath1) || TextUtils.isEmpty(mBmpPath2)
 				|| TextUtils.isEmpty(mVideoPath)) {
 			CommonFuncUtil.getToast(URANActivity.this, "请完善信息后上传");
-			return;
-		} else if (TextUtils.isEmpty(mSignatureBmpPath)) {
-			CommonFuncUtil.getToast(URANActivity.this, "请先签名后再上传");
 			return;
 		}
 
@@ -566,173 +569,6 @@ public class URANActivity extends BaseActivityPoo {
 	}
 
 	/**
-	 * 上传文件
-	 */
-	private void doUploadFile() {
-		String url = GlobalSet.APP_SERVER_URL + "index/upload";
-		OkHttpUtils.post()
-				.addHeader("token", mApplication.getToken())
-				.addFile("mFile1", mFileNameBmp1, new File(mBmpPath1))
-				.addFile("mFile2", mFileNameBmp2, new File(mBmpPath2))
-				.addFile("mFile3", mFileNameVideo, new File(mVideoPath))
-				.addFile("mFile4", mFileNameSignatureBmp, new File(mSignatureBmpPath))
-				.url(url)
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(URANActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								org.json.JSONArray array = jsonResponse.getJSONArray("data");
-								List<FileBean> fileList = new ArrayList<FileBean>();
-								FileBean file = null;
-								for (int i = 0; i < array.length(); i++) {
-									file = JSON.parseObject(array.getString(i), FileBean.class);
-//									CommonFuncUtil.getToast(URANActivity.this, file.toString());
-									fileList.add(file);
-									Log.e("XX", array.getString(i));
-								}
-								// 验证数据
-								if (checkFileList(fileList)) {
-									// 开始提交数据
-									doSubmitData(fileList);
-								} else {
-									CommonFuncUtil.getToast(URANActivity.this,
-											"上传文件失败，请尝试重新上传");
-									centerDialog.cancel();
-									return;
-								}
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(URANActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
-	 * 提交数据
-	 * @param fileList	文件列表
-     */
-	private void doSubmitData(List<FileBean> fileList) {
-		String url = GlobalSet.APP_SERVER_URL + "drug_sign";
-		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.addParams("sign_source", "1")
-				.addParams("sign_type", "2")	// 尿检 2 签到 1
-				.addParams("community_drug_extend_id", mTaskId + "")
-				.addParams("longitude", mLongitude + "")
-				.addParams("latitude", mLatitude + "")
-				.addParams("sign_address", mAddress + "")
-				.addParams("exceed_days", "0")
-				.addParams("photo1_url", fileList.get(0).getName())
-				.addParams("photo2_url", fileList.get(1).getName())
-				.addParams("video_url", fileList.get(2).getName())
-				.addParams("doctype", "0")
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(URANActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								int sourceId = jsonResponse.getInt("data");
-								// 更新任务数据
-								doUpdateTask(sourceId);
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(URANActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
-	 * 更新任务数据
-	 * @param sourceId	源ID
-     */
-	private void doUpdateTask(int sourceId) {
-		String jsonParas = String.format(
-				"{\"work_tag\":\"%1$d\", \"source_id\":\"%2$d\"}", 1, sourceId);
-		String url = GlobalSet.APP_SERVER_URL + "community_work/" + mTaskId;
-		OkHttpUtils.put().url(url)
-				.addHeader("token", mApplication.getToken())
-				.requestBody(RequestBody.create(MediaType.parse("application/json"), jsonParas))
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(URANActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								int resultData = jsonResponse.getInt("data");
-								if (1 == resultData) {
-									// 删除视频文件夹
-									FileUtils.deleteDir(mVideoDirPath);
-									// 删除照片
-									FileUtils.deleteFile(new File(mBmpPath1));
-									FileUtils.deleteFile(new File(mBmpPath2));
-									CommonFuncUtil.getToast(URANActivity.this, "提交成功");
-
-									URANActivity.this.setResult(RESULT_CODE_URAN);
-									URANActivity.this.finish();
-								} else {
-									CommonFuncUtil.getToast(URANActivity.this, "提交失败");
-								}
-								centerDialog.cancel();
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(URANActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
 	 * New 上传文件及数据【一次性上传】
 	 */
 	private void doUploadData() {
@@ -786,6 +622,65 @@ public class URANActivity extends BaseActivityPoo {
 								removeALLActivity();
 								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
 										LoginActivity.class, false);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+	}
+
+	/**
+	 * 尿检登记[六安]
+	 * 2018-4-25
+	 */
+	private void doUploadDataNew() {
+		String url = GlobalSet.APP_SERVER_URL + "app.drug_user/addUrine";
+		OkHttpUtils.post()
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.addFile("photo1_url", mFileNameBmp1, new File(mBmpPath1))
+				.addFile("photo2_url", mFileNameBmp2, new File(mBmpPath2))
+				.addFile("video_url", mFileNameVideo, new File(mVideoPath))
+				.addParams("work_id",  mTaskId + "")
+				.addParams("examination", "" + mResult)	// 尿检结果 0 阴性 1 阳性
+				.addParams("longitude", mLongitude + "")
+				.addParams("latitude", mLatitude + "")
+				.addParams("department_name", mEdtDepartment.getText().toString().trim())
+				.addParams("sign_time", mTvStartDate.getText().toString().trim())
+				.addParams("remark", mEdtRemark.getText().toString().trim())
+				.url(url)
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+//						CommonFuncUtil.getToast(SignActivity.this, response);
+						try {
+							JSONObject jsonResponse = new JSONObject(response);
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {	// Success
+								// 删除视频文件夹
+								FileUtils.deleteDir(mVideoDirPath);
+								// 删除照片
+								FileUtils.deleteFile(new File(mBmpPath1));
+								FileUtils.deleteFile(new File(mBmpPath2));
+								FileUtils.deleteFile(new File(mSignatureBmpPath));
+								CommonFuncUtil.getToast(URANActivity.this, "提交成功");
+
+								URANActivity.this.setResult(RESULT_CODE_URAN);
+								URANActivity.this.finish();
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
+								// token 失效，踢出当前用户，退到登录页面
+								CommonFuncUtil.getToast(URANActivity.this,
+										"当前用户已在别处登录，请重新登录");
+								removeALLActivity();
+								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
+										LoginActivity.class, false);
+							} else {
+								CommonFuncUtil.getToast(URANActivity.this, jsonResponse.getString("info"));
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -852,8 +747,9 @@ public class URANActivity extends BaseActivityPoo {
 				mLatitude = location.getLatitude();
 				mAddress = location.getAddrStr();
 				locationService.stop();
-//				doUploadFile();
-				doUploadData();
+
+//				doUploadData();
+				doUploadDataNew();
 
 			}
 		}
