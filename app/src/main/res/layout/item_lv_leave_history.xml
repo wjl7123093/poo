@@ -21,13 +21,11 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="22dp"></View>
 
-    <com.mypolice.poo.widget.IconView
+    <ImageView
         android:id="@+id/iconItemStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="@string/icon_sign_ok"
-        android:textColor="@color/app_main_green"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/ic_ok"
         android:layout_below="@id/view_1"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"

@@ -20,6 +20,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -428,9 +429,35 @@ public class LeaveListActivity extends BaseActivityPoo {
 				leaveList, R.layout.item_lv_leave_history) {
 			@Override
 			public void convert(ViewHolder helper, final LeaveItemBean item) {
-				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
-				helper.setText(R.id.tvItemStartTime, "请假时间:  " + item.getStart_time());
-				helper.setText(R.id.tvItemStatus, "请假状态:  " + item.getLeave_type_text());
+				if (item == getItem(0)) {
+					helper.getView(R.id.view_1).setVisibility(View.INVISIBLE);
+				}
+
+				/*helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
+				helper.setText(R.id.tvItemStartTime, "请假时间:  " + item.getStart_time());*/
+				((TextView) helper.getView(R.id.tvItemCreateTime)).setText(Html.fromHtml("创建时间: "
+						+ "<font color=\"#999999\">" + item.getReg_time() + "</font>"));
+				((TextView) helper.getView(R.id.tvItemStartTime)).setText(Html.fromHtml("请假时间: "
+						+ "<font color=\"#999999\">" + item.getStart_time() + "</font>"));
+
+				String status = "";
+				int resId = R.mipmap.ic_warning;
+				switch (item.getLeave_type()) {
+					case 1:
+						status = "<font color=\"#ffa400\">" + item.getLeave_type_text() + "</font>";
+						resId = R.mipmap.ic_warning;
+						break;
+					case 2:
+						status = "<font color=\"#53d656\">" + item.getLeave_type_text() + "</font>";
+						resId = R.mipmap.ic_ok;
+						break;
+					default:
+						status = "<font color=\"#f14f4f\">" + item.getLeave_type_text() + "</font>";
+						resId = R.mipmap.ic_error;
+						break;
+				}
+				helper.setImageResource(R.id.iconItemStatus, resId);
+				((TextView) helper.getView(R.id.tvItemStatus)).setText(Html.fromHtml("请假状态: " + status));
 			}
 
 

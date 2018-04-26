@@ -98,6 +98,8 @@ public class KeepLiveService extends Service {
 	private List<UploadServiceBeanNew> mUploadServiceBeanListNew = new ArrayList<UploadServiceBeanNew>();
 	private String mStrCachePath = "";
 	private String mFileName = "LocInfo.txt";
+
+	private long mRegTime = 0;
 	
 	public final IBinder mBinder = new LocalBinder();
 
@@ -304,10 +306,9 @@ public class KeepLiveService extends Service {
 	 * @param location
      */
 	private void doUploadLocation(BDLocation location) {
-//		String url = GlobalSet.APP_SERVER_URL + "community_dynamic/multSave";
-		String url = GlobalSet.APP_SERVER_URL + "community_dynamic/dynamicSaveAll";
+		String url = GlobalSet.APP_SERVER_URL + "app.upload/dynamicSaveAll";
 		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
 				.addParams("isContinue", "true")
 				.addParams("rows", getJsonArrayNew(location))
 				.build()
@@ -345,10 +346,9 @@ public class KeepLiveService extends Service {
 	 * 后台上传位置信息 [离线文件中保存的内容]
 	 */
 	private void doUploadLocationLineOff(String json) {
-//		String url = GlobalSet.APP_SERVER_URL + "community_dynamic/multSave";
-		String url = GlobalSet.APP_SERVER_URL + "community_dynamic/dynamicSaveAll";
+		String url = GlobalSet.APP_SERVER_URL + "app.upload/dynamicSaveAll";
 		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
 				.addParams("isContinue", "true")
 				.addParams("rows", json)
 				.build()

@@ -11,7 +11,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:background="@color/app_bg_grey">
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
@@ -158,7 +159,7 @@
             <com.mypolice.poo.widget.MyListView
                 android:id="@+id/lvExamination"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:divider="@color/transparent"
                 android:dividerHeight="20dp"
                 android:listSelector="@null"
@@ -173,7 +174,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:background="@color/WHITE_H">
 
                 <ImageView
                     android:layout_width="20dp"

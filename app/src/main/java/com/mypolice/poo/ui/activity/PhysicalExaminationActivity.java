@@ -301,10 +301,17 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 				R.layout.item_lv_pre_work) {
 			@Override
 			public void convert(ViewHolder helper, final WorkBean item) {
-				helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD
-						+ item.getWork_time());
-				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
-						+ item.getRemark());
+				if (item == getItem(0)) {
+					helper.getView(R.id.view_1).setVisibility(View.INVISIBLE);
+				}
+
+				/*helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD + item.getWork_time());
+				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD + item.getRemark());*/
+				((TextView) helper.getView(R.id.tvItemDeadtime)).setText(Html.fromHtml(GlobalSet.WORK_TIME_HEAD
+						+ "<font color=\"#999999\">" + item.getWork_time() + "</font>"));
+				((TextView) helper.getView(R.id.tvItemDescription)).setText(Html.fromHtml(GlobalSet.WORK_DESCRIPTION_HEAD
+						+ "<font color=\"#999999\">" + item.getRemark() + "</font>"));
+
 				String status = "";
 				int resId = R.mipmap.ic_warning;
 				switch (item.getWork_tag()) {
