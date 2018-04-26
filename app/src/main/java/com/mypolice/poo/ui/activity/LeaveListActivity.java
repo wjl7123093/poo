@@ -97,14 +97,14 @@ public class LeaveListActivity extends BaseActivityPoo {
 	public void initView() {
 		super.initView();
 		mTitleLeaveList.setText("请假申请");
-		mTitleLeaveList.setRightBtnIcon(getString(R.string.icon_leave_history));
-		mTitleLeaveList.setRightBtnOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-						LeaveHistoryListActivity.class, false);
-			}
-		});
+//		mTitleLeaveList.setRightBtnIcon(getString(R.string.icon_leave_history));
+//		mTitleLeaveList.setRightBtnOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
+//						LeaveHistoryListActivity.class, false);
+//			}
+//		});
 
 		centerDialog = new CenterDialog(LeaveListActivity.this, R.layout.dialog_wap_loading,
 				new int[]{});
