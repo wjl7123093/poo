@@ -443,17 +443,18 @@ public class LeaveListActivity extends BaseActivityPoo {
 				String status = "";
 				int resId = R.mipmap.ic_warning;
 				switch (item.getLeave_type()) {
-					case 1:
-						status = "<font color=\"#ffa400\">" + item.getLeave_type_text() + "</font>";
-						resId = R.mipmap.ic_warning;
-						break;
-					case 2:
+					case 2:	// 已审批
+					case 4:	// 已销假
 						status = "<font color=\"#53d656\">" + item.getLeave_type_text() + "</font>";
 						resId = R.mipmap.ic_ok;
 						break;
-					default:
+					case 3: // 审批未通过
 						status = "<font color=\"#f14f4f\">" + item.getLeave_type_text() + "</font>";
 						resId = R.mipmap.ic_error;
+						break;
+					default:// 其他（草稿/关闭）
+						status = "<font color=\"#ffa400\">" + item.getLeave_type_text() + "</font>";
+						resId = R.mipmap.ic_warning;
 						break;
 				}
 				helper.setImageResource(R.id.iconItemStatus, resId);

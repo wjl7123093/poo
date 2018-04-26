@@ -41,7 +41,8 @@
                 android:padding="10dp">
 
                 <!-- 尿检日期 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
+                    android:id="@+id/ll_datetime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/sp_bg_login_edt"
@@ -74,7 +75,8 @@
                 </LinearLayout>
 
                 <!-- 尿检结果 -->
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout
+                    android:id="@+id/ll_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -433,7 +435,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/WHITE_H"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

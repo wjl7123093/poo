@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
@@ -116,6 +118,10 @@ public class URANActivity extends BaseActivityPoo {
 	private TitleBarView mTitleURAN;
 
 	/** EditText 尿检日期 */
+	@ViewInject(R.id.ll_datetime)
+	private LinearLayout mLlDatetime;
+	@ViewInject(R.id.ll_result)
+	private LinearLayout mLlResult;
 	@ViewInject(R.id.tv_datetime)
 	private TextView mTvStartDate;
 	@ViewInject(R.id.tv_result)
@@ -156,6 +162,8 @@ public class URANActivity extends BaseActivityPoo {
 
 //	@ViewInject(R.id.btnSignature)
 //	private Button mBtnSignature;
+	@ViewInject(R.id.btn_upload)
+	private Button mBtnUpload;
 	@ViewInject(R.id.btnSendReport)
 	private Button mBtnSendReport;
 
@@ -174,6 +182,7 @@ public class URANActivity extends BaseActivityPoo {
 	private String mSignatureBmpPath = "";
 	private String mCoverPath = "";		// 缩略图路径
 	private String mVideoDirPath = "";	// video 存放的文件夹路径
+	private String mFilePath = "";		// 文件路径
 	// 文件
 	private File mFileBmp1 = null;
 	private File mFileBmp2 = null;
@@ -197,6 +206,8 @@ public class URANActivity extends BaseActivityPoo {
 	public static final int IMAGE_SELECT = 2;
 	// 从视频库中选择
 	public static final int VIDEO_SELECT = 3;
+	// 从文件管理器选择
+	public static final int FILE_SELECT = 0x400;
 	// 照片缩小比例
 	private static final int SCALE = 5;
 
@@ -273,7 +284,23 @@ public class URANActivity extends BaseActivityPoo {
 	}*/
 
 	/**
-	 * 上传操作
+	 * 上传文件
+	 */
+	@OnClick(R.id.btn_upload)
+	public void onBtnUpload(View v) {
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		//intent.setType(“image/*”);//选择图片
+		//intent.setType(“audio/*”); //选择音频
+		//intent.setType(“video/*”); //选择视频 （mp4 3gp 是android支持的视频格式）
+		//intent.setType(“video/*;image/*”);//同时选择视频和图片
+		intent.setType("*/*");//无类型限制
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		startActivityForResult(intent, FILE_SELECT);
+
+	}
+
+	/**
+	 * 提交 尿检 信息
 	 */
 	@OnClick(R.id.btnSendReport)
 	public void onBtnSendReport(View v) {
@@ -370,13 +397,13 @@ public class URANActivity extends BaseActivityPoo {
 		goToVideoPlayActivity();
 	}
 
-	@OnClick(R.id.tv_datetime)
+	@OnClick(R.id.ll_datetime)
 	public void onTvStartDateClick(View v) {
 		// 日期格式为yyyy-MM-dd
 		customDatePicker1.show(mTvStartDate.getText().toString());
 	}
 
-	@OnClick(R.id.tv_result)
+	@OnClick(R.id.ll_result)
 	public void onTvResultClick(View v) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(URANActivity.this);
 		View dialogView = LayoutInflater.from(URANActivity.this).inflate(R.layout.dialog_select_type, null);
@@ -531,6 +558,26 @@ public class URANActivity extends BaseActivityPoo {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}*/
+
+					break;
+
+				case FILE_SELECT:	// 文件选择
+					Uri uri = data.getData();
+					if ("file".equalsIgnoreCase(uri.getScheme())){//使用第三方应用打开
+						mFilePath = uri.getPath();
+//						tv.setText(mFilePath);
+						Toast.makeText(this, mFilePath +"11111",Toast.LENGTH_SHORT).show();
+						return;
+					}
+					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {//4.4以后
+						mFilePath = FileUtils.getPath(this, uri);
+//						tv.setText(path);
+						Toast.makeText(this,mFilePath,Toast.LENGTH_SHORT).show();
+					} else {//4.4以下下系统调用方法
+						mFilePath = FileUtils.getRealPathFromURI(URANActivity.this, uri);
+//						tv.setText(path);
+						Toast.makeText(URANActivity.this, mFilePath+"222222", Toast.LENGTH_SHORT).show();
+					}
 
 					break;
 
