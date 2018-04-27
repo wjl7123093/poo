@@ -95,14 +95,15 @@
             android:layout_marginTop="4dp"/>
         <TextView
             android:id="@+id/tv_msg_noread"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@drawable/sp_bg_msg_noread"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:textColor="@color/WHITE_H"
             android:text="12"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:gravity="center"/>
 
     </RelativeLayout>
 
