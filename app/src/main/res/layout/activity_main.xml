@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/WHITE_H"
             android:textSize="@dimen/app_textsize_mid1"
-            android:text="阳光生活(演示)"
+            android:text="阳光生活"
             android:layout_centerInParent="true"/>
         <com.mypolice.poo.widget.IconView
             android:id="@+id/iconNotification"

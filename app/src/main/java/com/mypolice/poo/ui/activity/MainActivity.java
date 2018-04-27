@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.lidroid.xutils.view.annotation.event.OnItemClick;
 import com.mypolice.poo.R;
 import com.mypolice.poo.adapter.CommonAdapter;
 import com.mypolice.poo.adapter.ViewHolder;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.AppVersion;
 import com.mypolice.poo.bean.ContactBean;
@@ -130,10 +132,9 @@ public class MainActivity extends BaseActivityPoo {
     private TextView mTvCommnuintyName;
     @ViewInject(R.id.rl_msg_noread)
     private RelativeLayout mRlMsgNoread;
+    @ViewInject(R.id.tv_msg_noread)
+    private TextView mTvMsgNoRead;
 
-    /** 未读标识（红点） */
-    @ViewInject(R.id.viewIsRead)
-    private View mViewIsRead;
     /** GridView 功能区 */
     @ViewInject(R.id.gvFunc)
     private GridView mGvFunc;
@@ -189,8 +190,8 @@ public class MainActivity extends BaseActivityPoo {
 //        mHwPushManager.isEnableReceiverNotifyMsg(true);
 
         // 4. 调用 服务
-        /*getIsRead();
-        postDeviceInfo();*/
+        getIsRead();
+        /*postDeviceInfo();*/
         // 上传外联信息
         /*asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
         init();*/
@@ -204,7 +205,6 @@ public class MainActivity extends BaseActivityPoo {
         initFunctionManager();
         bindGvFuncData();
 
-        mViewIsRead.setVisibility(View.GONE);
         mTvSecretaryName.setVisibility(View.GONE);
     }
 
@@ -318,13 +318,12 @@ public class MainActivity extends BaseActivityPoo {
     }
 
     /**
-     * 获取是否有 未读的违反协议处置 [v2.1.0]
+     * 获取是否有 未读的违反协议处置 [六安]
      */
     private void getIsRead() {
-        String url = GlobalSet.APP_SERVER_URL + "community_punish/getIsRead";
-        OkHttpUtils.post().url(url)
-                .addHeader("token", mApplication.getToken())
-                .addParams("drug_user_id", mApplication.getUserID() + "")
+        String url = GlobalSet.APP_SERVER_URL + "app.drug_user/getMsgCount";
+        OkHttpUtils.get().url(url)
+                .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -337,15 +336,16 @@ public class MainActivity extends BaseActivityPoo {
 //						CommonFuncUtil.getToast(SignActivity.this, response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            if (jsonResponse.getInt("code") == 0
-                                    || jsonResponse.getInt("code") == 200) {
-                                int isRead = jsonResponse.getJSONObject("data").getInt("is_read");
-                                if (0 == isRead)
-                                    mViewIsRead.setVisibility(View.GONE);
-                                else
-                                    mViewIsRead.setVisibility(View.VISIBLE);
+                            if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+                                int isNoRead = jsonResponse.getJSONObject("data").getInt("count");
+                                if (0 == isNoRead) {
+                                    mTvMsgNoRead.setVisibility(View.GONE);
+                                } else {
+                                    mTvMsgNoRead.setVisibility(View.VISIBLE);
+                                    mTvMsgNoRead.setText(isNoRead + "");
+                                }
 
-                            } else if (jsonResponse.getInt("code") == 1007) {
+                            } else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
                                 // token 失效，踢出当前用户，退到登录页面
                                 CommonFuncUtil.getToast(MainActivity.this,
                                         "当前用户已在别处登录，请重新登录");
