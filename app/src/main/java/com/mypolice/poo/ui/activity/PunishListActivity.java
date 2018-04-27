@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import lib.kingja.switchbutton.SwitchMultiButton;
 import okhttp3.Call;
 
@@ -63,7 +64,7 @@ public class PunishListActivity extends BaseActivityPoo {
 	private List<PunishBean.NoticeBean> noticeList = new ArrayList<>();
 
 	/** 加载进度条 */
-	private CenterDialog centerDialog;
+	private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +81,16 @@ public class PunishListActivity extends BaseActivityPoo {
 		super.initView();
 		mTitleLeaveList.setText("消息通知");
 
-		centerDialog = new CenterDialog(PunishListActivity.this, R.layout.dialog_wap_loading,
-				new int[]{});
-		centerDialog.show();
+		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+		pDialog.setTitleText("正在加载...");
+		pDialog.setCancelable(false);
+		pDialog.show();
 
 		mSwitchButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
 			@Override
 			public void onSwitch(int position, String tabText) {
+				pDialog.show();
 				switch (position) {
 					case 0:	// 全部
 						getPunishList(2);
@@ -120,14 +124,13 @@ public class PunishListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(PunishListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0
@@ -163,14 +166,13 @@ public class PunishListActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
-						centerDialog.cancel();
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(PunishListActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(LeaveListActivity.this, response);
-						centerDialog.cancel();
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
