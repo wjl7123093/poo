@@ -48,7 +48,7 @@
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!--<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>-->
-    
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -105,11 +105,11 @@
             android:theme="@style/CameraTheme">
             <!--<intent-filter>
              <action android:name="android.intent.action.MAIN" />
-             
+
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>-->
         </activity>
-        
+
         <activity
             android:name="com.yixia.camera.demo.ui.record.MediaPreviewActivity"
             android:hardwareAccelerated="true"
@@ -137,7 +137,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/CameraTheme" >
         </activity>
-        
+
         <service android:name="com.yixia.camera.demo.service.MessageService" >
             <intent-filter>
                 <action android:name="com.yixia.camera.demo" />
@@ -170,7 +170,7 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Umeng" />
-        
+
         <!-- POO 主程序 -->
         <activity
             android:name="com.mypolice.poo.ui.activity.AboutUsActivity"
@@ -244,6 +244,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name="com.mypolice.poo.ui.activity.SignaturepadActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.mypolice.poo.ui.activity.NoticeDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity

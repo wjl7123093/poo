@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @Title: activiy_about_us.xml
+  * @Description: 关于我们界面xml
+  * @author wangjl 
+  * @crdate 2017-8-21
+  * @update 
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
+    android:background="@color/app_bg_grey">
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleAboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题标题标题"
+        android:textSize="18dp"
+        android:textColor="@color/BLACK_M"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2018/05/05"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:textColor="@color/GREY_H"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_us"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:textColor="@color/BLACK_H"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_margin="20dp"/>
+
+    <!--<TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"/>-->
+    
+
+</LinearLayout>

@@ -55,7 +55,7 @@
     <string name="record_preview_building">视频生成中…</string>
     <string name="download_success">下载完成</string>
     <string name="download_error">下载失败</string>
-    
+
     <string name="loading_tips">加载中…</string>
     <string name="nodata">没有数据</string>
     <string name="record_camera_import_video_folder_title">相册</string>
@@ -105,7 +105,7 @@
 		4）具体描述：细节描述，可以给出问题发生的频率或者APP名称，sdk版本等，也可以加上附件如日志，贴图等\n
         </string>
     <string name="qa_callback_mail">反馈邮箱:loc-bugs@baidu.com</string>
-    
+
     <!-- icons -->
     <!-- login -->
     <string name="icon_login_user">&#xe63f;</string>

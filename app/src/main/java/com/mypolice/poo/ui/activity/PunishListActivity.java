@@ -220,6 +220,18 @@ public class PunishListActivity extends BaseActivityPoo {
 				else	// 已读
 					((TextView) helper.getView(R.id.tvItemStatus)).setTextColor(Color.parseColor("#999999"));
 
+				helper.getView(R.id.ll_container).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Bundle bundle = new Bundle();
+						bundle.putString("title", item.getTopic());
+						bundle.putString("time", item.getCreate_time());
+						bundle.putString("content", item.getContent());
+						CommonFuncUtil.goNextActivityWithArgs(PunishListActivity.this,
+								NoticeDetailActivity.class, bundle, false);
+					}
+				});
+
 			}
 		};
 		mLvPunish.setAdapter(mAdapter);
