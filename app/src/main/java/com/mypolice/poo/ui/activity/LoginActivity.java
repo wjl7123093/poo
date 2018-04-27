@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivityPoo {
 		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
 		pDialog.setTitleText("正在登录...");
 		pDialog.setCancelable(false);
-		pDialog.show();
+//		pDialog.show();
 	}
 
 	/**

@@ -231,6 +231,9 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 									bindWorkDataToUI(workBean);
 //									// 显示提示区
 //									setUranNoticeBlockVisibility(View.VISIBLE);
+								} else {
+									// 隐藏尿检操作区
+									setUranNoticeBlockGone();
 								}
 								if (!TextUtils.isEmpty(workNum) && !workNum.equals("{}")
 										&& !workNum.equals("null")) {	// 任务数量
@@ -359,6 +362,12 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		mLlUranBtn.setVisibility(visibility);
 		mLlUranPreWorkTitle.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
 		mLlUranPreWorkNowork.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
+	}
+
+	/** 设置提示区显示状态 */
+	private void setUranNoticeBlockGone() {
+		mLlUranBtn.setVisibility(View.GONE);
+		mTvNotice.setText("");
 	}
 
 	@Override

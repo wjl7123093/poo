@@ -51,7 +51,6 @@
                 android:textSize="@dimen/app_textsize_mid2"
                 android:layout_toRightOf="@id/iv_star"
                 android:layout_alignTop="@id/iv_star"
-                android:layout_marginTop="2dp"
                 android:layout_marginLeft="6dp"/>
             <TextView
                 android:id="@+id/tv_notice"
