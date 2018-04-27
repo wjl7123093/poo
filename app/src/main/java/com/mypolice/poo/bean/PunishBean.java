@@ -1,70 +1,119 @@
 package com.mypolice.poo.bean;
 
+import java.util.List;
+
 /**
  * @Title: PunishBean.java
  * @Package com.mypolice.poo.bean
  * @Description: 违反协议处置 实体类
  * @author wangjl
  * @crdate 2017-10-27
- * @update
- * @version v2.1.0(12)
+ * @update 2018-4-27    update 结构
+ * @version v1.0.1(2)[六安]
  */
 public class PunishBean {
 
-    private int id;
-    private int drug_user_id;
-    private String reg_time;
-    private String punish_type_text;
-    private int is_read;
+    private int total;
+    private int per_page;
+    private int current_page;
+    private int last_page;
+    private List<NoticeBean> data;
 
-    @Override
-    public String toString() {
-        return "PunishBean{" +
-                "id=" + id +
-                ", drug_user_id=" + drug_user_id +
-                ", reg_time='" + reg_time + '\'' +
-                ", punish_type_text='" + punish_type_text + '\'' +
-                ", is_read=" + is_read +
-                '}';
+    public int getTotal() {
+        return total;
     }
 
-    public int getId() {
-        return id;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getPer_page() {
+        return per_page;
     }
 
-    public int getDrug_user_id() {
-        return drug_user_id;
+    public void setPer_page(int per_page) {
+        this.per_page = per_page;
     }
 
-    public void setDrug_user_id(int drug_user_id) {
-        this.drug_user_id = drug_user_id;
+    public int getCurrent_page() {
+        return current_page;
     }
 
-    public String getReg_time() {
-        return reg_time;
+    public void setCurrent_page(int current_page) {
+        this.current_page = current_page;
     }
 
-    public void setReg_time(String reg_time) {
-        this.reg_time = reg_time;
+    public int getLast_page() {
+        return last_page;
     }
 
-    public String getPunish_type_text() {
-        return punish_type_text;
+    public void setLast_page(int last_page) {
+        this.last_page = last_page;
     }
 
-    public void setPunish_type_text(String punish_type_text) {
-        this.punish_type_text = punish_type_text;
+    public List<NoticeBean> getData() {
+        return data;
     }
 
-    public int getIs_read() {
-        return is_read;
+    public void setData(List<NoticeBean> data) {
+        this.data = data;
     }
 
-    public void setIs_read(int is_read) {
-        this.is_read = is_read;
+    public class NoticeBean {
+
+        private int msg_id;
+        private int msg_type;
+        private String content;
+        private String topic;
+        private String create_time;
+        private int is_read;
+
+        public int getMsg_id() {
+            return msg_id;
+        }
+
+        public void setMsg_id(int msg_id) {
+            this.msg_id = msg_id;
+        }
+
+        public int getMsg_type() {
+            return msg_type;
+        }
+
+        public void setMsg_type(int msg_type) {
+            this.msg_type = msg_type;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public String getTopic() {
+            return topic;
+        }
+
+        public void setTopic(String topic) {
+            this.topic = topic;
+        }
+
+        public String getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(String create_time) {
+            this.create_time = create_time;
+        }
+
+        public int getIs_read() {
+            return is_read;
+        }
+
+        public void setIs_read(int is_read) {
+            this.is_read = is_read;
+        }
     }
 }

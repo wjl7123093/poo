@@ -12,6 +12,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     android:background="@color/app_bg_grey">
 
     <!-- 顶部标题栏 -->

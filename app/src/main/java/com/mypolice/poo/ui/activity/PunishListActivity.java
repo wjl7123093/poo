@@ -1,9 +1,11 @@
 package com.mypolice.poo.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -13,6 +15,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.mypolice.poo.R;
 import com.mypolice.poo.adapter.CommonAdapter;
 import com.mypolice.poo.adapter.ViewHolder;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.LeaveItemBean;
 import com.mypolice.poo.bean.PunishBean;
@@ -57,6 +60,7 @@ public class PunishListActivity extends BaseActivityPoo {
 
 	private CommonAdapter mAdapter;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	private List<PunishBean.NoticeBean> noticeList = new ArrayList<>();
 
 	/** 加载进度条 */
 	private CenterDialog centerDialog;
@@ -67,7 +71,8 @@ public class PunishListActivity extends BaseActivityPoo {
 		ViewUtils.inject(this);
 
 		initView();
-		loadData();
+		getPunishList(2);	// 获取全部
+//		loadData();
 	}
 	
 	@Override
@@ -82,13 +87,25 @@ public class PunishListActivity extends BaseActivityPoo {
 		mSwitchButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
 			@Override
 			public void onSwitch(int position, String tabText) {
-				Toast.makeText(PunishListActivity.this, tabText, Toast.LENGTH_SHORT).show();
+				switch (position) {
+					case 0:	// 全部
+						getPunishList(2);
+						break;
+					case 1:	// 未读
+						getPunishList(0);
+						break;
+					case 2: // 已读
+						getPunishList(1);
+						break;
+				}
+
+//				Toast.makeText(PunishListActivity.this, tabText, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	private void loadData() {
-		getPunishList();
+//		getPunishList();
 	}
 
 	/**
@@ -136,11 +153,12 @@ public class PunishListActivity extends BaseActivityPoo {
 	/**
 	 * 获取违反协议处置列表
 	 */
-	private void getPunishList() {
-		String url = GlobalSet.APP_SERVER_URL + "community_punish/getPunishList";
-		OkHttpUtils.post().url(url)
-				.addParams("token", mApplication.getToken())
-				.addParams("drug_user_id", mApplication.getUserID() + "")
+	private void getPunishList(int status) {
+		String url = GlobalSet.APP_SERVER_URL + "app.message/allMessage";
+		OkHttpUtils.get().url(url)
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.addParams("type", "1")	// 1 吸毒端，2 管控端
+				.addParams("read", status + "")
 				.build()
 				.execute(new StringCallback() {
 					@Override
@@ -155,21 +173,20 @@ public class PunishListActivity extends BaseActivityPoo {
 						centerDialog.cancel();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								org.json.JSONArray array = jsonResponse.getJSONArray("data");
-								if (array.length() == 0)
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
+//								org.json.JSONArray array = jsonResponse.getJSONArray("data");
+								PunishBean punishBean = JSON.parseObject(jsonResponse.getString("data"), PunishBean.class);
+								if (punishBean.getData().size() == 0) {
+									CommonFuncUtil.getToast(PunishListActivity.this,
+											"当前暂无消息");
+									clearList();
 									return;
-
-								List<PunishBean> punishList = new ArrayList<PunishBean>();
-								PunishBean punishBean = null;
-								for (int i = 0; i < array.length(); i++) {
-									punishBean = JSON.parseObject(array.getString(i), PunishBean.class);
-									punishList.add(punishBean);
 								}
-								bindDataToUI(punishList);
-								saveIsRead();
-							} else if (jsonResponse.getInt("code") == 1007) {
+
+								noticeList = punishBean.getData();
+								bindDataToUI(noticeList);
+//								saveIsRead();
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(PunishListActivity.this,
 										"当前用户已在别处登录，请重新登录");
@@ -187,22 +204,34 @@ public class PunishListActivity extends BaseActivityPoo {
 
 	/**
 	 * 绑定数据到 UI
-	 * @param punishList
      */
-	private void bindDataToUI(List<PunishBean> punishList) {
-		mAdapter = new CommonAdapter<PunishBean>(PunishListActivity.this,
-				punishList, R.layout.item_lv_punish) {
-			@Override
-			public void convert(ViewHolder helper, final PunishBean item) {
+	private void bindDataToUI(List<PunishBean.NoticeBean> noticeList) {
 
-				helper.setText(R.id.tvItemPunishText, item.getPunish_type_text());
-				helper.setText(R.id.tvItemPunishTime, item.getReg_time());
+		mAdapter = new CommonAdapter<PunishBean.NoticeBean>(PunishListActivity.this,
+				noticeList, R.layout.item_lv_punish) {
+			@Override
+			public void convert(ViewHolder helper, final PunishBean.NoticeBean item) {
+
+				helper.setText(R.id.tvItemPunishText, item.getTopic());
+				helper.setText(R.id.tvItemPunishTime, item.getCreate_time());
+				helper.setText(R.id.tvItemStatus, item.getIs_read() == 0 ? "未读" : "已读");
+				if (item.getIs_read() == 0)	// 未读
+					((TextView) helper.getView(R.id.tvItemStatus)).setTextColor(Color.parseColor("#ffa400"));
+				else	// 已读
+					((TextView) helper.getView(R.id.tvItemStatus)).setTextColor(Color.parseColor("#999999"));
 
 			}
 		};
 		mLvPunish.setAdapter(mAdapter);
 		mLvPunish.setVisibility(View.VISIBLE);
 
+	}
+
+	/** 清空列表 */
+	private void clearList() {
+		noticeList.clear();
+		if (null != mAdapter)
+			mAdapter.notifyDataSetChanged();
 	}
 	
 }

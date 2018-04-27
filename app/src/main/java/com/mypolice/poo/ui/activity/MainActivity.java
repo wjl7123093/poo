@@ -235,13 +235,13 @@ public class MainActivity extends BaseActivityPoo {
 
     }
 
-    @OnClick(R.id.include_header)
+    @OnClick(R.id.ivHeaderImg)
     public void onIncludeHeaderClick(View v) {
         CommonFuncUtil.goNextActivityWithNoArgs(MainActivity.this, PersonalActivity.class, false);
     }
 
     /** 未读通知 点击事件 */
-    @OnClick(R.id.iconNotification)
+    @OnClick(R.id.rl_msg_noread)
     public void onIconNotificationClick(View v) {
         CommonFuncUtil.goNextActivityWithNoArgs(MainActivity.this, PunishListActivity.class, false);
     }

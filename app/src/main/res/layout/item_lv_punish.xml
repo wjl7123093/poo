@@ -3,62 +3,47 @@
   * @Description: 违反协议处置列表 项试图xml
   * @author wangjl
   * @crdate 2017-10-27
-  * @update
+  * @update 2018-4-27   更新UI
   * @version v2.1.0(12)
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:background="@color/WHITE_H"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:background="@drawable/sp_bg_notice"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_margin="10dp">
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="@color/app_main_green" />
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tvItemPunishText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:text="标题标题标题。。。。"
+        android:textColor="@color/BLACK_H"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:id="@+id/tvItemPunishTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-10-27"
+        android:textColor="@color/app_text_color"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tvItemPunishText"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/tvItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="未读"
+        android:textColor="#ffa400"
+        android:textSize="@dimen/app_textsize_mid3"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tvItemPunishTime"/>
 
-        <TextView
-            android:id="@+id/tvItemPunishText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="起始时间: xxx"
-            android:textColor="@color/app_text_color"
-            android:textSize="@dimen/app_textsize_mid2" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-            <com.mypolice.poo.widget.IconView
-                android:id="@+id/iconItemStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/icon_punlish_time"
-                android:textSize="16dp"
-                android:textColor="@color/app_text_color"/>
-            <TextView
-                android:id="@+id/tvItemPunishTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017-10-27"
-                android:textColor="@color/app_text_color"
-                android:textSize="@dimen/app_textsize_mid3"
-                android:layout_marginLeft="5dp"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
 
 
