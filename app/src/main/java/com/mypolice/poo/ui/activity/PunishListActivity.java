@@ -72,8 +72,7 @@ public class PunishListActivity extends BaseActivityPoo {
 		ViewUtils.inject(this);
 
 		initView();
-		getPunishList(2);	// 获取全部
-//		loadData();
+//		getPunishList(2);	// 获取全部
 	}
 	
 	@Override
@@ -108,49 +107,12 @@ public class PunishListActivity extends BaseActivityPoo {
 		});
 	}
 
-	private void loadData() {
-//		getPunishList();
-	}
+	@Override
+	protected void onResume() {
+		super.onResume();
 
-	/**
-	 * 保存已读状态
-	 */
-	private void saveIsRead() {
-		String url = GlobalSet.APP_SERVER_URL + "community_punish/saveIsRead";
-		OkHttpUtils.post().url(url)
-				.addParams("token", mApplication.getToken())
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						pDialog.dismiss();
-						CommonFuncUtil.getToast(PunishListActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-						pDialog.dismiss();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								Log.d("IS_Read", "is read true");
-
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(PunishListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(PunishListActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-
+		mSwitchButton.setSelectedTab(0);
+		getPunishList(2);	// 获取全部
 	}
 
 	/**
@@ -226,9 +188,11 @@ public class PunishListActivity extends BaseActivityPoo {
 					@Override
 					public void onClick(View v) {
 						Bundle bundle = new Bundle();
+						bundle.putInt("msg_id", item.getMsg_id());
 						bundle.putString("title", item.getTopic());
 						bundle.putString("time", item.getCreate_time());
 						bundle.putString("content", item.getContent());
+						bundle.putInt("is_read", item.getIs_read());
 						CommonFuncUtil.goNextActivityWithArgs(PunishListActivity.this,
 								NoticeDetailActivity.class, bundle, false);
 					}
