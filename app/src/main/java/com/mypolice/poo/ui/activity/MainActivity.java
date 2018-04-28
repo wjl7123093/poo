@@ -193,8 +193,8 @@ public class MainActivity extends BaseActivityPoo {
         getIsRead();
         /*postDeviceInfo();*/
         // 上传外联信息
-        /*asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
-        init();*/
+        asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
+        init();
     }
 
     @Override
@@ -361,13 +361,12 @@ public class MainActivity extends BaseActivityPoo {
     }
 
     /**
-     * 上传外联信息 [v2.1.0]
+     * 上传外联信息 [v1.0.1  六安]
      */
     private void addContacts(String contactsMap) {
-        String url = GlobalSet.APP_SERVER_URL + "drug_user_outreach/add";
+        String url = GlobalSet.APP_SERVER_URL + "app.drug_user/addOutreach";
         OkHttpUtils.post().url(url)
-                .addHeader("token", mApplication.getToken())
-                .addParams("drug_user_id", mApplication.getUserID() + "")
+                .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
                 .addParams("contacts", contactsMap)
                 .build()
                 .execute(new StringCallback() {
@@ -381,8 +380,7 @@ public class MainActivity extends BaseActivityPoo {
 //						CommonFuncUtil.getToast(SignActivity.this, response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            if (jsonResponse.getInt("code") == 0
-                                    || jsonResponse.getInt("code") == 200) {
+                            if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
                                 Log.i("CONTACTS", "SUCCESS");
 
                             } else if (jsonResponse.getInt("code") == 1007) {
