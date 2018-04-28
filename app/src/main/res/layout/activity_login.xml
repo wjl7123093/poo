@@ -40,6 +40,7 @@
                 android:gravity="center"
                 android:text="@string/app_name_cn"
                 android:textSize="24dp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_marginTop="20dp"/>
 
@@ -109,9 +110,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="六安市公安局禁毒支队@2018\n技术支持：四川科瑞软件有限责任公司"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textColor="@color/white"
-                android:alpha="0.8"
                 android:layout_marginTop="90dp"/>
 
         </LinearLayout>
