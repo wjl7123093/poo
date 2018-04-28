@@ -86,11 +86,12 @@
             android:layout_marginTop="2dp"/>
         <TextView
             android:id="@+id/tv_msg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12dp"
             android:textColor="@color/WHITE_H"
             android:text="系统消息"
+            android:gravity="center"
             android:layout_below="@id/iv_msg"
             android:layout_marginTop="4dp"/>
         <TextView
@@ -101,6 +102,7 @@
             android:textSize="10dp"
             android:textColor="@color/WHITE_H"
             android:text="12"
+            android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:gravity="center"/>
