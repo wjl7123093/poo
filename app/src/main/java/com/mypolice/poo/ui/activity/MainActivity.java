@@ -191,7 +191,7 @@ public class MainActivity extends BaseActivityPoo {
 
         // 4. 调用 服务
         getIsRead();
-        /*postDeviceInfo();*/
+        postDeviceInfo();
         // 上传外联信息
         asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
         init();
@@ -399,17 +399,17 @@ public class MainActivity extends BaseActivityPoo {
     }
 
     /**
-     * 上传设备信息 [v2.2.2]
+     * 上传设备信息 [v1.0.1 六安]
      */
     private void postDeviceInfo() {
-        String url = GlobalSet.APP_SERVER_URL + "device_code/saveDeviceCode";
+        String url = GlobalSet.APP_SERVER_URL + "app.drug_user/saveDeiceCode";
         OkHttpUtils.post().url(url)
-                .addHeader("token", mApplication.getToken())
-                .addParams("drug_user_id", mApplication.getUserID() + "")
+                .addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
                 .addParams("device_code", SystemUtil.getIMEI(MainActivity.this))
                 .addParams("version", SystemUtil.getSystemVersion())
                 .addParams("brand", SystemUtil.getDeviceBrand())
                 .addParams("model", SystemUtil.getSystemModel())
+                .addParams("mac_address", SystemUtil.getMacAddressFromIp(MainActivity.this))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -422,11 +422,10 @@ public class MainActivity extends BaseActivityPoo {
 //						CommonFuncUtil.getToast(SignActivity.this, response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            if (jsonResponse.getInt("code") == 0
-                                    || jsonResponse.getInt("code") == 200) {
+                            if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {
                                 Log.i("DEVICE_INFO", "UPLOAD SUCCESS");
 
-                            } else if (jsonResponse.getInt("code") == 1007) {
+                            } else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
                                 // token 失效，踢出当前用户，退到登录页面
                                 CommonFuncUtil.getToast(MainActivity.this,
                                         "当前用户已在别处登录，请重新登录");
