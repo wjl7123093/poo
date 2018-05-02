@@ -48,8 +48,8 @@ import okhttp3.RequestBody;
  * @Description: 请假列表页面
  * @author wangjl  
  * @crdate 2017-8-21
- * @update 2017-9-9
- * @version v2.0.0(2)
+ * @update 2018-5-2		优化UI
+ * @version v1.0.3(4)[六安]
  */
 @ContentView(R.layout.activity_leave_list)
 public class LeaveListActivity extends BaseActivityPoo {
@@ -293,6 +293,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 										leaveList.add(leave);
 									}
 									bindLogDataToUI(leaveList);
+								} else {
+									mTvCounts.setText("共0条");
 								}
 
 
@@ -313,49 +315,6 @@ public class LeaveListActivity extends BaseActivityPoo {
 					}
 				});
 
-	}
-
-	/**
-	 * 提交已有请假数据
-	 */
-	private void putLeaveData(LeaveBean leaveBean, int leaveId) {
-		String url = GlobalSet.APP_SERVER_URL + "community_leave/" + leaveId;
-		OkHttpUtils.put().url(url)
-				.addHeader("token", mApplication.getToken())
-				.requestBody(RequestBody.create(MediaType.parse("application/json"), JSON.toJSONString(leaveBean)))
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						pDialog.dismiss();
-						CommonFuncUtil.getToast(LeaveListActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-						pDialog.dismiss();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								int result = jsonResponse.getInt("data");
-								if (1 == result) {
-									CommonFuncUtil.getToast(LeaveListActivity.this, "提交成功");
-									loadData();	// 刷新列表
-								}
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(LeaveListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
 	}
 
 	/**

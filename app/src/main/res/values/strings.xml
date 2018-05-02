@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">阳光生活(演示)</string>
+    <string name="app_name">阳光生活</string>
 
     <!-- ffmpeg 视频拍摄 -->
     <string name="hint">提示</string>

@@ -137,7 +137,7 @@
                         android:id="@+id/tv_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="共32条"
+                        android:text=""
                         android:textColor="@color/app_text_color"
                         android:textSize="@dimen/app_textsize_mid3" />
 

@@ -55,7 +55,7 @@
                 android:id="@+id/tv_notice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="亲～2018年04月20日有一次访谈沟通，届时工作人员会与你取得联系，请提前做好准备哦～～"
+                android:text=""
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/app_textsize_mid3"
                 android:layout_alignLeft="@id/tv_1"
@@ -114,7 +114,7 @@
                 android:id="@+id/tv_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已完成12次 | 共需完成24次"
+                android:text=""
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/app_textsize_mid3" />
 

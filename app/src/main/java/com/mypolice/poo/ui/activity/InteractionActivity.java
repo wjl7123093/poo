@@ -126,66 +126,6 @@ public class InteractionActivity extends BaseActivityPoo {
 //	}
 
 	/**
-	 * 获取交流互动列表 [New]
-	 */
-	private void getInteractionList() {
-		String url = GlobalSet.APP_SERVER_URL + "community_work/getWorkListBy";
-		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.addParams("work_type", "2")	// 2 -> 家访
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						pDialog.dismiss();
-						CommonFuncUtil.getToast(InteractionActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-						pDialog.dismiss();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								JSONArray arrNow = jsonResponse.getJSONObject("data").getJSONArray("nowList");
-								JSONArray arrPre = jsonResponse.getJSONObject("data").getJSONArray("preList");
-
-								List<WorkBean> workBeanList = new ArrayList<WorkBean>();
-								WorkBean work = null;
-								for (int i = 0; i < arrNow.length(); i++) {
-									work = JSON.parseObject(arrNow.getString(i), WorkBean.class);
-									workBeanList.add(work);
-								}
-								List<WorkBean> workBeanPreList = new ArrayList<WorkBean>();
-								WorkBean workPre = null;
-								for (int i = 0; i < arrPre.length(); i++) {
-									workPre = JSON.parseObject(arrPre.getString(i), WorkBean.class);
-									workBeanPreList.add(workPre);
-								}
-
-								if (workBeanList.size() > 0)
-									bindDataToUI(workBeanList);
-								if (workBeanPreList.size() > 0)
-									bindDataToUIPre(workBeanPreList);
-
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(InteractionActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(InteractionActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
 	 * 获取交流互动数据 [六安]
 	 * 2018-4-24
 	 */
