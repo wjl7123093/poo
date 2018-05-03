@@ -181,13 +181,9 @@ public class LeaveListActivity extends BaseActivityPoo {
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_EMPTY_DATA) {
 								// 空数据，不做处理
 
-							} else if (jsonResponse.getInt("code") == 1007) {
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(LeaveListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(LeaveListActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -236,11 +232,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(LeaveListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(LeaveListActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -303,11 +295,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(LeaveListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(LeaveListActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(LeaveListActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();

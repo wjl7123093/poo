@@ -39,7 +39,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mypolice.poo.application.PooApplication;
 import com.mypolice.poo.bean.AppVersion;
+import com.mypolice.poo.ui.activity.ApplicationForLeaveActivity;
+import com.mypolice.poo.ui.activity.BaseActivityPoo;
+import com.mypolice.poo.ui.activity.LoginActivity;
 import com.mypolice.poo.util.filecache.DataLoader;
 
 /**   
@@ -149,7 +153,6 @@ public class CommonFuncUtil {
 	 * 跳转到下一页面 [不带参数]
 	 * @param activity	当前页面
 	 * @param cls 下一页面
-	 * @param bundle 参数
 	 * @param requestCode 请求码
 	 */
 	public static void goNextActivityWithNoArgsForResult(Activity activity, 
@@ -333,6 +336,20 @@ public class CommonFuncUtil {
 			wakeLock.release();
 			wakeLock = null;
 		}
+	}
+
+	/**
+	 * Token 失效
+	 */
+	public static void isTokenExpired(BaseActivityPoo activity) {
+		// token 失效，踢出当前用户，退到登录页面
+		CommonFuncUtil.getToast(activity,
+				"当前用户已在别处登录，请重新登录");
+		activity.removeALLActivity();
+		CommonFuncUtil.goNextActivityWithNoArgs(activity,
+				LoginActivity.class, false);
+
+		activity.mApplication.setLogin(false);
 	}
 	
 }

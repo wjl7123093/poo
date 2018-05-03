@@ -614,11 +614,7 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
                 PrizesForReportingActivity.this.finish();
             } else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
                 // token 失效，踢出当前用户，退到登录页面
-                CommonFuncUtil.getToast(PrizesForReportingActivity.this,
-                        "当前用户已在别处登录，请重新登录");
-                removeALLActivity();
-                CommonFuncUtil.goNextActivityWithNoArgs(PrizesForReportingActivity.this,
-                        LoginActivity.class, false);
+                CommonFuncUtil.isTokenExpired(PrizesForReportingActivity.this);
             } else {
                 CommonFuncUtil.getToast(PrizesForReportingActivity.this,
                         jsonResponse.getString("info"));
@@ -670,7 +666,6 @@ public class PrizesForReportingActivity extends BaseActivityPoo {
     }
 
     /*****
-     * @see copy funtion to you project
      * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
      *
      */

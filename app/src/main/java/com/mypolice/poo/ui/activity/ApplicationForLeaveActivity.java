@@ -528,11 +528,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 								ApplicationForLeaveActivity.this.finish();
 							} else if (jsonResponse.getInt("code") == 1007) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(ApplicationForLeaveActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(ApplicationForLeaveActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -578,13 +574,9 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 //								int leaveId = jsonResponse.getInt("data");
 								setResult(RESULT_CODE_LEAVE);
 								ApplicationForLeaveActivity.this.finish();
-							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED	) {
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(ApplicationForLeaveActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(ApplicationForLeaveActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -623,11 +615,7 @@ public class ApplicationForLeaveActivity extends BaseActivityPoo {
 									ApplicationForLeaveActivity.this.finish();
 								} else if (jsonResponse.getInt("code") == 1007) {
 									// token 失效，踢出当前用户，退到登录页面
-									CommonFuncUtil.getToast(ApplicationForLeaveActivity.this,
-											"当前用户已在别处登录，请重新登录");
-									removeALLActivity();
-									CommonFuncUtil.goNextActivityWithNoArgs(ApplicationForLeaveActivity.this,
-											LoginActivity.class, false);
+									CommonFuncUtil.isTokenExpired(ApplicationForLeaveActivity.this);
 								}
 							}
 						} catch (JSONException e) {

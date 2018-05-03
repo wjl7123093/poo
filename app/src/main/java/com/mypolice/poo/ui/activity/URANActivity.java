@@ -621,69 +621,6 @@ public class URANActivity extends BaseActivityPoo {
 	}
 
 	/**
-	 * New 上传文件及数据【一次性上传】
-	 */
-	private void doUploadData() {
-//		String url = GlobalSet.APP_SERVER_URL + "drug_sign/saveDrugSign";
-		String url = GlobalSet.APP_SERVER_URL + "drug_sign/saveSign";
-		OkHttpUtils.post()
-				.addHeader("token", mApplication.getToken())
-				.addFile("mFile1", mFileNameBmp1, new File(mBmpPath1))
-				.addFile("mFile2", mFileNameBmp2, new File(mBmpPath2))
-				.addFile("mFile3", mFileNameVideo, new File(mVideoPath))
-				.addFile("mFile4", mFileNameSignatureBmp, new File(mSignatureBmpPath))
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.addParams("sign_source", "1")
-				.addParams("sign_type", "2")	// 尿检 2 签到 1
-				.addParams("community_drug_extend_id", mTaskId + "")
-				.addParams("longitude", mLongitude + "")
-				.addParams("latitude", mLatitude + "")
-				.addParams("sign_address", mAddress + "")
-				.addParams("exceed_days", "0")
-				.addParams("community_work_id", mTaskId + "")
-				.addParams("doctype", "0")
-				.url(url)
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						pDialog.dismiss();
-						CommonFuncUtil.getToast(URANActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-						pDialog.dismiss();
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {	// Success
-								// 删除视频文件夹
-								FileUtils.deleteDir(mVideoDirPath);
-								// 删除照片
-								FileUtils.deleteFile(new File(mBmpPath1));
-								FileUtils.deleteFile(new File(mBmpPath2));
-								FileUtils.deleteFile(new File(mSignatureBmpPath));
-								CommonFuncUtil.getToast(URANActivity.this, "提交成功");
-
-								URANActivity.this.setResult(RESULT_CODE_URAN);
-								URANActivity.this.finish();
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(URANActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
 	 * 尿检登记[六安]
 	 * 2018-4-25
 	 */
@@ -728,11 +665,7 @@ public class URANActivity extends BaseActivityPoo {
 								URANActivity.this.finish();
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(URANActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(URANActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(URANActivity.this);
 							} else {
 								CommonFuncUtil.getToast(URANActivity.this, jsonResponse.getString("info"));
 							}

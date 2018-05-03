@@ -112,11 +112,7 @@ public class UpdatePwdActivity extends BaseActivityPoo {
 										LoginActivity.class, false);
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(UpdatePwdActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(UpdatePwdActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(UpdatePwdActivity.this);
 							}
 
 						} catch (JSONException e) {

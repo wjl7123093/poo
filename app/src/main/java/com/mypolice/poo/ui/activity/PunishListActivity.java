@@ -152,11 +152,7 @@ public class PunishListActivity extends BaseActivityPoo {
 //								saveIsRead();
 							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(PunishListActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(PunishListActivity.this,
-										LoginActivity.class, false);
+								CommonFuncUtil.isTokenExpired(PunishListActivity.this);
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();

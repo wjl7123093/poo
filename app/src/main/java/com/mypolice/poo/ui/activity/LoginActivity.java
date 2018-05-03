@@ -209,7 +209,7 @@ public class LoginActivity extends BaseActivityPoo {
 								CommonFuncUtil.goNextActivityWithNoArgs(LoginActivity.this,
 										MainActivity.class, true);
 							} else {
-								CommonFuncUtil.getToast(LoginActivity.this, "登录失败，请检查账号密码");
+								CommonFuncUtil.getToast(LoginActivity.this, jsonResponse.getString("info"));
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
