@@ -153,11 +153,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入请假事由"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 外出地址 -->
@@ -181,11 +181,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入外出地址"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 目的地派出所 -->
@@ -209,11 +209,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入目的地派出所"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -272,11 +272,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入姓名"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 关系 -->
@@ -300,11 +300,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入关系"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 职业 -->
@@ -328,11 +328,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入职业"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 单位 -->
@@ -356,11 +356,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入单位"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 住址 -->
@@ -384,11 +384,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入住址"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 电话 -->
@@ -403,7 +403,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="电话"
+                        android:text="手机"
                         android:textColor="@color/BLACK_H"
                         android:textSize="14dp" />
 
@@ -412,11 +412,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入手机"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <!-- 备注 -->
@@ -447,7 +447,7 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/WHITE_H"/>
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
             </LinearLayout>

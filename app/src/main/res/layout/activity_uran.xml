@@ -130,11 +130,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:background="@color/WHITE_H"
                         android:hint="请输入检测部门"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
-                        android:textColor="@color/GREY_H"/>
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -163,7 +163,7 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/WHITE_H"/>
+                        android:background="@color/transparent"/>
                 </LinearLayout>
 
             </LinearLayout>
