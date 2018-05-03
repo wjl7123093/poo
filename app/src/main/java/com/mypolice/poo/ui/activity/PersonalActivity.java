@@ -13,12 +13,14 @@ import com.mypolice.poo.notification.NotificationActivity;
 import com.mypolice.poo.service.KeepLiveService;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.UpdateVersion;
+import com.mypolice.poo.util.statusbar.StatusBarCompat;
 import com.mypolice.poo.widget.CenterDialog;
 import com.mypolice.poo.widget.TitleBarView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -104,6 +106,10 @@ public class PersonalActivity extends BaseActivityPoo {
 	@Override
 	public void initView() {
 		super.initView();
+
+		// 设置状态栏颜色
+		StatusBarCompat.setStatusBarColor(PersonalActivity.this, Color.parseColor("#00c2da"));
+
 		initLayout(mLayout1, "修改密码", R.mipmap.ic_update_pwd, false);
 //		initLayout(mLayout2, "修改服务器", false);
 		initLayout(mLayout3, "关于我们", R.mipmap.ic_about_us, false);

@@ -49,6 +49,7 @@ import com.mypolice.poo.util.UpdateVersion;
 import com.mypolice.poo.util.keeping.HwPushManager;
 import com.mypolice.poo.util.keeping.JobSchedulerManager;
 import com.mypolice.poo.util.keeping.ScreenManager;
+import com.mypolice.poo.util.statusbar.StatusBarCompat;
 import com.mypolice.poo.widget.QuickAlphabeticBar;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -200,6 +201,9 @@ public class MainActivity extends BaseActivityPoo {
     @Override
     public void initView() {
         super.initView();
+
+        // 设置状态栏透明
+        StatusBarCompat.translucentStatusBar(MainActivity.this, true);
 
         initUserData();
         initFunctionManager();

@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 /**   
@@ -26,7 +27,7 @@ import android.view.WindowManager;
  * @version v2.0.0(2)
  */
 @ContentView(R.layout.activity_start)
-public class StartActivity extends Activity {
+public class StartActivity extends AppCompatActivity {
 
 	private PooApplication mApplication;
 

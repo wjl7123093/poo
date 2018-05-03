@@ -1,14 +1,10 @@
 package com.mypolice.poo.ui.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mypolice.poo.R;
 import com.mypolice.poo.application.PooApplication;
-import com.mypolice.poo.util.CommonFuncUtil;
-import com.mypolice.poo.util.GPSUtils;
 import com.mypolice.poo.util.StatusBarTools;
 import com.umeng.message.PushAgent;
 
@@ -21,7 +17,7 @@ import com.umeng.message.PushAgent;
  * @update 2017-9-7
  * @version v2.0.1(3)
  */
-public class BaseActivityPoo extends Activity {
+public class BaseActivityPoo extends AppCompatActivity {
 
 	public PooApplication mApplication;
 	private BaseActivityPoo mContext;
@@ -31,8 +27,8 @@ public class BaseActivityPoo extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// 沉浸式状态栏
-		StatusBarTools.setWindowStatusBarColor(BaseActivityPoo.this,
-				getResources().getColor(R.color.app_main_green));
+//		StatusBarTools.setWindowStatusBarColor(BaseActivityPoo.this,
+//				getResources().getColor(R.color.app_main_green));
 
 		PushAgent.getInstance(BaseActivityPoo.this).onAppStart();
 		if (null == mApplication)

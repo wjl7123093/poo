@@ -67,9 +67,10 @@
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Light.NoTitleBar">
+        android:theme="@style/AppTheme">
         <activity android:name="com.mypolice.poo.ui.activity.StartActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -203,7 +204,7 @@
         <activity
             android:name="com.mypolice.poo.ui.activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
         <activity
             android:name="com.mypolice.poo.ui.activity.MainActivity"
             android:screenOrientation="portrait"

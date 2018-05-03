@@ -413,7 +413,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:background="@color/WHITE_H"
-                        android:hint="请输入电话"
+                        android:hint="请输入手机"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"/>

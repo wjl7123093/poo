@@ -101,6 +101,8 @@
     <color name="app_main_red">#fa5f5f</color>
     <!-- app 主色调3 -->
     <color name="app_main_btn">#7ed321</color>
+
+    <color name="app_login_title">#00b8d0</color>
     <!-- 通用页面背景色 -->
     <color name="app_bg_grey">#f2f2f2</color>
     <!-- 一级标题栏 - 红色 -->

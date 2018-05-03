@@ -38,8 +38,8 @@
             android:padding="10dp">
             <ImageView
                 android:id="@+id/iv_star"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@mipmap/ic_star"
                 android:scaleType="centerCrop"/>
             <TextView
@@ -51,7 +51,8 @@
                 android:textSize="@dimen/app_textsize_mid2"
                 android:layout_toRightOf="@id/iv_star"
                 android:layout_alignTop="@id/iv_star"
-                android:layout_marginLeft="6dp"/>
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="2dp"/>
             <TextView
                 android:id="@+id/tv_notice"
                 android:layout_width="wrap_content"
@@ -108,8 +109,8 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@mipmap/ic_uran_warning"
             android:scaleType="centerCrop"/>
 
@@ -144,11 +145,58 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llExpandSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@color/WHITE_H"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:gravity="right"
+            android:src="@mipmap/ic_time"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="尿检记录"
+            android:textColor="@color/BLACK_H"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成12次 | 共需完成24次"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3" />
+
+        <!--<ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_arrow_down" />-->
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg_grey"></View>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:layout_marginTop="10dp">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,52 +214,6 @@
                 android:visibility="gone">
 
             </com.mypolice.poo.widget.MyListView>
-
-            <LinearLayout
-                android:id="@+id/llExpandSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="@color/WHITE_H">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:gravity="right"
-                    android:src="@mipmap/ic_time"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="尿检记录"
-                    android:textColor="@color/BLACK_H"
-                    android:textSize="@dimen/app_textsize_mid2"
-                    android:layout_marginLeft="8dp"/>
-
-                <TextView
-                    android:id="@+id/tv_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已完成12次 | 共需完成24次"
-                    android:textColor="@color/app_text_color"
-                    android:textSize="@dimen/app_textsize_mid3" />
-
-                <!--<ImageView
-                    android:id="@+id/ivSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_arrow_down" />-->
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/app_bg_grey"></View>
 
             <com.mypolice.poo.widget.MyListView
                 android:id="@+id/lvExaminationPre"

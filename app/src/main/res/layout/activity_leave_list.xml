@@ -48,8 +48,8 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@mipmap/ic_leave_status"
             android:scaleType="centerCrop"/>
 
@@ -62,6 +62,11 @@
             android:layout_marginLeft="8dp"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg_grey"></View>
 
     <LinearLayout
         android:id="@+id/ll_no_leave_btn"
@@ -93,11 +98,52 @@
     </LinearLayout>
 
     <!-- 历史请假记录 -->
+    <LinearLayout
+        android:id="@+id/llExpandSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WHITE_H"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:gravity="right"
+            android:src="@mipmap/ic_time"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="请假记录"
+            android:textColor="@color/BLACK_H"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <!-- 历史请假记录 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:layout_marginTop="10dp">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/llExpandSwitch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,7 +192,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/app_bg_grey"></View>
+                    android:background="@color/app_bg_grey"></View>-->
 
                 <com.mypolice.poo.widget.MyListView
                     android:id="@+id/lvLeavePre"
@@ -162,47 +208,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <!--<LinearLayout
-        android:id="@+id/llNoLeave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="60dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="当前暂无请假申请/草稿"
-            android:textSize="@dimen/app_textsize_mid1"
-            android:textColor="@color/BLACK_H"/>
-
-        <LinearLayout
-            android:id="@+id/llAppForLeave"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/sp_bg_oval_1_2"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="15dp">
-            <LinearLayout
-                android:id="@+id/llFuncBg1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/sp_bg_oval_1"
-                android:orientation="vertical"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="请假申请"
-                    android:textSize="@dimen/app_textsize_mid1"
-                    android:textColor="@color/WHITE_H"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>-->
     
 
 </LinearLayout>

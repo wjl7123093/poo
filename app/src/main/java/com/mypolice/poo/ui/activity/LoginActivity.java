@@ -13,6 +13,7 @@ import com.mypolice.poo.bean.UserEntity;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.NetUtils;
 import com.mypolice.poo.util.encrypt.RSAUtil;
+import com.mypolice.poo.util.statusbar.StatusBarCompat;
 import com.mypolice.poo.widget.CenterDialog;
 import com.umeng.message.PushAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,7 +43,7 @@ import sun.misc.BASE64Encoder;
  * @update 2017-9-9
  * @version v2.0.0(2)
  */
-@ContentView(R.layout.activity_login)
+@ContentView(R.layout.activity_login_test)
 public class LoginActivity extends BaseActivityPoo {
 
 	/** Edt 账号 */
@@ -82,6 +83,9 @@ public class LoginActivity extends BaseActivityPoo {
 //		GlobalSet.APP_IMAGE_URL = mApplication.getAppServer() + "/static/uploads/";
 //		GlobalSet.APP_DOWNLOAD_URL = mApplication.getAppServer() + "/app/update.xml";
 //		GlobalSet.APP_DETAIL_URL = mApplication.getAppServer() + "/index/wx/detail.html?id=";
+
+		// 设置状态栏透明
+		StatusBarCompat.translucentStatusBar(LoginActivity.this, true);
 
 		mAcc = mApplication.getAcc();
 		mEdtTxtAcc.setText(mAcc);
