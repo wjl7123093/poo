@@ -25,6 +25,10 @@ public class WorkBean {
     private int num;                // 任务是第几次
     private String the_first_year;  // 任务是第几年
 
+    private String examination;     // 尿检结果
+    private String department_name; // 检测部门
+    private String sign_time;       // 尿检时间
+
     @Override
     public String toString() {
         return "WorkBean{" +
@@ -132,5 +136,29 @@ public class WorkBean {
 
     public void setThe_first_year(String the_first_year) {
         this.the_first_year = the_first_year;
+    }
+
+    public String getExamination() {
+        return examination;
+    }
+
+    public void setExamination(String examination) {
+        this.examination = examination;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
+
+    public String getSign_time() {
+        return sign_time;
+    }
+
+    public void setSign_time(String sign_time) {
+        this.sign_time = sign_time;
     }
 }

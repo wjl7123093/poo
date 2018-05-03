@@ -145,6 +145,18 @@
 
     </LinearLayout>
 
+    <com.mypolice.poo.widget.MyListView
+        android:id="@+id/lvExamination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/transparent"
+        android:dividerHeight="20dp"
+        android:listSelector="@null"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+    </com.mypolice.poo.widget.MyListView>
+
     <LinearLayout
         android:id="@+id/llExpandSwitch"
         android:layout_width="match_parent"
@@ -202,18 +214,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <com.mypolice.poo.widget.MyListView
-                android:id="@+id/lvExamination"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@color/transparent"
-                android:dividerHeight="20dp"
-                android:listSelector="@null"
-                android:scrollbars="none"
-                android:visibility="gone">
-
-            </com.mypolice.poo.widget.MyListView>
 
             <com.mypolice.poo.widget.MyListView
                 android:id="@+id/lvExaminationPre"

@@ -7,7 +7,7 @@
   * @update 2017-8-23
   * @version v1.0.0(1)
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/sp_bg_shadow">
@@ -80,6 +80,93 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"/>
+    </LinearLayout>
+
+</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_uran_warning"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="尿检任务"
+            android:textColor="@color/BLACK_H"
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已审核，待销假"
+            android:textColor="@color/GREY_H"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/WHITE_H"
+        android:paddingLeft="42dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/tvItemTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="尿检日期: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"/>
+        <TextView
+            android:id="@+id/tvItemResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="尿检结果: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="检测部门: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemRemark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="备注说明: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

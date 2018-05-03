@@ -171,6 +171,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 								} else {
 									// 隐藏尿检操作区
 									setUranNoticeBlockGone();
+									setNoTaskVisible();
 								}
 								if (!TextUtils.isEmpty(workNum) && !workNum.equals("{}")
 										&& !workNum.equals("null")) {	// 任务数量
@@ -207,27 +208,29 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 				R.layout.item_lv_examination) {
 			@Override
 			public void convert(ViewHolder helper, final WorkBean item) {
-				helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD
-						+ item.getWork_time());
-				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
-						+ item.getRemark());
-//				helper.setText(R.id.tvItemStatus, GlobalSet.WORK_STATUS_HEAD
-//						+ (item.getWork_tag() == 0 ? "未登记" : "已登记(待审核)"));
-				helper.setText(R.id.tvItemStatus, GlobalSet.WORK_STATUS_HEAD
-						+ item.getWork_tag_text());
-				helper.setText(R.id.btnItemUpdateWork, item.getWork_tag() == 0 ? "登记" : "修改");
-				helper.setOnClickListener(R.id.btnItemUpdateWork, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Bundle bundle = new Bundle();
-						bundle.putInt("taskId", item.getId());
-						CommonFuncUtil.goNextActivityWithArgsForResult(PhysicalExaminationActivity.this,
-								URANActivity.class, bundle, REQUES_CODE_EXAMINATION);
-					}
-				});
+				helper.setText(R.id.tvItemTime, "尿检日期: "
+						+ item.getSign_time());
+				helper.setText(R.id.tvItemResult, "尿检结果: "
+						+ item.getExamination());
+				helper.setText(R.id.tvItemDepartment, "检测部门: "
+						+ item.getDepartment_name());
+				helper.setText(R.id.tvItemRemark, "备注说明: " + item.getRemark());
+
+				switch (item.getWork_tag()) {
+					case 0:
+						helper.setText(R.id.tvItemStatus, "新任务");
+						break;
+					case 1:
+						helper.setText(R.id.tvItemStatus, "待审核");
+						break;
+					case 2:
+						helper.setText(R.id.tvItemStatus, "已完成");
+						break;
+				}
 			}
 		};
 		mLvExamination.setAdapter(mAdapter);
+		mLvExamination.setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -281,7 +284,20 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 	/** 绑定当前尿检数据 */
 	private void bindWorkDataToUI(WorkBean workBean) {
 		mWorkId = workBean.getWork_id();
-		mTvNotice.setText("亲～" + workBean.getWork_time() + "要完成本月尿检任务哦～～");
+		mTvNotice.setText("亲～" + workBean.getWork_time() + "要完成本期尿检任务哦～～");
+
+		List<WorkBean> workList = new ArrayList<>();
+		workList.add(workBean);
+		switch (workBean.getWork_tag()) {
+			case 0: // 新任务
+				mLvExamination.setVisibility(View.GONE);
+				break;
+			case 1:	// 待审核
+			case 2: // 已完成
+				bindDataToUI(workList);
+				setUranNoticeBlockGone();
+				break;
+		}
 	}
 
 	/** 绑定任务数量数据 */
@@ -297,10 +313,17 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		mLlUranPreWorkNowork.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
 	}
 
-	/** 设置提示区显示状态 */
+	/** 隐藏 任务提示区 */
 	private void setUranNoticeBlockGone() {
+		mLlUranNotice.setVisibility(View.GONE);
 		mLlUranBtn.setVisibility(View.GONE);
 		mTvNotice.setText("");
+	}
+
+	/** 显示 无任务区 */
+	private void setNoTaskVisible() {
+		mLlUranPreWorkTitle.setVisibility(View.VISIBLE);
+		mLlUranPreWorkNowork.setVisibility(View.VISIBLE);
 	}
 
 	@Override
