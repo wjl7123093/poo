@@ -326,6 +326,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 				helper.setText(R.id.tvItemEndTime, "结束时间:  " + item.getEnd_time());
 				helper.setText(R.id.tvItemLeaveReason, "请假事由:  " + item.getReason());
 				helper.setText(R.id.tvItemDestination, "外出地址:  " + item.getDestination());
+				helper.setText(R.id.tvItemDestinStation, "目的地派出所:  " + item.getCommunity_name());
 
 			}
 		};

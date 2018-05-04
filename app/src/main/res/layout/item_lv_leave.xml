@@ -52,11 +52,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/WHITE_H"
-        android:paddingLeft="42dp"
         android:paddingRight="30dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="1dp">
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tv_notice"
@@ -64,7 +62,8 @@
             android:layout_height="wrap_content"
             android:text="*提示：若请假时间已结束，请前往社区销假！"
             android:textSize="@dimen/app_textsize_mid3"
-            android:textColor="#f14f4f"/>
+            android:textColor="#f14f4f"
+            android:paddingLeft="42dp"/>
 
         <TextView
             android:id="@+id/tvItemStartTime"
@@ -73,7 +72,8 @@
             android:text="开始时间: xxx"
             android:textSize="@dimen/app_textsize_mid3"
             android:textColor="@color/BLACK_H"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:paddingLeft="42dp"/>
         <TextView
             android:id="@+id/tvItemEndTime"
             android:layout_width="match_parent"
@@ -81,7 +81,8 @@
             android:text="结束时间: xxx"
             android:textSize="@dimen/app_textsize_mid3"
             android:textColor="@color/BLACK_H"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:paddingLeft="42dp"/>
         <TextView
             android:id="@+id/tvItemLeaveReason"
             android:layout_width="match_parent"
@@ -89,7 +90,8 @@
             android:text="请假事由: xxx"
             android:textSize="@dimen/app_textsize_mid3"
             android:textColor="@color/BLACK_H"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:paddingLeft="42dp"/>
         <TextView
             android:id="@+id/tvItemDestination"
             android:layout_width="match_parent"
@@ -97,7 +99,17 @@
             android:text="外出地址: xxx"
             android:textSize="@dimen/app_textsize_mid3"
             android:textColor="@color/BLACK_H"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:paddingLeft="42dp"/>
+        <TextView
+            android:id="@+id/tvItemDestinStation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="目的地派出所: xxx"
+            android:textSize="@dimen/app_textsize_mid3"
+            android:textColor="@color/BLACK_H"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="14dp"/>
         <TextView
             android:id="@+id/tvItemCreateTime"
             android:layout_width="match_parent"
@@ -105,7 +117,8 @@
             android:text="创建时间: xxx"
             android:textSize="@dimen/app_textsize_mid3"
             android:textColor="@color/BLACK_H"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:paddingLeft="42dp"/>
 
         <!--<TextView
             android:id="@+id/tv_notice"

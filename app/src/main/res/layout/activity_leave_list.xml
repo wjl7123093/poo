@@ -45,7 +45,8 @@
         android:background="@color/WHITE_H"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_marginBottom="1dp">
 
         <ImageView
             android:layout_width="24dp"
@@ -89,7 +90,6 @@
         android:orientation="vertical"
         android:background="@color/WHITE_H"
         android:padding="10dp"
-        android:layout_marginTop="1dp"
         android:gravity="center">
 
         <TextView
