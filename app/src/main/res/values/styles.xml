@@ -166,5 +166,18 @@
         <item name="@android:windowEnterAnimation">@anim/bottom_menu_enter</item>
         <item name="@android:windowExitAnimation">@anim/bottom_menu_exit</item>
     </style>
+
+
+    <!-- [放弃] 该主题可以防止出现 启动白屏。但是会造成 APP延迟启动 的现象 -->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!-- 【推荐】 该主题可以防止出现 启动白屏。并且不会造成 APP延迟启动 问题 -->
+    <style name="SplashTheme2" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/bg_start</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
     
 </resources>

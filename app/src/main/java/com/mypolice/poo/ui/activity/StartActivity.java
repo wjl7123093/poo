@@ -26,7 +26,7 @@ import android.view.WindowManager;
  * @update 2017-9-7
  * @version v2.0.0(2)
  */
-@ContentView(R.layout.activity_start)
+//@ContentView(R.layout.activity_start)
 public class StartActivity extends AppCompatActivity {
 
 	private PooApplication mApplication;
@@ -34,18 +34,20 @@ public class StartActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ViewUtils.inject(this);
-		//隐藏状态栏
-		//定义全屏参数
-		int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-		//设置当前窗体为全屏显示
-		getWindow().setFlags(flag, flag);
+//		ViewUtils.inject(this);
+//		//隐藏状态栏
+//		//定义全屏参数
+//		int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//		//设置当前窗体为全屏显示
+//		getWindow().setFlags(flag, flag);
 
 		PushAgent.getInstance(StartActivity.this).onAppStart();
 		if (null == mApplication)
 			mApplication = (PooApplication) getApplication();
 
-		mHandler.postDelayed(r, 3000);
+//		mHandler.postDelayed(r, 1000);
+
+		mHandler.post(r);
 	}
 
 	private Handler mHandler = new Handler();
