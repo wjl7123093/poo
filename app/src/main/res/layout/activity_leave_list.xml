@@ -25,7 +25,7 @@
     <ListView
         android:id="@+id/lvLeave"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="230dp"
         android:divider="@color/transparent"
         android:dividerHeight="10dp"
         android:listSelector="@null"

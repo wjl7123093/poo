@@ -134,7 +134,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -163,7 +164,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
             </LinearLayout>

@@ -38,12 +38,15 @@ import com.yixia.weibo.sdk.VCamera;
 import com.yixia.weibo.sdk.util.DeviceUtils;
 import com.yixia.weibo.sdk.util.FileUtils;
 import com.yixia.weibo.sdk.util.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
+import okhttp3.OkHttpClient;
 
 /**
  * @Title: PooApplication.java
@@ -127,6 +130,17 @@ public class PooApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mActivityList = new ArrayList<Activity>();
+
+        /** 初始化 OkHttpClient */
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(new LoggerInterceptor("TAG"))
+                .connectTimeout(20000L, TimeUnit.MILLISECONDS)
+                .readTimeout(20000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .build();
+
+        OkHttpUtils.initClient(okHttpClient);
+
 
         /** 初始化 Umeng 消息推送 SDK */
         initNotificationSDK();

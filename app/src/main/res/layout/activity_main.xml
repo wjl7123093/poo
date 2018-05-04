@@ -64,7 +64,9 @@
         android:verticalSpacing="20dp"
         android:horizontalSpacing="1dp"
         android:listSelector="@android:color/transparent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
     </GridView>
 

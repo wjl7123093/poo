@@ -46,7 +46,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/ic_report_content"
-                android:scaleType="center"/>
+                android:scaleType="fitCenter"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +75,8 @@
                 android:textColorHint="@color/GREY_H"
                 android:textSize="14dp"
                 android:padding="10dp"
-                android:gravity="top|left"/>
+                android:gravity="top|left"
+                android:maxLength="200"/>
 
         </LinearLayout>
 
@@ -93,7 +94,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/ic_report_photo"
-                android:scaleType="center"/>
+                android:scaleType="fitCenter"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,7 +232,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/ic_report_camera"
-                android:scaleType="center"/>
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -39,7 +39,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/ic_star"
-                android:scaleType="center"/>
+                android:scaleType="centerCrop"/>
             <TextView
                 android:id="@+id/tv_1"
                 android:layout_width="wrap_content"
@@ -79,9 +79,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:gravity="center"
-            android:paddingRight="5dp"
             android:src="@mipmap/ic_time"
-            android:scaleType="center"/>
+            android:scaleType="centerCrop"
+            android:layout_marginRight="5dp"/>
 
         <TextView
             android:layout_width="0dp"

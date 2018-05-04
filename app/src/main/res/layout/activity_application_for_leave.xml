@@ -157,7 +157,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 外出地址 -->
@@ -185,7 +186,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 目的地派出所 -->
@@ -213,7 +215,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -276,7 +279,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 关系 -->
@@ -304,7 +308,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 职业 -->
@@ -332,7 +337,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 单位 -->
@@ -360,7 +366,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 住址 -->
@@ -388,7 +395,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
                 <!-- 电话 -->
@@ -416,7 +424,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="20"/>
                 </LinearLayout>
 
                 <!-- 备注 -->
@@ -447,7 +456,8 @@
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"
-                        android:background="@color/transparent"/>
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
                 </LinearLayout>
 
             </LinearLayout>
