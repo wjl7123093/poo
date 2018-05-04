@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/sp_bg_login_edt"
+            android:background="@drawable/sp_bg_login_edt2"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
