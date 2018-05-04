@@ -32,8 +32,8 @@ ext {
     buildToolsVersion = '22.0.1'
     targetSdkVersion = 22
     minSdkVersion = 19
-    versionCode = 6
-    versionName = "1.0.5"
+    versionCode = 8
+    versionName = "1.0.7"
     POM_NAME = 'Shortcutbadger'
     POM_DESCRIPTION = 'The ShortcutBadger makes your Android App show the count of unread messages as a badge on your App shortcut!'
     POM_URL = 'https://github.com/leolin310148/ShortcutBadger'
