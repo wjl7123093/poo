@@ -37,6 +37,7 @@ public class LeaveItemBean implements Parcelable {
     private String leave_type_text;
     private int leave_id;
     private String community_name;
+    private String destin_police;
 
     public LeaveItemBean() {  }
 
@@ -62,6 +63,7 @@ public class LeaveItemBean implements Parcelable {
         leave_type_text = in.readString();
         leave_id = in.readInt();
         community_name = in.readString();
+        destin_police = in.readString();
     }
 
     public static final Creator<LeaveItemBean> CREATOR = new Creator<LeaveItemBean>() {
@@ -268,6 +270,14 @@ public class LeaveItemBean implements Parcelable {
         this.community_name = community_name;
     }
 
+    public String getDestin_police() {
+        return destin_police;
+    }
+
+    public void setDestin_police(String destin_police) {
+        this.destin_police = destin_police;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -296,5 +306,6 @@ public class LeaveItemBean implements Parcelable {
         dest.writeString(leave_type_text);
         dest.writeInt(leave_id);
         dest.writeString(community_name);
+        dest.writeString(destin_police);
     }
 }
