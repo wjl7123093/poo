@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,8 @@ public class PunishListActivity extends BaseActivityPoo {
 
 	@ViewInject(R.id.lvPunish)
 	private ListView mLvPunish;
+	@ViewInject(R.id.ll_no_data)
+	private LinearLayout mLlNoData;
 
 	private CommonAdapter mAdapter;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -141,8 +144,8 @@ public class PunishListActivity extends BaseActivityPoo {
 //								org.json.JSONArray array = jsonResponse.getJSONArray("data");
 								PunishBean punishBean = JSON.parseObject(jsonResponse.getString("data"), PunishBean.class);
 								if (punishBean.getData().size() == 0) {
-									CommonFuncUtil.getToast(PunishListActivity.this,
-											"当前暂无消息");
+//									CommonFuncUtil.getToast(PunishListActivity.this,
+//											"当前暂无消息");
 									clearList();
 									return;
 								}
@@ -198,6 +201,7 @@ public class PunishListActivity extends BaseActivityPoo {
 		};
 		mLvPunish.setAdapter(mAdapter);
 		mLvPunish.setVisibility(View.VISIBLE);
+		mLlNoData.setVisibility(View.GONE);
 
 	}
 
@@ -206,6 +210,9 @@ public class PunishListActivity extends BaseActivityPoo {
 		noticeList.clear();
 		if (null != mAdapter)
 			mAdapter.notifyDataSetChanged();
+
+		mLvPunish.setVisibility(View.GONE);
+		mLlNoData.setVisibility(View.VISIBLE);
 	}
 	
 }

@@ -12,7 +12,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:background="@color/app_bg_grey">
 
     <LinearLayout
         android:layout_width="match_parent"
