@@ -68,6 +68,8 @@ public class LeaveListActivity extends BaseActivityPoo {
 	private LinearLayout mLlNoLeaveTitle;
 	@ViewInject(R.id.ll_no_leave_btn)
 	private LinearLayout mLlNoLeaveBtn;
+	@ViewInject(R.id.tvItemStatus)
+	private TextView mTvItemStatus;
 
 	@ViewInject(R.id.btn_leave)
 	private Button mBtnLeave;
@@ -122,7 +124,7 @@ public class LeaveListActivity extends BaseActivityPoo {
 
 	/** 设置无请假提示区的显示状态 */
 	private void setNoLeaveBlockVisibility(int visibility) {
-		mLlNoLeaveTitle.setVisibility(visibility);
+//		mLlNoLeaveTitle.setVisibility(visibility);
 		mLlNoLeaveBtn.setVisibility(visibility);
 	}
 
@@ -311,52 +313,20 @@ public class LeaveListActivity extends BaseActivityPoo {
      */
 	private void bindDataToUI(List<LeaveItemBean> leaveList) {
 //		mLeaveBean = leave;
+		mTvItemStatus.setText(leaveList.get(0).getLeave_type_text());
 
 		mAdapter = new CommonAdapter<LeaveItemBean>(LeaveListActivity.this,
 				leaveList, R.layout.item_lv_leave) {
 			@Override
 			public void convert(ViewHolder helper, final LeaveItemBean item) {
-//				if (0 == item.getLeave_type()) {	// 草稿
-////					helper.setText(R.id.tvItemTitle, "请假草稿");
-////					helper.setVisibility(R.id.rlItemEdit, View.VISIBLE);
-//					helper.setText(R.id.tvItemStatus, "存为草稿");
-//				} else if (1 == item.getLeave_type()) {	// 待审核
-////					helper.setText(R.id.tvItemTitle, "已提交申请");
-////					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-//					helper.setText(R.id.tvItemStatus, "待审核");
-//				} else if (2 == item.getLeave_type()) {	// 已审核，待销假
-////					helper.setText(R.id.tvItemTitle, "已提交申请");
-////					helper.setVisibility(R.id.rlItemEdit, View.GONE);
-//					helper.setText(R.id.tvItemStatus, "已审核，待销假");
-//				}
 
-				helper.setText(R.id.tvItemStatus, item.getLeave_type_text());
+//				helper.setText(R.id.tvItemStatus, item.getLeave_type_text());
 				helper.setText(R.id.tvItemCreateTime, "创建时间:  " + item.getReg_time());
 				helper.setText(R.id.tvItemStartTime, "开始时间:  " + item.getStart_time());
 				helper.setText(R.id.tvItemEndTime, "结束时间:  " + item.getEnd_time());
 				helper.setText(R.id.tvItemLeaveReason, "请假事由:  " + item.getReason());
 				helper.setText(R.id.tvItemDestination, "外出地址:  " + item.getDestination());
 
-				// 编辑
-				/*helper.setOnClickListener(R.id.btnItemEdit, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Bundle bundle = new Bundle();
-						bundle.putString("from", "edit");
-						bundle.putParcelable("leaveBean", item);
-						CommonFuncUtil.goNextActivityWithArgsForResult(LeaveListActivity.this,
-								ApplicationForLeaveActivity.class, bundle, REQUEST_CODE_LEAVE);
-					}
-				});
-				// 提交
-				helper.setOnClickListener(R.id.btnItemSubmit, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						centerDialog.show();
-						item.setLeave_type(1);
-						putLeaveData(doTransferLeaveItemToLeave(item), item.getId());
-					}
-				});*/
 			}
 		};
 		mLvLeave.setAdapter(mAdapter);

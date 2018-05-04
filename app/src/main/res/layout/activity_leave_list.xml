@@ -22,7 +22,7 @@
         android:layout_height="wrap_content" >
     </com.mypolice.poo.widget.TitleBarView>
 
-    <ListView
+    <!--<ListView
         android:id="@+id/lvLeave"
         android:layout_width="match_parent"
         android:layout_height="230dp"
@@ -30,7 +30,7 @@
         android:dividerHeight="10dp"
         android:listSelector="@null"
         android:scrollbars="none"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
     <!--<include layout="@layout/item_lv_leave"
         android:id="@+id/includeLeaveDetail"
@@ -54,14 +54,33 @@
             android:scaleType="centerCrop"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="请假状态"
             android:textColor="@color/BLACK_H"
             android:textSize="16dp"
             android:layout_marginLeft="8dp"/>
 
+        <TextView
+            android:id="@+id/tvItemStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/GREY_H"
+            android:textSize="12dp"/>
+
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvLeave"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:divider="@color/transparent"
+        android:dividerHeight="10dp"
+        android:listSelector="@null"
+        android:scrollbars="none"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_no_leave_btn"
