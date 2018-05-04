@@ -63,11 +63,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/app_bg_grey"></View>
-
     <LinearLayout
         android:id="@+id/ll_no_leave_btn"
         android:layout_width="match_parent"
@@ -75,7 +70,7 @@
         android:orientation="vertical"
         android:background="@color/WHITE_H"
         android:padding="10dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:gravity="center">
 
         <TextView
