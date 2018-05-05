@@ -105,7 +105,8 @@
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
