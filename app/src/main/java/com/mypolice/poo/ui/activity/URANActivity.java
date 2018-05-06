@@ -130,6 +130,8 @@ public class URANActivity extends BaseActivityPoo {
 	private TextView mTvResult;
 	@ViewInject(R.id.edt_department)
 	private EditText mEdtDepartment;
+	@ViewInject(R.id.edt_department_username)
+	private EditText mEdtDepartmentUserName;
 	@ViewInject(R.id.edt_remark)
 	private EditText mEdtRemark;
 
@@ -311,7 +313,11 @@ public class URANActivity extends BaseActivityPoo {
 	public void onBtnSendReport(View v) {
 //		doUploadFile();
 		if (TextUtils.isEmpty(mBmpPath1) || TextUtils.isEmpty(mBmpPath2)
-				|| TextUtils.isEmpty(mVideoPath)) {
+				|| TextUtils.isEmpty(mVideoPath)
+				|| TextUtils.isEmpty(mTvResult.getText().toString().trim())
+				|| TextUtils.isEmpty(mEdtDepartment.getText().toString().trim())
+				|| TextUtils.isEmpty(mEdtDepartmentUserName.getText().toString().trim())
+				|| TextUtils.isEmpty(mEdtRemark.getText().toString().trim())) {
 			CommonFuncUtil.getToast(URANActivity.this, "请完善信息后上传");
 			return;
 		}
@@ -636,6 +642,7 @@ public class URANActivity extends BaseActivityPoo {
 				.addParams("longitude", mLongitude + "")
 				.addParams("latitude", mLatitude + "")
 				.addParams("department_name", mEdtDepartment.getText().toString().trim())
+				.addParams("department_username", mEdtDepartmentUserName.getText().toString().trim())
 				.addParams("sign_time", mTvStartDate.getText().toString().trim())
 				.addParams("remark", mEdtRemark.getText().toString().trim())
 				.url(url)

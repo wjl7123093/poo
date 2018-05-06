@@ -50,7 +50,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="尿检日期"
                         android:textColor="@color/BLACK_H"
@@ -85,7 +85,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="尿检结果"
                         android:textColor="@color/BLACK_H"
@@ -110,6 +110,7 @@
 
                 </LinearLayout>
 
+                <!-- 检测部门 -->
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="检测部门"
                         android:textColor="@color/BLACK_H"
@@ -131,6 +132,35 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:hint="请输入检测部门"
+                        android:textColorHint="@color/GREY_H"
+                        android:textSize="14dp"
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
+                </LinearLayout>
+
+                <!-- 检测人 -->
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/sp_bg_login_edt"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="检测人"
+                        android:textColor="@color/BLACK_H"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/edt_department_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:hint="请输入检测人"
                         android:textColorHint="@color/GREY_H"
                         android:textSize="14dp"
                         android:textColor="@color/GREY_H"

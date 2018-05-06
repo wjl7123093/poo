@@ -100,8 +100,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 		ViewUtils.inject(this);
 
 		initView();
-//		getExaminationList();
-		getExaminationData();
+//		getExaminationData();
 	}
 	
 	@Override
@@ -124,6 +123,7 @@ public class PhysicalExaminationActivity extends BaseActivityPoo {
 			Intent intent = new Intent(PhysicalExaminationActivity.this, KeepLiveService.class);
 			this.startService(intent);
 		}
+		getExaminationData();
 	}
 
 	/** 跳转到尿检页面 */
