@@ -48,6 +48,7 @@ import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.FileUtils;
 import com.mypolice.poo.util.GPSUtils;
 import com.mypolice.poo.util.ImageTools;
+import com.mypolice.poo.util.keeping.ScreenManager;
 import com.mypolice.poo.widget.CenterDialog;
 import com.mypolice.poo.widget.CustomDatePicker;
 import com.mypolice.poo.widget.IconView;
@@ -735,6 +736,14 @@ public class URANActivity extends BaseActivityPoo {
 			// TODO Auto-generated method stub
 			if (null != location && location.getLocType() != BDLocation.TypeServerError) {
 //				CommonFuncUtil.getToast(URANActivity.this, location.getLatitude() + " " + location.getLongitude());
+
+				// 判断是否是无效数据，是就舍弃
+				if (String.valueOf(location.getLatitude()).contains("E")
+						|| String.valueOf(location.getLongitude()).contains("E")) {
+
+					ScreenManager.getScreenManagerInstance(URANActivity.this).finishActivity();
+					return;
+				}
 
 				mLongitude = location.getLongitude();
 				mLatitude = location.getLatitude();
