@@ -5,6 +5,7 @@ import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -192,7 +193,11 @@ public class MainActivity extends BaseActivityPoo {
 
         // 4. 调用 服务
         getIsRead();
-        postDeviceInfo();
+        // 如果 授权了 电话权限，再获取设备信息
+        if (PackageManager.PERMISSION_GRANTED == getPackageManager().checkPermission("android.permission.CALL_PHONE", getPackageName())
+                && PackageManager.PERMISSION_GRANTED == getPackageManager().checkPermission("android.permission.READ_PHONE_STATE", getPackageName())) {
+            postDeviceInfo();
+        }
         // 上传外联信息
         asyncQueryHandler = new MainActivity.MyAsyncQueryHandler(getContentResolver());
         init();

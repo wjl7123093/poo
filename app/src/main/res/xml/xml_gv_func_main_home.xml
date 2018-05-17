@@ -30,7 +30,7 @@
     <!-- 功能3 -->
     <Function 
         name="interaction"
-        displayName="定期访谈"
+        displayName="访谈提醒"
         icon="ic_home_communition"
         packageName="com.mypolice.poo.ui.activity"
         activityName="InteractionActivity" />

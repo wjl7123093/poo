@@ -248,7 +248,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:text="请上传本人及环境外观照片"
+                                android:text="上传本人手持尿检报告照片"
                                 android:textColor="@color/GREY_H"
                                 android:textSize="@dimen/app_textsize_mid3" />
                         </LinearLayout>
@@ -304,7 +304,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:text="请上传尿检单照片"
+                                android:text="上传尿检报告资料照片"
                                 android:textColor="#999"
                                 android:textSize="@dimen/app_textsize_mid3" />
                         </LinearLayout>
@@ -388,7 +388,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:text="请上传本人及环境外观视频"
+                                android:text="上传本人与检测机构合影视频"
                                 android:textColor="#999"
                                 android:textSize="@dimen/app_textsize_mid3" />
                         </LinearLayout>

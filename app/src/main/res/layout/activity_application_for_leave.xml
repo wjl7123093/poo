@@ -514,7 +514,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="上传相关照片"
+                            android:text="上传请假报告照片"
                             android:textSize="@dimen/app_textsize_mid3"
                             android:textColor="@color/GREY_H"
                             android:gravity="center"
