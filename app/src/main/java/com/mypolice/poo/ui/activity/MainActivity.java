@@ -141,6 +141,9 @@ public class MainActivity extends BaseActivityPoo {
     @ViewInject(R.id.gvFunc)
     private GridView mGvFunc;
 
+    private Bundle bundle = null;
+
+
     private ScreenReceiverUtil.SreenStateListener mScreenListenerer = new ScreenReceiverUtil.SreenStateListener() {
         @Override
         public void onSreenOn() {
@@ -191,6 +194,19 @@ public class MainActivity extends BaseActivityPoo {
 //        mHwPushManager.isEnableReceiveNormalMsg(true);
 //        mHwPushManager.isEnableReceiverNotifyMsg(true);
 
+        getData();
+        if(bundle!=null){
+            int index = bundle.getInt("class");
+            int id=bundle.getInt("id");
+            switch (index){
+                case 1: // 2006 请假列表页
+                    Intent intent=new Intent(this, LeaveListActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    break;
+            }
+        }
+
         // 4. 调用 服务
         getIsRead();
         // 如果 授权了 电话权限，再获取设备信息
@@ -215,6 +231,17 @@ public class MainActivity extends BaseActivityPoo {
         bindGvFuncData();
 
         mTvSecretaryName.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        getData();
+    }
+
+    private void getData(){
+        bundle = getIntent().getExtras();
     }
 
     @Override
@@ -634,7 +661,7 @@ public class MainActivity extends BaseActivityPoo {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) < 2000) {
                 finish();
-                System.exit(0);
+                removeALLActivity();
             }
             mExitTime = System.currentTimeMillis();
             Toast.makeText(this, "再按一次退出程序！", Toast.LENGTH_SHORT).show();

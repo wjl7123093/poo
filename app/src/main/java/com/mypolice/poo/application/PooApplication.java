@@ -15,7 +15,9 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 //import android.support.multidex.MultiDexApplication;
 
+import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.igexin.sdk.PushManager;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.factory.BitmapFactory;
 import com.mypolice.poo.R;
@@ -141,9 +143,13 @@ public class PooApplication extends Application {
 
         OkHttpUtils.initClient(okHttpClient);
 
+        // com.getui.demo.DemoPushService 为第三方自定义推送服务
+        PushManager.getInstance().initialize(this.getApplicationContext(), com.mypolice.poo.service.PushService.class);
+        // com.getui.demo.DemoIntentService 为第三方自定义的推送服务事件接收类
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), com.mypolice.poo.service.IntentService.class);
 
         /** 初始化 Umeng 消息推送 SDK */
-        initNotificationSDK();
+//        initNotificationSDK();
 
         /***
          * 初始化定位sdk，建议在Application中创建
@@ -151,6 +157,9 @@ public class PooApplication extends Application {
         locationService = new LocationService(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
+        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
+        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
+        SDKInitializer.setCoordType(CoordType.BD09LL);
 
         // 设置拍摄视频缓存路径
         File dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);

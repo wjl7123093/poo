@@ -27,6 +27,12 @@ android {
             abiFilters "armeabi-v7a", "armeabi", "arm64-v8a", "x86", "x86-64"
         }
 
+        manifestPlaceholders = [
+                GETUI_APP_ID : "KFko3NrJAb93D0CbDdz54",
+                GETUI_APP_KEY : "JT1XUvfFyo5scguLGohVC2",
+                GETUI_APP_SECRET : "XFeeHukcVU7O44I9W8aPAA"
+        ]
+
     }
 
 
@@ -109,4 +115,5 @@ dependencies {
     compile project(':libk-switchbutton')
     // Sweet-Dialog
     compile 'cn.pedant.sweetalert:library:1.3'
+    compile files('libs/GetuiSDK2.12.3.0.jar')
 }
