@@ -32,12 +32,18 @@ public class GlobalSet {
     public static int APP_SUCCESS = 1;
 	/** Token Key */
 	public static String APP_TOKEN_KEY = "jwt-token";
+//	/** 服务端接口地址 */
+//	public static String APP_SERVER_URL = "http://111.39.142.240:55555/doc//";
+//	/** 服务端图片地址 */
+//	public static String APP_IMAGE_URL = "http://111.39.142.240:55555/static/uploads/";
+//	/** 更新下载 apk 地址 */
+//	public static String APP_DOWNLOAD_URL = "http://111.39.142.240:55555/static/app/shapp_update.xml";
 	/** 服务端接口地址 */
-	public static String APP_SERVER_URL = "http://111.39.142.240:55555/doc//";
+	public static String APP_SERVER_URL = "http://luan.keywaysoft.com/doc//";
 	/** 服务端图片地址 */
-	public static String APP_IMAGE_URL = "http://111.39.142.240:55555/static/uploads/";
+	public static String APP_IMAGE_URL = "http://luan.keywaysoft.com/static/uploads/";
 	/** 更新下载 apk 地址 */
-	public static String APP_DOWNLOAD_URL = "http://111.39.142.240:55555/static/app/shapp_update.xml";
+	public static String APP_DOWNLOAD_URL = "http://luan.keywaysoft.com/static/app/shapp_update.xml";
 
 
 
