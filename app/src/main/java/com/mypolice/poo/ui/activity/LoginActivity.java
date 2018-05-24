@@ -10,6 +10,7 @@ import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.application.PooApplication;
 import com.mypolice.poo.bean.UserEntity;
+import com.mypolice.poo.util.ACache;
 import com.mypolice.poo.util.CommonFuncUtil;
 import com.mypolice.poo.util.NetUtils;
 import com.mypolice.poo.util.encrypt.RSAUtil;
@@ -188,10 +189,13 @@ public class LoginActivity extends BaseActivityPoo {
 	 */
 	private void doLoginNew(final String data) {
 		String url = GlobalSet.APP_SERVER_URL + "app.passport/login";
+		String client_id = ACache.get(this).getAsString("client_id");
 		OkHttpUtils.post().url(url)
 				.addParams("type", GlobalSet.APP_TYPE + "")
 				.addParams("user", data)
-				.addParams("registrationID", PushAgent.getInstance(LoginActivity.this).getRegistrationId() + ",0")	// 0 代表 Android
+				.addParams("registrationID", client_id)	// 0 代表 Android
+				.addParams("operate_system", "2")
+//				.addParams("registrationID", PushAgent.getInstance(LoginActivity.this).getRegistrationId() + ",0")	// 0 代表 Android
 				.build()
 				.execute(new StringCallback() {
 					@Override
