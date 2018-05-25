@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">阳光生活</string>
+    <string name="app_name">阳光六安生活</string>
 
     <!-- ffmpeg 视频拍摄 -->
     <string name="hint">提示</string>
@@ -140,7 +140,7 @@
     <!-- punlish -->
     <string name="icon_punlish_time">&#xe626;</string>
 
-    <string name="app_name_cn">阳光生活</string>
+    <string name="app_name_cn">阳光六安生活</string>
     <string name="about_us">　　四川科瑞软件有限责任公司成立于2002年，是由四川九洲电器集团有限责任公司控股的高新技术企业，注册资本1500万元，拥有1家独资子公司（北京九州科瑞科技有限公司），专注于软件与电子商务产业，是以自主软件开发和互联网技术为核心的电子商务服务商。</string>
 
     <!-- 自定义 时间选择器 -->
