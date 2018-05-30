@@ -38,34 +38,21 @@ public class GlobalSet {
 //	public static String APP_IMAGE_URL = "http://111.39.142.240:55555/static/uploads/";
 //	/** 更新下载 apk 地址 */
 //	public static String APP_DOWNLOAD_URL = "http://111.39.142.240:55555/static/app/shapp_update.xml";
-	/** 服务端接口地址 */
-	public static String APP_SERVER_URL = "http://luan.keywaysoft.com/doc//";
-	/** 服务端图片地址 */
-	public static String APP_IMAGE_URL = "http://luan.keywaysoft.com/static/uploads/";
-	/** 更新下载 apk 地址 */
-	public static String APP_DOWNLOAD_URL = "http://luan.keywaysoft.com/static/app/shapp_update.xml";
 
-
-
-//	public static String APP_SERVER = "http://www.myxdgk.com:18080";
 //	/** 服务端接口地址 */
-//	public static String APP_SERVER_URL = "http://www.myxdgk.com:18080/api/";
-//	/** 服务端接口地址 https */
-//	public static String APP_SERVER_URL_HTTPS = "https://www.myxdgk.com:18080/api/";
+//	public static String APP_SERVER_URL = "http://luan.keywaysoft.com/doc//";
 //	/** 服务端图片地址 */
-//	public static String APP_IMAGE_URL = "http://www.myxdgk.com:18080/static/uploads/";
-//	/** 服务端图片地址 https */
-//	public static String APP_IMAGE_URL_HTTPS = "https://www.myxdgk.com:18080/static/uploads/";
-//	/** 宣传教育 - 新闻详情页地址 */
-//	public static String APP_DETAIL_URL = "http://www.myxdgk.com:18080/index/wx/detail.html?id=";
-//	/** 宣传教育 - 新闻详情页地址 https */
-//	public static String APP_DETAIL_URL_HTTPS = "https://www.myxdgk.com:18080/index/wx/detail.html?id=";
+//	public static String APP_IMAGE_URL = "http://luan.keywaysoft.com/static/uploads/";
 //	/** 更新下载 apk 地址 */
-//	public static String APP_DOWNLOAD_URL = "http://www.myxdgk.com:18080/app/update.xml";
-//	/** 更新下载 apk 地址 https */
-//	public static String APP_DOWNLOAD_URL_HTTPS = "https://www.myxdgk.com:18080/app/update.xml";
-//	/** 下载 apk 名称 */
-//	public static String APP_DOWNLOAD_NAME = "drugapp.apk";
+//	public static String APP_DOWNLOAD_URL = "http://luan.keywaysoft.com/static/app/shapp_update.xml";
+
+	/** 服务端接口地址 */
+	public static String APP_SERVER_URL = "http://120.202.149.121:55555/doc//";
+	/** 服务端图片地址 */
+	public static String APP_IMAGE_URL = "http://120.202.149.121:55555/static/uploads/";
+	/** 更新下载 apk 地址 */
+	public static String APP_DOWNLOAD_URL = "http://120.202.149.121:55555/static/app/shapp_update.xml";
+
 
 
 
