@@ -75,7 +75,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="26dp"/>
         <Button
-            android:id="@+id/btn_uran"
+            android:id="@+id/btn_sign"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:text="登记签到"
@@ -87,7 +87,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_uran_pre_notice_nowork"
+        android:id="@+id/ll_sign_pre_notice_nowork"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -108,7 +108,7 @@
     </LinearLayout>
 
     <com.mypolice.poo.widget.MyListView
-        android:id="@+id/lvExamination"
+        android:id="@+id/lvSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/transparent"
@@ -178,7 +178,7 @@
             android:orientation="vertical">
 
             <com.mypolice.poo.widget.MyListView
-                android:id="@+id/lvExaminationPre"
+                android:id="@+id/lvSignPre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
