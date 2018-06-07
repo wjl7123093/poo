@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  * @Title: activiy_sign_new.xml
+  * @Description: 签到界面xml(青海)
+  * @author wangjl 
+  * @crdate 2018-6-4
+  * @update
+  * @version v1.0.0(1)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_grey"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleURAN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.mypolice.poo.widget.TitleBarView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 基本信息区域 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/WHITE_H"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <!-- 尿检日期 -->
+                <LinearLayout
+                    android:id="@+id/ll_datetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sp_bg_login_edt"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="签到日期"
+                        android:textColor="@color/BLACK_H"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_datetime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/app_text_color"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_datetime"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_uran_datetime" />
+
+                </LinearLayout>
+
+                <!-- 备注说明 -->
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/sp_bg_login_edt"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="备注说明"
+                        android:textColor="@color/BLACK_H"
+                        android:textSize="14dp" />
+
+                    <EditText
+                        android:id="@+id/edt_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="top|left"
+                        android:hint="请输入备注说明"
+                        android:textColorHint="@color/GREY_H"
+                        android:textSize="14dp"
+                        android:textColor="@color/GREY_H"
+                        android:background="@color/transparent"
+                        android:maxLength="100"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 添加照片 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/WHITE_H"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="现场拍照"
+                    android:textColor="@color/BLACK_H"
+                    android:textSize="@dimen/app_textsize_mid3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/sp_bg_login_edt">
+
+                        <LinearLayout
+                            android:id="@+id/llPhoto1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_uran_photo1" />
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="上传本人及环境外观照片"
+                                android:textColor="@color/GREY_H"
+                                android:textSize="@dimen/app_textsize_mid3" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlPhoto1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/ivPhoto1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <com.mypolice.poo.widget.IconView
+                                android:id="@+id/iconDel1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentTop="true"
+                                android:text="@string/icon_uran_delete"
+                                android:textColor="@color/RED_H"
+                                android:textSize="20dp" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 添加视频 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/WHITE_H"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_notice_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="添加视频 （视频录制时间不超过10秒） "
+                    android:textColor="@color/BLACK_H"
+                    android:textSize="@dimen/app_textsize_mid3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llVideo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="40dp"
+                                android:scaleType="fitCenter"
+                                android:src="@mipmap/ic_uran_camera" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="上传本人与检测机构合影视频"
+                                android:textColor="#999"
+                                android:textSize="@dimen/app_textsize_mid3" />
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlVideo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/ivVideo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <com.mypolice.poo.widget.IconView
+                                android:id="@+id/iconDel3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentTop="true"
+                                android:text="@string/icon_uran_delete"
+                                android:textColor="@color/RED_H"
+                                android:textSize="20dp" />
+
+                            <ImageView
+                                android:id="@+id/ivPlay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_play" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 手写签名 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/WHITE_H"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="手写签名"
+                    android:textColor="@color/BLACK_H"
+                    android:textSize="@dimen/app_textsize_mid3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/sp_bg_login_edt">
+
+                        <LinearLayout
+                            android:id="@+id/llPhoto3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_signature" />
+
+                            <!--<TextView
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="上传本人及环境外观照片"
+                                android:textColor="@color/GREY_H"
+                                android:textSize="@dimen/app_textsize_mid3" />-->
+                        </LinearLayout>
+
+                        <!--<RelativeLayout
+                            android:id="@+id/rlPhoto1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/ivPhoto1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <com.mypolice.poo.widget.IconView
+                                android:id="@+id/iconDel1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentTop="true"
+                                android:text="@string/icon_uran_delete"
+                                android:textColor="@color/RED_H"
+                                android:textSize="20dp" />
+                        </RelativeLayout>-->
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提示: 录制时间不要超过10s"
+                android:textSize="@dimen/app_textsize_mid3"
+                android:gravity="center"
+                android:layout_margin="10dp"/>-->
+
+            <!--<ImageView
+                android:id="@+id/ivSignatureImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitCenter"
+                android:visibility="gone"/>-->
+
+            <!-- 签名 -->
+            <!--<Button
+                android:id="@+id/btnSignature"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="签名"
+                android:textSize="@dimen/app_textsize_mid2"
+                android:textColor="@color/WHITE_H"
+                android:background="@drawable/sp_bg_btn_red"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>-->
+
+            <!-- 上传附件 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/WHITE_H"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传附件"
+                    android:textColor="@color/BLACK_H"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:id="@+id/btn_upload"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/sp_bg_btn_orange"
+                    android:text="点击上传"
+                    android:textColor="@color/WHITE_H"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="(请上传.pdf/.word/.excel)"
+                    android:textColor="@color/app_text_color"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <!-- 发送 尿检结果 -->
+            <Button
+                android:id="@+id/btnSendReport"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/sp_bg_btn_green"
+                android:text="发送"
+                android:textColor="@color/WHITE_H"
+                android:textSize="@dimen/app_textsize_mid2" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

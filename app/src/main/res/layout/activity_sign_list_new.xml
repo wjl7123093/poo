@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  * @Title: activiy_sign_list_new.xml
+  * @Description: 定期签到界面xml
+  * @author wangjl 
+  * @crdate 2018-6-4
+  * @update
+  * @version v2.1.0(12)
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
+    android:background="@color/app_bg_grey">
+
+    <!-- 顶部标题栏 -->
+    <com.mypolice.poo.widget.TitleBarView
+        android:id="@+id/titleSignList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.mypolice.poo.widget.TitleBarView>
+
+    <!-- 体检预告 -->
+    <LinearLayout
+        android:id="@+id/ll_sign_pre_notice_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_uran_warning"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="签到预告"
+            android:textColor="@color/BLACK_H"
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sign_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:layout_marginTop="2dp">
+        <TextView
+            android:id="@+id/tv_sign_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="签到时间  2018/04/11"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginLeft="26dp"/>
+        <TextView
+            android:id="@+id/tv_sign_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务说明  定期签到"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="26dp"/>
+        <Button
+            android:id="@+id/btn_uran"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="登记签到"
+            android:textColor="@color/white"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:background="@drawable/sp_bg_btn_orange"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_uran_pre_notice_nowork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/WHITE_H"
+        android:padding="10dp"
+        android:layout_marginTop="2dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/edtTxtReportInfo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="暂无相关任务"
+            android:textColorHint="@color/GREY_H"
+            android:textSize="14dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <com.mypolice.poo.widget.MyListView
+        android:id="@+id/lvExamination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/transparent"
+        android:dividerHeight="20dp"
+        android:listSelector="@null"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+    </com.mypolice.poo.widget.MyListView>
+
+    <LinearLayout
+        android:id="@+id/llExpandSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@color/WHITE_H"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:gravity="right"
+            android:src="@mipmap/ic_time"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="签到记录"
+            android:textColor="@color/BLACK_H"
+            android:textSize="@dimen/app_textsize_mid2"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已完成12次 | 共需完成24次"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/app_textsize_mid3" />
+
+        <!--<ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_arrow_down" />-->
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg_grey"></View>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.mypolice.poo.widget.MyListView
+                android:id="@+id/lvExaminationPre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@null"
+                android:scrollbars="none">
+
+            </com.mypolice.poo.widget.MyListView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

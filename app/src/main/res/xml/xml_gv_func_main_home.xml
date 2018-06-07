@@ -18,14 +18,12 @@
         activityName="PhysicalExaminationActivity" />
     
     <!-- 功能2 -->
-    <!--<Function
+    <Function
         name="sign"
         displayName="定期签到"
-        icon="icon_main_sign"
-        bg1="sp_bg_oval_2"
-        bg2="sp_bg_oval_2_2"
+        icon="ic_home_sign"
         packageName="com.mypolice.poo.ui.activity"
-        activityName="SignListActivity" />-->
+        activityName="SignListActivity" />
     
     <!-- 功能3 -->
     <Function 

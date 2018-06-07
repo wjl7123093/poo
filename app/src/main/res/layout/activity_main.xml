@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:numColumns="2"
+        android:numColumns="3"
         android:columnWidth="120dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="20dp"
