@@ -211,7 +211,7 @@ public class SignListActivity extends BaseActivityPoo {
 				R.layout.item_lv_sign) {
 			@Override
 			public void convert(ViewHolder helper, final WorkBean item) {
-				helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD
+				helper.setText(R.id.tvItemDeadtime, "签到时间: "
 						+ item.getReality_time());
 				/*helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
 						+ item.getRemark());*/
