@@ -31,6 +31,7 @@
         android:background="@color/WHITE_H"
         android:padding="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
         android:gravity="center_vertical">
 
         <ImageView
@@ -55,8 +56,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/white"
-        android:layout_marginTop="2dp">
+        android:background="@color/white">
         <TextView
             android:id="@+id/tv_sign_time"
             android:layout_width="wrap_content"

@@ -29,6 +29,8 @@ public class WorkBean {
     private String department_name; // 检测部门
     private String sign_time;       // 尿检时间
 
+    private String reality_time;    // 签到时间
+
     @Override
     public String toString() {
         return "WorkBean{" +
@@ -160,5 +162,13 @@ public class WorkBean {
 
     public void setSign_time(String sign_time) {
         this.sign_time = sign_time;
+    }
+
+    public String getReality_time() {
+        return reality_time;
+    }
+
+    public void setReality_time(String reality_time) {
+        this.reality_time = reality_time;
     }
 }

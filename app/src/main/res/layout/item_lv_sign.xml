@@ -7,7 +7,7 @@
   * @update 2017-8-23
   * @version v1.0.0(1)
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sp_bg_shadow">
@@ -80,5 +80,32 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"/>
     </LinearLayout>
+
+</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:layout_marginTop="2dp">
+    <TextView
+        android:id="@+id/tvItemDeadtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="签到时间  2018/04/11"
+        android:textColor="@color/app_text_color"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:layout_marginLeft="26dp"/>
+    <TextView
+        android:id="@+id/tvItemStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="任务说明  定期签到"
+        android:textColor="@color/app_text_color"
+        android:textSize="@dimen/app_textsize_mid2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="26dp"/>
 
 </LinearLayout>

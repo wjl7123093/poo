@@ -85,6 +85,7 @@ public class SignListActivity extends BaseActivityPoo {
 	private TextView mTvCounts;
 
 	private int mWorkId = 0;	// 任务ID
+	private String mWorkTime = "";	// 签到时间
 
 	private CommonAdapter mAdapter;
 	private CommonAdapter mAdapterPre;
@@ -130,6 +131,7 @@ public class SignListActivity extends BaseActivityPoo {
 	public void onBtnSignClick(View v) {
 		Bundle bundle = new Bundle();
 		bundle.putInt("taskId", mWorkId);
+		bundle.putString("time", mWorkTime);
 		CommonFuncUtil.goNextActivityWithArgsForResult(SignListActivity.this,
 				SignActivity.class, bundle, REQUES_CODE_SIGN);
 	}
@@ -210,37 +212,26 @@ public class SignListActivity extends BaseActivityPoo {
 			@Override
 			public void convert(ViewHolder helper, final WorkBean item) {
 				helper.setText(R.id.tvItemDeadtime, GlobalSet.WORK_TIME_HEAD
-						+ item.getWork_time());
-				helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
-						+ item.getRemark());
-//				helper.setText(R.id.tvItemStatus, GlobalSet.WORK_STATUS_HEAD
-//						+ (item.getWork_tag() == 0 ? "未登记" : "已登记(待审核)"));
-//				helper.setText(R.id.btnItemUpdateWork, item.getWork_tag() == 0 ? "登记" : "修改");
+						+ item.getReality_time());
+				/*helper.setText(R.id.tvItemDescription, GlobalSet.WORK_DESCRIPTION_HEAD
+						+ item.getRemark());*/
 
 				switch (item.getWork_tag()) {
 					case 0:
-						helper.setText(R.id.tvItemStatus, "新任务");
+						helper.setText(R.id.tvItemStatus, "任务状态: 新任务");
 						break;
 					case 1:
-						helper.setText(R.id.tvItemStatus, "待审核");
+						helper.setText(R.id.tvItemStatus, "任务状态: 待审核");
 						break;
 					case 2:
-						helper.setText(R.id.tvItemStatus, "已完成");
+						helper.setText(R.id.tvItemStatus, "任务状态: 已完成");
 						break;
 				}
 
-				helper.setOnClickListener(R.id.btnItemUpdateWork, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Bundle bundle = new Bundle();
-						bundle.putInt("taskId", item.getId());
-						CommonFuncUtil.goNextActivityWithArgsForResult(SignListActivity.this,
-								SignActivity.class, bundle, REQUES_CODE_SIGN);
-					}
-				});
 			}
 		};
 		mLvSign.setAdapter(mAdapter);
+		mLvSign.setVisibility(View.VISIBLE);
 	}
 
 	/**
@@ -296,6 +287,7 @@ public class SignListActivity extends BaseActivityPoo {
 	/** 绑定当前尿检数据 */
 	private void bindWorkDataToUI(WorkBean workBean) {
 		mWorkId = workBean.getWork_id();
+		mWorkTime = workBean.getWork_time();
 //		mTvNotice.setText("亲～" + workBean.getWork_time() + "要完成本期签到检任务哦～～");
 		mTvSignTime.setText("签到时间  " + workBean.getWork_time());
 		mTvSignType.setText("任务说明  " + workBean.getRemark());
