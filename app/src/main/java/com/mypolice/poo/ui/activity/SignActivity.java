@@ -8,6 +8,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.mypolice.poo.R;
+import com.mypolice.poo.application.ApiCode;
 import com.mypolice.poo.application.GlobalSet;
 import com.mypolice.poo.bean.FileBean;
 import com.mypolice.poo.service.LocationService;
@@ -39,9 +40,11 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,6 +85,14 @@ public class SignActivity extends BaseActivityPoo {
 	@ViewInject(R.id.titleSign)
 	private TitleBarView mTitleSign;
 
+	/** EditText 签到日期 */
+	@ViewInject(R.id.ll_datetime)
+	private LinearLayout mLlDatetime;
+	@ViewInject(R.id.tv_datetime)
+	private TextView mTvStartDate;
+	@ViewInject(R.id.edt_remark)
+	private EditText mEdtRemark;
+
 	@ViewInject(R.id.llPhoto1)
 	private LinearLayout mLlPhoto1;
 	@ViewInject(R.id.llPhoto3)
@@ -121,6 +132,7 @@ public class SignActivity extends BaseActivityPoo {
 	private Button mBtnSendReport;
 
 	private int mTaskId;	// 任务 ID
+	private String mWorkTime;	// 签到时间
 
 	/** 是否已拍摄 标识 */
 	private boolean isPhoto1 = false;	// 照片1是否已经存在
@@ -161,6 +173,7 @@ public class SignActivity extends BaseActivityPoo {
 
 		Bundle bundle = getIntent().getExtras();
 		mTaskId = bundle.getInt("taskId");
+		mWorkTime = bundle.getString("time");
 
 		initView();
 
@@ -186,10 +199,11 @@ public class SignActivity extends BaseActivityPoo {
 	public void initView() {
 		super.initView();
 		mTitleSign.setText("签到");
+		mTvStartDate.setText(mWorkTime);
 
 		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
 		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-		pDialog.setTitleText("正在提交...");
+		pDialog.setTitleText("正在签到...");
 		pDialog.setCancelable(false);
 	}
 
@@ -200,7 +214,8 @@ public class SignActivity extends BaseActivityPoo {
 	public void onBtnSendReport(View v) {
 //		doUploadFile();
 		if (TextUtils.isEmpty(mBmpPath1)
-				|| TextUtils.isEmpty(mVideoPath)) {
+				|| TextUtils.isEmpty(mVideoPath)
+				|| TextUtils.isEmpty(mSignatureBmpPath)) {
 			CommonFuncUtil.getToast(SignActivity.this, "请完善信息后上传");
 			return;
 		}
@@ -423,188 +438,20 @@ public class SignActivity extends BaseActivityPoo {
 	}
 
 	/**
-	 * 上传文件
-	 */
-	private void doUploadFile() {
-		String url = GlobalSet.APP_SERVER_URL + "index/upload";
-		OkHttpUtils.post()
-				.addHeader("token", mApplication.getToken())
-				.addFile("mFile1", mFileNameBmp1, new File(mBmpPath1))
-				.addFile("mFile3", mFileNameVideo, new File(mVideoPath))
-				.url(url)
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(SignActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								org.json.JSONArray array = jsonResponse.getJSONArray("data");
-								List<FileBean> fileList = new ArrayList<FileBean>();
-								FileBean file = null;
-								for (int i = 0; i < array.length(); i++) {
-									file = JSON.parseObject(array.getString(i), FileBean.class);
-//									CommonFuncUtil.getToast(URANActivity.this, file.toString());
-									fileList.add(file);
-								}
-								// 验证数据
-								if (checkFileList(fileList)) {
-									// 开始提交数据
-									doSubmitData(fileList);
-								} else {
-									CommonFuncUtil.getToast(SignActivity.this,
-											"上传文件失败，请尝试重新上传");
-									pDialog.cancel();
-									return;
-								}
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(SignActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(SignActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
-	 * 提交数据
-	 * @param fileList	文件列表
-	 */
-	private void doSubmitData(List<FileBean> fileList) {
-		String url = GlobalSet.APP_SERVER_URL + "drug_sign";
-		OkHttpUtils.post().url(url)
-				.addHeader("token", mApplication.getToken())
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.addParams("sign_source", "1")
-				.addParams("sign_type", "1")	// 尿检 2 签到 1
-				.addParams("community_drug_extend_id", mTaskId + "")
-				.addParams("longitude", mLongitude + "")
-				.addParams("latitude", mLatitude + "")
-				.addParams("sign_address", mAddress + "")
-				.addParams("exceed_days", "0")
-				.addParams("photo1_url", fileList.get(0).getName())
-				.addParams("photo2_url", "")
-				.addParams("video_url", fileList.get(1).getName())
-				.addParams("doctype", "0")
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						CommonFuncUtil.getToast(SignActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								int sourceId = jsonResponse.getInt("data");
-								// 更新任务数据
-								doUpdateTask(sourceId);
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(SignActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(SignActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
-	 * 更新任务数据
-	 * @param sourceId	源ID
-	 */
-	private void doUpdateTask(int sourceId) {
-		String jsonParas = String.format(
-				"{\"work_tag\":\"%1$d\", \"source_id\":\"%2$d\"}", 1, sourceId);
-		String url = GlobalSet.APP_SERVER_URL + "community_work/" + mTaskId;
-		OkHttpUtils.put().url(url)
-				.addHeader("token", mApplication.getToken())
-				.requestBody(RequestBody.create(MediaType.parse("application/json"), jsonParas))
-				.build()
-				.execute(new StringCallback() {
-					@Override
-					public void onError(Call call, Exception e, int id) {
-						pDialog.dismiss();
-						CommonFuncUtil.getToast(SignActivity.this, e.getMessage());
-					}
-
-					@Override
-					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
-						try {
-							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {
-								int resultData = jsonResponse.getInt("data");
-								if (1 == resultData) {
-									// 删除视频文件夹
-									FileUtils.deleteDir(mVideoDirPath);
-									// 删除照片
-									FileUtils.deleteFile(new File(mBmpPath1));
-									CommonFuncUtil.getToast(SignActivity.this, "提交成功");
-
-									SignActivity.this.setResult(RESULT_CODE_SIGN);
-									SignActivity.this.finish();
-								} else {
-									CommonFuncUtil.getToast(SignActivity.this, "提交失败");
-								}
-								pDialog.dismiss();
-							} else if (jsonResponse.getInt("code") == 1007) {
-								// token 失效，踢出当前用户，退到登录页面
-								CommonFuncUtil.getToast(SignActivity.this,
-										"当前用户已在别处登录，请重新登录");
-								removeALLActivity();
-								CommonFuncUtil.goNextActivityWithNoArgs(SignActivity.this,
-										LoginActivity.class, false);
-							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-	}
-
-	/**
 	 * New 上传文件及数据【一次性上传】
 	 */
 	private void doUploadData() {
-		String url = GlobalSet.APP_SERVER_URL + "drug_sign/saveDrugSign";
+		String url = GlobalSet.APP_SERVER_URL + "app.sign/save";
 		OkHttpUtils.post()
-				.addHeader("token", mApplication.getToken())
-				.addFile("mFile1", mFileNameBmp1, new File(mBmpPath1))
-				.addFile("mFile3", mFileNameVideo, new File(mVideoPath))
-				.addParams("drug_user_id", mApplication.getUserID() + "")
-				.addParams("sign_source", "1")
-				.addParams("sign_type", "1")	// 尿检 2 签到 1
-				.addParams("community_drug_extend_id", mTaskId + "")
+				.addHeader(GlobalSet.APP_TOKEN_KEY, mApplication.getToken())
+				.addFile("photo", mFileNameBmp1, new File(mBmpPath1))
+				.addFile("video", mFileNameVideo, new File(mVideoPath))
+				.addFile("sign", mFileNameSignatureBmp, new File(mSignatureBmpPath))
+				.addParams("type", "0")	// 0 吸毒端  1 管控端
 				.addParams("longitude", mLongitude + "")
 				.addParams("latitude", mLatitude + "")
-				.addParams("sign_address", mAddress + "")
-				.addParams("exceed_days", "0")
 				.addParams("community_work_id", mTaskId + "")
-				.addParams("doctype", "0")
+				.addParams("remark", mEdtRemark.getText().toString().trim())
 				.url(url)
 				.build()
 				.execute(new StringCallback() {
@@ -619,17 +466,18 @@ public class SignActivity extends BaseActivityPoo {
 						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
-							if (jsonResponse.getInt("code") == 0
-									|| jsonResponse.getInt("code") == 200) {	// Success
+							if (jsonResponse.getInt("code") == ApiCode.CODE_SUCCESS) {	// Success
 								// 删除视频文件夹
 								FileUtils.deleteDir(mVideoDirPath);
 								// 删除照片
 								FileUtils.deleteFile(new File(mBmpPath1));
-								CommonFuncUtil.getToast(SignActivity.this, "提交成功");
+								// 删除签名图片
+								FileUtils.deleteFile(new File(mSignatureBmpPath));
+								CommonFuncUtil.getToast(SignActivity.this, "签到成功");
 
 								SignActivity.this.setResult(RESULT_CODE_SIGN);
 								SignActivity.this.finish();
-							} else if (jsonResponse.getInt("code") == 1007) {
+							} else if (jsonResponse.getInt("code") == ApiCode.CODE_TOKEN_EXPIRED) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(SignActivity.this,
 										"当前用户已在别处登录，请重新登录");

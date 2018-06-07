@@ -40,7 +40,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <!-- 尿检日期 -->
+                <!-- 签到日期 -->
                 <LinearLayout
                     android:id="@+id/ll_datetime"
                     android:layout_width="match_parent"
