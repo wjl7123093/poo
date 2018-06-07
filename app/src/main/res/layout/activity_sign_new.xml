@@ -17,7 +17,7 @@
 
     <!-- 顶部标题栏 -->
     <com.mypolice.poo.widget.TitleBarView
-        android:id="@+id/titleURAN"
+        android:id="@+id/titleSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.mypolice.poo.widget.TitleBarView>
 
@@ -126,7 +126,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
@@ -298,7 +298,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
@@ -307,7 +307,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/sp_bg_login_edt">
+                        android:background="@drawable/sp_bg_login_edt"
+                        android:padding="10dp">
 
                         <LinearLayout
                             android:id="@+id/llPhoto3"
@@ -332,21 +333,21 @@
                                 android:textSize="@dimen/app_textsize_mid3" />-->
                         </LinearLayout>
 
-                        <!--<RelativeLayout
-                            android:id="@+id/rlPhoto1"
+                        <RelativeLayout
+                            android:id="@+id/rlPhoto3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:visibility="gone">
 
                             <ImageView
-                                android:id="@+id/ivPhoto1"
+                                android:id="@+id/iv_signature"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
+                                android:scaleType="centerInside"
                                 android:src="@mipmap/ic_launcher" />
 
                             <com.mypolice.poo.widget.IconView
-                                android:id="@+id/iconDel1"
+                                android:id="@+id/iconDel4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -354,7 +355,7 @@
                                 android:text="@string/icon_uran_delete"
                                 android:textColor="@color/RED_H"
                                 android:textSize="20dp" />
-                        </RelativeLayout>-->
+                        </RelativeLayout>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -428,7 +429,7 @@
 
             </LinearLayout>
 
-            <!-- 发送 尿检结果 -->
+            <!-- 发送 签到结果 -->
             <Button
                 android:id="@+id/btnSendReport"
                 android:layout_width="match_parent"

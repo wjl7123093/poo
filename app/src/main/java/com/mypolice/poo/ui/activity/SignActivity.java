@@ -27,6 +27,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -49,6 +51,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -62,10 +65,11 @@ import okhttp3.RequestBody;
  * @update 2017-11-24
  * @version v2.1.2(14)
  */
-@ContentView(R.layout.activity_sign)
+@ContentView(R.layout.activity_sign_new)
 public class SignActivity extends BaseActivityPoo {
 
 	public static final int RESULT_CODE_SIGN = 0x302;
+	public static final int REQUEST_CODE_SIGNATURE = 0x301;	// 请求手写签名页面 code
 
 	private LocationService locationService;
 	private double mLongitude = 0.0f;
@@ -80,12 +84,16 @@ public class SignActivity extends BaseActivityPoo {
 
 	@ViewInject(R.id.llPhoto1)
 	private LinearLayout mLlPhoto1;
+	@ViewInject(R.id.llPhoto3)
+	private LinearLayout mLlPhoto3;
 //	@ViewInject(R.id.llPhoto2)
 //	private LinearLayout mLlPhoto2;
 	@ViewInject(R.id.llVideo)
 	private LinearLayout mLlVideo;
 	@ViewInject(R.id.rlPhoto1)
 	private RelativeLayout mRlPhoto1;
+	@ViewInject(R.id.rlPhoto3)
+	private RelativeLayout mRlPhoto3;
 //	@ViewInject(R.id.rlPhoto2)
 //	private RelativeLayout mRlPhoto2;
 	@ViewInject(R.id.rlVideo)
@@ -96,12 +104,16 @@ public class SignActivity extends BaseActivityPoo {
 //	private ImageView mivPhoto2;
 	@ViewInject(R.id.ivVideo)
 	private ImageView mivVideo;
+	@ViewInject(R.id.iv_signature)
+	private ImageView mIvSignature;
 	@ViewInject(R.id.iconDel1)
 	private IconView mIconDel1;
 //	@ViewInject(R.id.iconDel2)
 //	private IconView mIconDel2;
 	@ViewInject(R.id.iconDel3)
 	private IconView mIconDel3;
+	@ViewInject(R.id.iconDel4)
+	private IconView mIconDel4;
 	@ViewInject(R.id.ivPlay)
 	private ImageView mIvPlay;
 
@@ -119,6 +131,7 @@ public class SignActivity extends BaseActivityPoo {
 	// 路径
 	private String mBmpPath1 = "";
 //	private String mBmpPath2 = "";
+	private String mSignatureBmpPath = "";	// 签到图片路径
 	private String mVideoPath = "";		// 视频路径
 	private String mCoverPath = "";		// 缩略图路径
 	private String mVideoDirPath = "";	// video 存放的文件夹路径
@@ -126,10 +139,12 @@ public class SignActivity extends BaseActivityPoo {
 	private File mFileBmp1 = null;
 //	private File mFileBmp2 = null;
 	private File mFileVideo = null;
+	private File mFileSignatureBmp = null;
 	// 文件名
 	private String mFileNameBmp1 = "";
 //	private String mFileNameBmp2 = "";
 	private String mFileNameVideo = "";
+	private String mFileNameSignatureBmp = "test_sign.jpg";
 	// 临时保存图片
 	private Bitmap mBitmap1 = null;
 
@@ -137,7 +152,7 @@ public class SignActivity extends BaseActivityPoo {
 	public static final int IMAGE_CAPTURE = 1;
 
 	/** 加载进度条 */
-	private CenterDialog centerDialog;
+	private SweetAlertDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -172,9 +187,10 @@ public class SignActivity extends BaseActivityPoo {
 		super.initView();
 		mTitleSign.setText("签到");
 
-		centerDialog = new CenterDialog(SignActivity.this, R.layout.dialog_uploading,
-				new int[]{});
-//		centerDialog.show();
+		pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+		pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+		pDialog.setTitleText("正在提交...");
+		pDialog.setCancelable(false);
 	}
 
 	/**
@@ -197,7 +213,7 @@ public class SignActivity extends BaseActivityPoo {
 			settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			SignActivity.this.startActivity(settingsIntent);
 		} else {
-			centerDialog.show();
+			pDialog.show();
 			// 先执行定位操作
 			doLoc();
 		}
@@ -216,6 +232,16 @@ public class SignActivity extends BaseActivityPoo {
 		isTakingPhoto2 = true;
 		captureImage(FileUtils.SDPATH);
 	}*/
+
+	/**
+	 * 签名
+	 * @param v
+	 */
+	@OnClick(R.id.llPhoto3)
+	public void onBtnSignature(View v) {
+		CommonFuncUtil.goNextActivityWithNoArgsForResult(SignActivity.this,
+				SignaturepadActivity.class, REQUEST_CODE_SIGNATURE);
+	}
 
 	@OnClick(R.id.llVideo)
 	public void onLlVideoClick(View v) {
@@ -249,6 +275,16 @@ public class SignActivity extends BaseActivityPoo {
 		mVideoPath = "";
 		// 删除视频文件夹
 		FileUtils.deleteDir(mVideoDirPath);
+	}
+
+	@OnClick(R.id.iconDel4)
+	public void onIconDel4Click(View v) {
+		mLlPhoto3.setVisibility(View.VISIBLE);
+		mRlPhoto3.setVisibility(View.GONE);
+
+		mSignatureBmpPath = "";
+		// 删除视频文件夹
+		FileUtils.deleteDir(mSignatureBmpPath);
 	}
 
 	@OnClick(R.id.ivPhoto1)
@@ -374,6 +410,15 @@ public class SignActivity extends BaseActivityPoo {
 			// 重置
 			GlobalSet.intentData = null;
 
+		} else if (requestCode == REQUEST_CODE_SIGNATURE
+				&& resultCode == SignaturepadActivity.RESULT_CODE_SIGNATURE) {	// 手写签名页面
+			mSignatureBmpPath = FileUtils.SDPATH + "test_sign.jpg";
+			mFileSignatureBmp = new File(mSignatureBmpPath);
+
+			mRlPhoto3.setVisibility(View.VISIBLE);
+			mIvSignature.setImageBitmap(null);
+			mIvSignature.setImageBitmap(BitmapFactory.decodeFile(mSignatureBmpPath));
+			mIvSignature.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -416,7 +461,7 @@ public class SignActivity extends BaseActivityPoo {
 								} else {
 									CommonFuncUtil.getToast(SignActivity.this,
 											"上传文件失败，请尝试重新上传");
-									centerDialog.cancel();
+									pDialog.cancel();
 									return;
 								}
 							} else if (jsonResponse.getInt("code") == 1007) {
@@ -501,6 +546,7 @@ public class SignActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(SignActivity.this, e.getMessage());
 					}
 
@@ -524,7 +570,7 @@ public class SignActivity extends BaseActivityPoo {
 								} else {
 									CommonFuncUtil.getToast(SignActivity.this, "提交失败");
 								}
-								centerDialog.cancel();
+								pDialog.dismiss();
 							} else if (jsonResponse.getInt("code") == 1007) {
 								// token 失效，踢出当前用户，退到登录页面
 								CommonFuncUtil.getToast(SignActivity.this,
@@ -564,12 +610,13 @@ public class SignActivity extends BaseActivityPoo {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e, int id) {
+						pDialog.dismiss();
 						CommonFuncUtil.getToast(SignActivity.this, e.getMessage());
 					}
 
 					@Override
 					public void onResponse(String response, int id) {
-//						CommonFuncUtil.getToast(SignActivity.this, response);
+						pDialog.dismiss();
 						try {
 							JSONObject jsonResponse = new JSONObject(response);
 							if (jsonResponse.getInt("code") == 0
@@ -658,87 +705,6 @@ public class SignActivity extends BaseActivityPoo {
 //				doUploadFile();
 				doUploadData();
 
-				/*StringBuffer sb = new StringBuffer(256);
-//				// 保存 经纬度坐标至缓存文件中
-//				FileUtils.writeTxtToFile(location.getLatitude() + "," + location.getLongitude() + "\n " , mStrCachePath, "LocInfo.txt");
-				*//**
-				 * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
-				 * location.getTime() 是指服务端出本次结果的时间，如果位置不发生变化，则时间不变
-				 *//*
-				sb.append(location.getTime());
-				sb.append("time : ");
-				sb.append("\nlocType : ");// 定位类型
-				sb.append(location.getLocType());
-				sb.append("\nlocType description : ");// *****对应的定位类型说明*****
-				sb.append(location.getLocTypeDescription());
-				sb.append("\nlatitude : ");// 纬度
-				sb.append(location.getLatitude());
-				sb.append("\nlontitude : ");// 经度
-				sb.append(location.getLongitude());
-				sb.append("\nradius : ");// 半径
-				sb.append(location.getRadius());
-				sb.append("\nCountryCode : ");// 国家码
-				sb.append(location.getCountryCode());
-				sb.append("\nCountry : ");// 国家名称
-				sb.append(location.getCountry());
-				sb.append("\ncitycode : ");// 城市编码
-				sb.append(location.getCityCode());
-				sb.append("\ncity : ");// 城市
-				sb.append(location.getCity());
-				sb.append("\nDistrict : ");// 区
-				sb.append(location.getDistrict());
-				sb.append("\nStreet : ");// 街道
-				sb.append(location.getStreet());
-				sb.append("\naddr : ");// 地址信息
-				sb.append(location.getAddrStr());
-				sb.append("\nUserIndoorState: ");// *****返回用户室内外判断结果*****
-				sb.append(location.getUserIndoorState());
-				sb.append("\nDirection(not all devices have value): ");
-				sb.append(location.getDirection());// 方向
-				sb.append("\nlocationdescribe: ");
-				sb.append(location.getLocationDescribe());// 位置语义化信息
-				sb.append("\nPoi: ");// POI信息
-				if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
-					for (int i = 0; i < location.getPoiList().size(); i++) {
-						Poi poi = (Poi) location.getPoiList().get(i);
-						sb.append(poi.getName() + ";");
-					}
-				}
-				if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
-					sb.append("\nspeed : ");
-					sb.append(location.getSpeed());// 速度 单位：km/h
-					sb.append("\nsatellite : ");
-					sb.append(location.getSatelliteNumber());// 卫星数目
-					sb.append("\nheight : ");
-					sb.append(location.getAltitude());// 海拔高度 单位：米
-					sb.append("\ngps status : ");
-					sb.append(location.getGpsAccuracyStatus());// *****gps质量判断*****
-					sb.append("\ndescribe : ");
-					sb.append("gps定位成功");
-				} else if (location.getLocType() == BDLocation.TypeNetWorkLocation) {// 网络定位结果
-					// 运营商信息
-					if (location.hasAltitude()) {// *****如果有海拔高度*****
-						sb.append("\nheight : ");
-						sb.append(location.getAltitude());// 单位：米
-					}
-					sb.append("\noperationers : ");// 运营商信息
-					sb.append(location.getOperators());
-					sb.append("\ndescribe : ");
-					sb.append("网络定位成功");
-				} else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// 离线定位结果
-					sb.append("\ndescribe : ");
-					sb.append("离线定位成功，离线定位结果也是有效的");
-				} else if (location.getLocType() == BDLocation.TypeServerError) {
-					sb.append("\ndescribe : ");
-					sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
-				} else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-					sb.append("\ndescribe : ");
-					sb.append("网络不同导致定位失败，请检查网络是否通畅");
-				} else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-					sb.append("\ndescribe : ");
-					sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
-				}
-//				logMsg(sb.toString());*/
 			}
 		}
 
